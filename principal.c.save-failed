@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_native_dialog.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_image.h>
+#include <math.h>
+#include "principal.h"
+#include "fonctions.h"
+#include "variables.h"
+#include "deplacement.h"
+#include "affichage.h"
+#include "objets.h"
+#include "economie_fini.h"
+void jeu()
+{
+    joueur speeder;
+    joueur *Pspeeder=&speeder;
+    initialiser_joueur(Pspeeder,Xfenetre,Yfenetre);
+
+    fumee carburant[max_fumee];
+    fumee *Pcarburant=&carburant;
+    for(i=1;i<=max_fumee;i++)
+    {
+        initialiser_fumee(&Pcarburant[i],taille_fumee_carburant);
+    }
+    tir laser[max_laser];
+    tir *Plaser=&laser;
+    for(i=1;i<=max_laser;i++)
+    {
+        initialiser_laser(&Plaser[i]);
+    }
+    sondes kamik[max_kamik];
+    sondes *Pkamik=&kamik;
+    for(i=1;i<=max_kamik;i++)
+    {
+        initialiser_kamik(&Pkamik[i]);
+    }
+    chasseurs croiseur[max_croiseur];
+    chasseurs *Pcroiseur=&croiseur;
+    for(i=1;i<=max_croiseur;i++)
+    {
+        initialiser_chasseur(&Pcroiseur[i]);
+    }
+    INITIALISER_BIBLIOTHEQUE
+    INITIALISER_IMAGES_EN_MASSE(fond,nombre_fonds_actuels,"./images/fond/")
+    al_draw_bitmap(fond[2],0,0,0);
+    al_flip_display();
+    INITIALISER_IMAGES_EN_MASSE(vaisseau,nombre_vaisseaux_actuels,"./images/vaisseau/")
+    INITIALISER_IMAGES_EN_MASSE(fumee,nombre_fumee_actuel,"./images/fumee/")
+    INITIALISER_IMAGES_EN_MASSE(fumee2,nombre_fumee_actuel,"./images/fumee2/")
+    INITIALISER_IMAGES_EN_MASSE(tir,nombre_tirs_actuels,"./images/missiles/")
+    INITIALISER_IMAGES_EN_MASSE(sonde,nombre_sondes_actuels,"./images/sonde_explo/")
+    INITIALISER_IMAGES_EN_MASSE(chasseur,nombre_chasseurs_actuels,"./images/chasseurs/")
+    while(!fin)
+    {
+        OBTENIRMOUSEETKEY
+        ESCAPE
+        EVENT
+        //TIMER = 1/50 sec
+        if(event.type==ALLEGRO_EVENT_TIMER)
+        {
+            sablier+=fps;
+            num_chasseur=pop_chasseur(&croiseur[num_chasseur],sablier,num_chasseur,max_croiseur);
+            sonde_n=pop_sonde(&kamik[sonde_n],sablier,sonde_n,max_kamik);
+            afficher_fond(fond[1]);
+            FUMEE
+            if(speeder.mode==1){num_laser=pop_missile_milieu(&Plaser[num_laser],speeder,&speeder,mouse,max_laser,num_laser);}
+            if(speeder.mode==2){num_laser=pop_missile_droit(&Plaser[num_laser],speeder,&speeder,mouse,max_laser,num_laser);num_laser=pop_missile_gauche(&Plaser[num_laser],speeder,&speeder,mouse,max_laser,num_laser);}
+            if(speeder.mode==3){num_laser=pop_missile_milieu(&Plaser[num_laser],speeder,&speeder,mouse,max_laser,num_laser);num_laser=pop_missile_droit(&Plaser[num_laser],speeder,&speeder,mouse,max_laser,num_laser);num_laser=pop_missile_gauche(&Plaser[num_laser],speeder,&speeder,mouse,max_laser,num_laser);}
+            VAISSEAU
+            for(i=1;i<=max_kamik;i++){deplacer_sondes(&Pkamik[i],speeder);}
+            afficher_kamiks(kamik,sonde,max_kamik);
+            for(i=1;i<=max_croiseur;i++){deplacer_chasseur(&croiseur[i],speeder,Xfenetre,Yfenetre);}
+            afficher_chasseur(croiseur,chasseur,max_croiseur);
+            for(i=1;i<=max_croiseur;i++){num_laser=chasseur_tir_laser(&laser[num_laser],&croiseur[i],num_laser,max_laser);}
+            for(i=1;i<=max_laser;i++){for(j=1;j<=max_kamik;j++){interaction(&Plaser[i],&Pkamik[j]);explosion_sonde(&Pkamik[i],max_laser,nombre_sondes_actuels,speeder);collision_mortelle(&Pkamik[i],&speeder);collision_mortelle(&kamik[i],&speeder);}}
+            al_flip_display();
+        }
+    }
+}

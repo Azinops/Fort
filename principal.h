@@ -1,0 +1,4 @@
+#ifndef PRINCIPAL_H_INCLUDED
+#define PRINCIPAL_H_INCLUDED
+void jeu();
+#endif // PRINCIPAL_H_INCLUDED
