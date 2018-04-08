@@ -11,6 +11,8 @@
 #include "affichage.h"
 #include "objets.h"
 #include "tailles_images.h"
+
+
 void afficher_fond(ALLEGRO_BITMAP* bitmap,fenetre f)
 {
     al_draw_scaled_rotated_bitmap(bitmap,0,0,0,0,f.Xfenetre/taille_fond_x,f.Yfenetre/taille_fond_y,0,0);
