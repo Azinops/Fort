@@ -15,6 +15,28 @@ typedef struct
 }carre;
 typedef struct
 {
+    double x;
+    double y;
+    ALLEGRO_BITMAP* bitmap[NBRE_ANIM_MAXIMAL];
+    int etat_animation;
+    double vitesse_animation;
+    double taille;
+    int nbre_images_max;
+    int taille_x;
+    int taille_y;
+    int animation[4]; //0:ANIMATION OUI/NON  1:DEPART DE L'ANIMATION:quelle image  2:FIN ANIMATION:quelle image 3:METTRE A QUELLE IMAGE APRES ANIMATION
+    double compteur_animation;
+}objet_anime;
+typedef struct
+{
+    objet_anime canon_anime;
+    int xi;
+    int yi;
+    double x;
+    double y;
+}canon;
+typedef struct
+{
     double Xfenetre;
     double Yfenetre;
     int cases_x;
@@ -25,6 +47,11 @@ typedef struct
     int id_selectionee;
     int n_joueur;
     int n_item_placable_sel;
+    canon bombardier;
+    int canon_place;
+    int explosion_debloques[NBRE_COMPETENCES_EXPLO];
+    int science_debloques[NBRE_COMPETENCES_SCIENCE];
+    int precision_debloques[NBRE_COMPETENCES_PRECISION]; //0: PAS DEBLOQUE   1:DEBLOQUABLE    2:DEBLOQUE
 }joueur;
 void placer_bloc(ALLEGRO_MOUSE_STATE mouse,carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,fenetre f);
 typedef struct
@@ -43,26 +70,24 @@ typedef struct
     int nbre_item_placable;
     int soumis_a_la_gravite; //  0:NON    1:OUI   2:COLLANT
 }item;
-void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur j);
 typedef struct
 {
     double x;
     double y;
-    ALLEGRO_BITMAP* bitmap[NBRE_ANIM_MAXIMAL];
-    int etat_animation;
-    double vitesse_animation;
+    ALLEGRO_BITMAP* bitmap;
     double taille;
-    int nbre_images_max;
     int taille_x;
     int taille_y;
-    int animation[4]; //0:ANIMATION OUI/NON  1:DEPART DE L'ANIMATION:quelle image  2:FIN ANIMATION:quelle image 3:METTRE A QUELLE IMAGE APRES ANIMATION
-    double compteur_animation;
-}objet_anime;
+    int utile;
+    int utile2[NBRE_LIAISONS_COMPTENCES_MAX]; //POUR COMPETENCES:  [5,7,0,0] <-- FAIT DES LIAISON AVEC COMPETENCE 5 ET 7
+}objet_fixe;
+void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j);
 int clic_objet(SOURIS,objet_anime o);
 int toucher_objet(SOURIS,objet_anime o);
 int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue);
 void animer_objet(objet_anime* o,int image_depart,int image_fin_anim,int image_a_mettre_apres_animation);
-void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,item it[]);
+void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,item it[],joueur jo[]);
 void switcher_deux_blocs(carre* bloc1,carre* bloc2);
 void enlever_carre(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],point_case p,SOURIS,item i[]);
+
 #endif // OBJETS_H_INCLUDED

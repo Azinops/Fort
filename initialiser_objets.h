@@ -4,7 +4,9 @@
 #include "dimensions.h"
 void initialiser_blocs(fenetre f,carre c[NBRE_CASES_Y][NBRE_CASES_X]);
 void initialiser_map(fenetre f[],double Xfen,double Yfen,int cases_max_x,int cases_map_y);
-void initialiser_joueur(joueur j[],int jmax);
+void initialiser_joueur(joueur j[],int jmax,canon canon_j[]);
 void initialiser_item(item i[],int nbre_blocs_actuel);
 void initialiser_objet_anime(objet_anime* o,int images_max,ALLEGRO_BITMAP* images_animees[],double vitesse_animation,double taille,double x,double y,int taille_x,int taille_y);
+void initialiser_objet_fixe(objet_fixe* o,ALLEGRO_BITMAP* image,double taille,double x,double y,int taille_x,int taille_y);
+void initialiser_objet_fixe_c(objet_fixe o[],ALLEGRO_BITMAP* image[],double taille,int taille_xy,double x);
 #endif // INITIALISER_OBJETS_H_INCLUDED

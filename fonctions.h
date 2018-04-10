@@ -89,6 +89,7 @@
     ALLEGRO_COLOR blanc =al_map_rgba(255,255,255,0);\
     ALLEGRO_COLOR violet =al_map_rgba(130,80,200,0);\
     ALLEGRO_COLOR jaune =al_map_rgba(255,255,0,255);\
+    ALLEGRO_COLOR jaune_fonce =al_map_rgba(150,150,0,255);\
     ALLEGRO_COLOR jaunetrans =al_map_rgba(255,255,0,0);\
     ALLEGRO_COLOR gris =al_map_rgba(150,150,150,255);\
     ALLEGRO_COLOR orange =al_map_rgba(255,102,0,150);\
@@ -100,7 +101,10 @@
     al_flip_display();\
     al_get_mouse_state(&mouse);\
     al_get_keyboard_state(&key);
+#define JAUNE_FONCE al_map_rgba(120,120,0,255)
+#define JAUNE al_map_rgba(255,255,0,255)
 #define SOURIS ALLEGRO_MOUSE_STATE mouse
+#define CLAVIER int ALLEGRO_KEYBOARD_STATE
 double round(double variable);
 void erreur(const char*txt);
 int retablisseur(int valeur,int valeur_max,int valeur_min);

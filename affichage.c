@@ -11,8 +11,6 @@
 #include "affichage.h"
 #include "objets.h"
 #include "tailles_images.h"
-
-
 void afficher_fond(ALLEGRO_BITMAP* bitmap,fenetre f)
 {
     al_draw_scaled_rotated_bitmap(bitmap,0,0,0,0,f.Xfenetre/taille_fond_x,f.Yfenetre/taille_fond_y,0,0);
@@ -76,4 +74,54 @@ void afficher_objet_anime(objet_anime* o)
         }
     }
     al_draw_scaled_rotated_bitmap(o->bitmap[o->etat_animation],0,0,o->x,o->y,o->taille,o->taille,0,0);
+}
+void interface_competences(CLAVIER,int* interface_du_jeu,int* fond)
+{
+    static int a=0;
+    if(!al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) && a==1)
+        {
+            a=0;
+        }
+    if(*interface_du_jeu==0)
+    {
+        if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) && a==0)
+        {
+            *fond=2;
+            *interface_du_jeu=1;
+            a=1;
+        }
+    }
+    if(*interface_du_jeu==1)
+    {
+        if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) && a==0)
+        {
+            *fond=1;
+            *interface_du_jeu=0;
+            a=1;
+        }
+    }
+}
+void afficher_objet_fixe(objet_fixe o)
+{
+    al_draw_scaled_rotated_bitmap(o.bitmap,0,0,o.x,o.y,o.taille,o.taille,0,0);
+}
+void tracer_ligne_entre_objets(objet_fixe o1, objet_fixe o2,double epaisseur, ALLEGRO_COLOR couleur)
+{
+    al_draw_line(o1.x+o1.taille_x*o1.taille/2,o1.y+o1.taille_y*o1.taille/2,o2.x+o2.taille_x*o2.taille/2,o2.y+o2.taille_y*o2.taille/2,couleur,epaisseur);
+}
+void connexions(objet_fixe o[],int nbre_objets)
+{
+    int i;
+    int j;
+    for(i=1;i<=NBRE_COMPETENCES_EXPLO;i++)
+    {
+        for(j=1;j<=NBRE_LIAISONS_COMPTENCES_MAX;j++)
+        {
+            if(o[i].utile2[j]!=0)
+            {
+                tracer_ligne_entre_objets(o[i],o[o[i].utile2[j]],taille_liaisons,JAUNE);
+            }
+        }
+
+    }
 }

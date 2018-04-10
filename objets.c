@@ -26,7 +26,26 @@ void rentrer_souris_dans_une_case(point_case* souris,fenetre f,ALLEGRO_MOUSE_STA
     souris->x=floor(mouse.x/f.Xfenetre*f.cases_x);
     souris->y=floor(mouse.y/f.Yfenetre*f.cases_y);
 }
-void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur j)
+void switcher_deux_blocs(carre* bloc1,carre* bloc2)
+{
+    int id=bloc1->id;
+    int etat=bloc1->etat;
+    int pv=bloc1->pv;
+    int compteur_gravite=bloc1->compteur_gravite;
+
+
+    bloc1->id=bloc2->id;
+    bloc1->etat=bloc2->etat;
+    bloc1->pv=bloc2->pv;
+    bloc1->compteur_gravite=bloc2->compteur_gravite;
+
+
+    bloc2->id=id;
+    bloc2->etat=etat;
+    bloc2->pv=pv;
+    bloc2->compteur_gravite=compteur_gravite;
+}
+void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j)
 {
     if(mouse.buttons&1)
     {
@@ -36,9 +55,28 @@ void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CA
             {}
             else
             {
-                if(mouse.x*(1-j.n_joueur*2)<(1-j.n_joueur*2)*(XFENETRE/2))
+                if(mouse.x*(1-j->n_joueur*2)<(1-j->n_joueur*2)*(XFENETRE/2))
                 {
-                    blocs[souris.y][souris.x].id=j.id_selectionee;
+                    if(j->id_selectionee==5)
+                    {
+                        if(j->canon_place==1)
+                        {
+                            switcher_deux_blocs(&blocs[j->bombardier.yi][j->bombardier.xi],&blocs[souris.y][souris.x]);
+                        }
+                        else
+                        {
+                            blocs[souris.y][souris.x].id=j->id_selectionee;
+                            j->canon_place=1;
+                        }
+                        j->bombardier.xi=souris.x;
+                        j->bombardier.yi=souris.y;
+                        j->bombardier.x=mouse.x;
+                        j->bombardier.y=mouse.y;
+                    }
+                    else
+                    {
+                        blocs[souris.y][souris.x].id=j->id_selectionee;
+                    }
                 }
             }
         }
@@ -102,27 +140,10 @@ int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue)
     }
     return quel_joueur_joue;
 }
-void switcher_deux_blocs(carre* bloc1,carre* bloc2)
+
+void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,item it[],joueur jo[])
 {
-    int id=bloc1->id;
-    int etat=bloc1->etat;
-    int pv=bloc1->pv;
-    int compteur_gravite=bloc1->compteur_gravite;
-
-
-    bloc1->id=bloc2->id;
-    bloc1->etat=bloc2->etat;
-    bloc1->pv=bloc2->pv;
-    bloc1->compteur_gravite=bloc2->compteur_gravite;
-
-
-    bloc2->id=id;
-    bloc2->etat=etat;
-    bloc2->pv=pv;
-    bloc2->compteur_gravite=compteur_gravite;
-}
-void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,item it[])
-{
+    int a;
     int i=0;
     int j=0;
     for(i=0;i<=NBRE_CASES_X-1;i++)
@@ -141,6 +162,21 @@ void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,
                             switcher_deux_blocs(&bloc[j][i],&bloc[j+1][i]);
                         }
                     }
+                }
+                if(bloc[j][i].id==5)
+                {
+                    if(bloc[j][i].x<XFENETRE/2)
+                    {
+                        a=0;
+                    }
+                    if(bloc[j][i].x>XFENETRE/2)
+                    {
+                        a=1;
+                    }
+                    jo[a].bombardier.xi=i;
+                    jo[a].bombardier.yi=j;
+                    jo[a].bombardier.x=(XFENETRE/NBRE_CASES_X)*i;
+                    jo[a].bombardier.y=(YFENETRE/NBRE_CASES_Y)*j;
                 }
             }
         }

@@ -56,16 +56,34 @@ void initialiser_map(fenetre f[],double Xfen,double Yfen,int cases_max_x,int cas
     f[0].Xfenetre=Xfen;
     f[0].Yfenetre=Yfen;
 }
-void initialiser_joueur(joueur j[],int jmax)
+void initialiser_joueur(joueur j[],int jmax,canon canon_j[])
 {
     int i;
+    int k;
     for(i=0;i<=jmax;i++)
     {
         j[i].id_selectionee=1;
         j[i].n_item_placable_sel=1;
+        j[i].n_joueur=i;
+        j[i].bombardier=canon_j[i];
+        j[i].canon_place=0;
+        for(k=1;k<=NBRE_COMPETENCES_EXPLO;k++)
+        {
+            j[i].explosion_debloques[k]=0;
+        }
+        for(k=1;k<=NBRE_COMPETENCES_SCIENCE;k++)
+        {
+            j[i].science_debloques[k]=0;
+        }
+        for(k=1;k<=NBRE_COMPETENCES_PRECISION;k++)
+        {
+            j[i].precision_debloques[k]=0;
+        }
+        j[i].explosion_debloques[1]=1;
+        j[i].science_debloques[1]=1;
+        j[i].precision_debloques[1]=1;
     }
-    j[0].n_joueur=0;
-    j[1].n_joueur=1;
+
 }
 void initialiser_item(item i[],int nbre_blocs_actuel)
 {
@@ -74,7 +92,8 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
     for(j=1;j<=nbre_blocs_actuel;j++)
     {
         i[j].id=j;
-        i[j].nbre_blocs_actuel=nbre_blocs_actuel;if(j==4)
+        i[j].nbre_blocs_actuel=nbre_blocs_actuel;
+        if(j==4)
         {
             i[j].soumis_a_la_gravite=3;
         }
@@ -84,7 +103,7 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
             i[j].soumis_a_la_gravite=0;
         if(j==4)
             i[j].soumis_a_la_gravite=3;
-        if(j==1 || j==4 || j==5)
+        if(j==1 || j==4 || j==5 || j==5)
         {
             i[j].placable=1;
             i[j].n_placable=n;
@@ -116,5 +135,59 @@ void initialiser_objet_anime(objet_anime* o,int images_max,ALLEGRO_BITMAP* image
     for(i=1;i<=images_max;i++)
     {
         o->bitmap[i]=images_animees[i];
+    }
+}
+void initialiser_objet_fixe(objet_fixe* o,ALLEGRO_BITMAP* image,double taille,double x,double y,int taille_x,int taille_y)
+{
+    o->taille_x=taille_x;
+    o->taille_y=taille_y;
+    o->taille=taille;
+    o->x=x;
+    o->y=y;
+    o->bitmap=image;
+}
+void initialiser_objet_fixe_c(objet_fixe o[],ALLEGRO_BITMAP* image[],double taille,int taille_xy,double x)
+{
+    int k;
+    int i;
+    int n;
+    for(k=1;k<=NBRE_COMPETENCES_EXPLO;k++)
+        {
+        o[k].taille_x=taille_xy;
+        o[k].taille_y=taille_xy;
+        o[k].taille=taille;
+        for(i=1;i<=4;i++){o[k].utile2[i]=0;}
+        if(k==1)
+        {
+            o[k].y=YFENETRE/(NBRE_COLONE_COMPETENCE+1)-taille_xy/2;
+            o[k].x=x;
+            o[k].utile2[1]=2;
+            o[k].utile2[2]=3;
+        }
+        if(k>=2 && k<=3)
+        {
+            o[k].y=(YFENETRE/(NBRE_COLONE_COMPETENCE+1))*2-taille_xy/2;
+            n=k-2;
+            o[k].utile2[1]=6-2*n;
+            o[k].utile2[2]=7-2*n;
+            o[k].x=x+(2*(k-2)-1)*(taille_xy);
+        }
+        if(k>=4 && k<=7)
+        {
+            if(k>=5 && k<=6)
+            {
+                o[k].utile2[1]=8;
+            }
+            o[k].y=(YFENETRE/(NBRE_COLONE_COMPETENCE+1))*3-taille_xy/2;
+            n=k-5;
+            if(n<=0){n-=1;}
+            o[k].x=x+(n/(abs(n)))*(taille_xy/2)-(n)*(taille_xy*1.2);
+        }
+        if(k==8)
+        {
+            o[k].y=(YFENETRE/(NBRE_COLONE_COMPETENCE+1))*4-taille_xy/2;
+            o[k].x=x;
+        }
+        o[k].bitmap=image[k];
     }
 }
