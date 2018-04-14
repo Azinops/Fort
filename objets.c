@@ -76,15 +76,27 @@ void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CA
                     else
                     {
                         blocs[souris.y][souris.x].id=j->id_selectionee;
+                        blocs[souris.y][souris.x].au_joueur=j->n_joueur;
                     }
                 }
             }
         }
     }
 }
+int clic_objet_fixe(SOURIS,objet_fixe o)
+{
+    if(mouse.x>o.x-o.taille_x*o.taille/2 && mouse.y>o.y-o.taille_y*o.taille/2 && mouse.x<o.x+o.taille_x*o.taille/2 && mouse.y<o.y+o.taille_y*o.taille/2 && mouse.buttons&1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
 int clic_objet(SOURIS,objet_anime o)
 {
-    if(mouse.x>o.x && mouse.y>o.y && mouse.x<o.x+o.taille_x*o.taille && mouse.y<o.y+o.taille_y*o.taille && mouse.buttons&1)
+    if(mouse.x>o.x-o.taille_x*o.taille/2 && mouse.y>o.y-o.taille_y*o.taille/2 && mouse.x<o.x+o.taille_x*o.taille/2 && mouse.y<o.y+o.taille_y*o.taille/2 && mouse.buttons&1)
     {
         return 1;
     }
@@ -95,7 +107,18 @@ int clic_objet(SOURIS,objet_anime o)
 }
 int toucher_objet(SOURIS,objet_anime o)
 {
-    if(mouse.x>o.x && mouse.y>o.y && mouse.x<o.x+o.taille_x*o.taille && mouse.y<o.y+o.taille_y*o.taille)
+    if(mouse.x>o.x-o.taille_x*o.taille/2 && mouse.y>o.y-o.taille_y*o.taille/2 && mouse.x<o.x+o.taille_x*o.taille/2 && mouse.y<o.y+o.taille_y*o.taille/2)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int toucher_objet_fixe(SOURIS,objet_fixe o)
+{
+    if(mouse.x>o.x-o.taille_x*o.taille/2 && mouse.y>o.y-o.taille_y*o.taille/2 && mouse.x<o.x+o.taille_x*o.taille/2 && mouse.y<o.y+o.taille_y*o.taille/2)
     {
         return 1;
     }
@@ -150,6 +173,11 @@ void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,
     {
         for(j=0;j<=NBRE_CASES_Y-1;j++)
         {
+            if(bloc[j][i].pv<=0)
+            {
+                bloc[j][i].id=0;
+                bloc[j][i].au_joueur=-1;
+            }
             if(it[bloc[j][i].id].soumis_a_la_gravite==1)
             {
                 if(bloc[j+1][i].id==0)
@@ -191,6 +219,174 @@ void enlever_carre(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],point_case p,SOURIS,it
             bloc[p.y][p.x].id=0;
             bloc[p.y][p.x].etat=1;
             bloc[p.y][p.x].pv=0;
+        }
+    }
+}
+void gerer_competences(SOURIS,joueur* j,objet_fixe o[])
+{
+    int i=1;
+    int k;
+    if(o[i].id==1)
+    {
+        for(i=1;i<=NBRE_COMPETENCES_EXPLO;i++)
+        {
+            if(clic_objet_fixe(mouse,o[i]))
+            {
+                if(j->explosion_debloques[i]==1)
+                {
+                    j->explosion_debloques[i]=2;
+                    for(k=1;k<=NBRE_LIAISONS_COMPTENCES_MAX;k++)
+                    {
+                        if(o[i].utile2[k]!=0)
+                        {
+                            if(o[i].utile2[k]==8)
+                            {
+                                j->explosion_debloques[o[i].utile2[k]]+=0.5;
+                            }
+                            else
+                            {
+                                j->explosion_debloques[o[i].utile2[k]]=1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if(o[i].id==2)
+    {
+        for(i=1;i<=NBRE_COMPETENCES_SCIENCE;i++)
+        {
+            if(clic_objet_fixe(mouse,o[i]))
+            {
+                if(j->science_debloques[i]==1)
+                {
+                    j->science_debloques[i]=2;
+                    for(k=1;k<=NBRE_LIAISONS_COMPTENCES_MAX;k++)
+                    {
+                        if(o[i].utile2[k]!=0)
+                        {
+                            if(o[i].utile2[k]==8)
+                            {
+                                j->science_debloques[o[i].utile2[k]]+=0.5;
+                            }
+                            else
+                            {
+
+                                j->science_debloques[o[i].utile2[k]]=1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if(o[i].id==3)
+    {
+        for(i=1;i<=NBRE_COMPETENCES_PRECISION;i++)
+        {
+            if(clic_objet_fixe(mouse,o[i]))
+            {
+                if(j->precision_debloques[i]==1)
+                {
+                    j->precision_debloques[i]=2;
+                    for(k=1;k<=NBRE_LIAISONS_COMPTENCES_MAX;k++)
+                    {
+                        if(o[i].utile2[k]!=0)
+                        {
+                            if(o[i].utile2[k]==8)
+                            {
+                                j->precision_debloques[o[i].utile2[k]]+=0.5;
+                            }
+                            else
+                            {
+                                j->precision_debloques[o[i].utile2[k]]=1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X])
+{
+    int xi=floor((o.x)/XFENETRE*NBRE_CASES_X);
+    int yi=floor((o.y)/YFENETRE*NBRE_CASES_Y);
+    if(c[yi][xi].id!=0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X])
+{
+    int i;
+    for(i=0;i<=NBRE_FUSEES;i++)
+    {
+        if(f[i].fusee.existence==1)
+        {
+            if(f[i].explosion.animation[0]==0)
+            {
+                f[i].vy+=attraction;
+                f[i].fusee.x+=f[i].vx/50;
+                f[i].fusee.y+=f[i].vy/50;
+                f[i].fusee.angle=atan(f[i].vy/f[i].vx)+PI/2*(f[i].vx/abs(f[i].vx));
+            }
+            if(collision_objet_fixe_carre(f[i].fusee,c)==1 && f[i].explosion_en_cours==0)
+            {
+                f[i].explosion_en_cours=1;
+                f[i].vx=0;
+                f[i].vy=0;
+                f[i].explosion.x=f[i].fusee.x;
+                f[i].explosion.y=f[i].fusee.y;
+                animer_objet(&f[i].explosion,1,f[i].explosion.nbre_images_max,f[i].explosion.nbre_images_max);
+            }
+            if(f[i].fusee.y>YFENETRE || f[i].fusee.x>XFENETRE || f[i].fusee.x<0)
+            {
+                f[i].fusee.existence=0;
+            }
+            if(f[i].explosion.animation[0]==0 && f[i].explosion_en_cours==1)
+            {
+                f[i].fusee.existence=0;
+                f[i].explosion_en_cours=0;
+            }
+        }
+    }
+}
+void tirer_missile(joueur j,double vx,double vy,double x,double y,fusee_missile f[])
+{
+    static int n=1;
+    f[n].vx=vx;
+    f[n].vy=vy;
+    f[n].fusee.existence=1;
+    f[n].fusee.x=x;
+    f[n].fusee.y=y;
+    f[n].explosion.taille=j.taille_explosion;
+    n=retablisseur(n+1,NBRE_FUSEES,1);
+}
+void pop_fumee(objet_anime o[],fusee_missile f[])
+{
+    static int n=0;
+    int i;
+    for(i=0;i<=NBRE_FUSEES;i++)
+    {
+        if(f[i].fusee.existence==1)
+        {
+            f[i].compteur_fumee+=FREQUENCE_APPARITION_FUMEE;
+            if(f[i].compteur_fumee>=1)
+            {
+                f[i].compteur_fumee=0;
+                o[n].existence=1;
+                o[n].x=f[i].fusee.x;
+                o[n].y=f[i].fusee.y;
+                o[n].taille=f[i].fusee.taille*COEF_FUSEE_FUMEE_TAILLE;
+                animer_objet(&o[n],1,o[i].nbre_images_max,o[i].nbre_images_max);
+                n=retablisseur(n+1,NBRE_FUMEE,0);
+            }
         }
     }
 }

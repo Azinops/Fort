@@ -89,7 +89,7 @@
     ALLEGRO_COLOR blanc =al_map_rgba(255,255,255,0);\
     ALLEGRO_COLOR violet =al_map_rgba(130,80,200,0);\
     ALLEGRO_COLOR jaune =al_map_rgba(255,255,0,255);\
-    ALLEGRO_COLOR jaune_fonce =al_map_rgba(150,150,0,255);\
+    ALLEGRO_COLOR jaune_fonce =al_map_rgba(100,100,100,255);\
     ALLEGRO_COLOR jaunetrans =al_map_rgba(255,255,0,0);\
     ALLEGRO_COLOR gris =al_map_rgba(150,150,150,255);\
     ALLEGRO_COLOR orange =al_map_rgba(255,102,0,150);\
@@ -101,7 +101,11 @@
     al_flip_display();\
     al_get_mouse_state(&mouse);\
     al_get_keyboard_state(&key);
-#define JAUNE_FONCE al_map_rgba(120,120,0,255)
+#define AFFICHER_CHARGEMENT al_draw_scaled_rotated_bitmap(fond[3],0,0,0,0,Xfenetre/taille_fond_chargement_x,Yfenetre/taille_fond_chargement_y,0,0);\
+    al_flip_display();
+#define AJUSTER_ECRAN taille_competences_m=round(XFENETRE*1000/1800)/1000;\
+    anti_marge_competence_x=taille_competences_m*(-600);
+#define JAUNE_FONCE al_map_rgba(100,100,0,255)
 #define JAUNE al_map_rgba(255,255,0,255)
 #define SOURIS ALLEGRO_MOUSE_STATE mouse
 #define CLAVIER int ALLEGRO_KEYBOARD_STATE

@@ -12,6 +12,7 @@ typedef struct
     int etat;
     double pv;
     int compteur_gravite;
+    int au_joueur;
 }carre;
 typedef struct
 {
@@ -26,6 +27,8 @@ typedef struct
     int taille_y;
     int animation[4]; //0:ANIMATION OUI/NON  1:DEPART DE L'ANIMATION:quelle image  2:FIN ANIMATION:quelle image 3:METTRE A QUELLE IMAGE APRES ANIMATION
     double compteur_animation;
+    float angle;
+    int existence;
 }objet_anime;
 typedef struct
 {
@@ -49,9 +52,11 @@ typedef struct
     int n_item_placable_sel;
     canon bombardier;
     int canon_place;
-    int explosion_debloques[NBRE_COMPETENCES_EXPLO];
-    int science_debloques[NBRE_COMPETENCES_SCIENCE];
-    int precision_debloques[NBRE_COMPETENCES_PRECISION]; //0: PAS DEBLOQUE   1:DEBLOQUABLE    2:DEBLOQUE
+    double explosion_debloques[NBRE_COMPETENCES_EXPLO];
+    double science_debloques[NBRE_COMPETENCES_SCIENCE];
+    double precision_debloques[NBRE_COMPETENCES_PRECISION]; //0: PAS DEBLOQUE   1:DEBLOQUABLE    2:DEBLOQUE
+    int fini_de_jouer;
+    double taille_explosion;
 }joueur;
 void placer_bloc(ALLEGRO_MOUSE_STATE mouse,carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,fenetre f);
 typedef struct
@@ -74,13 +79,26 @@ typedef struct
 {
     double x;
     double y;
+    int id;
     ALLEGRO_BITMAP* bitmap;
     double taille;
     int taille_x;
     int taille_y;
     int utile;
     int utile2[NBRE_LIAISONS_COMPTENCES_MAX]; //POUR COMPETENCES:  [5,7,0,0] <-- FAIT DES LIAISON AVEC COMPETENCE 5 ET 7
+    float angle;
+    int existence;
 }objet_fixe;
+typedef struct
+{
+    objet_fixe fusee;
+    objet_anime explosion;
+    float inclinaison;
+    double vx;
+    double vy;
+    int explosion_en_cours;
+    double compteur_fumee;
+}fusee_missile;
 void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j);
 int clic_objet(SOURIS,objet_anime o);
 int toucher_objet(SOURIS,objet_anime o);
@@ -89,5 +107,10 @@ void animer_objet(objet_anime* o,int image_depart,int image_fin_anim,int image_a
 void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,item it[],joueur jo[]);
 void switcher_deux_blocs(carre* bloc1,carre* bloc2);
 void enlever_carre(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],point_case p,SOURIS,item i[]);
-
+void gerer_competences(SOURIS,joueur* j,objet_fixe o[]);
+int toucher_objet_fixe(SOURIS,objet_fixe o);
+void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X]);
+int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X]);
+void tirer_missile(joueur j,double vx,double vy,double x,double y,fusee_missile f[]);
+void pop_fumee(objet_anime o[],fusee_missile f[]);
 #endif // OBJETS_H_INCLUDED
