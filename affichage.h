@@ -15,4 +15,5 @@ void afficher_acces_comptetences(ALLEGRO_BITMAP* debloque,ALLEGRO_BITMAP* inacce
 void selection_objets_jaune(ALLEGRO_BITMAP* selection_jaune,objet_fixe o[],int nombre_objets,SOURIS);
 void afficher_fusees(fusee_missile f[]);
 void afficher_objet_anime_en_masse(objet_anime o[],int nbre_objets);
+void afficher_objet_fixe_en_masse(objet_fixe o[],int nbre_objets);
 #endif // AFFICHAGE_H_INCLUDED

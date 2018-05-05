@@ -6,7 +6,7 @@
         al_wait_for_event(queue,&event);
 #include "dimensions.h"
 //FENETRE
-double Xfenetre=XFENETRE;
+double Xfenetre=XFENETRE    ;
 double Yfenetre=YFENETRE;
 int cases_x=NBRE_CASES_X;
 int cases_y=NBRE_CASES_Y;
@@ -34,28 +34,34 @@ int nbre_c_explo_actuels=NBRE_COMPETENCES_EXPLO;
 int nbre_c_precision_actuels=NBRE_COMPETENCES_PRECISION;
 int nbre_c_scientifique_actuels=NBRE_COMPETENCES_SCIENCE;
 int joueur_qui_joue=0;
-int nbre_explosion_actuel=18;
+int nbre_explosion_actuel=9;
 int nbre_fusees_actuel=1;
 int nbre_fumees_actuel=10;
+int nbre_particules_explosion_actuel=1;
 
 //FUSEES
 double taille_fusees_normales=0.2;
-double attraction = 10;
+double attraction = 15;
 
 //FUMEE
-double vitese_anim_fumee=0.5;
+double vitese_anim_fumee=0.2;
 double taille_initiale_fumee=0.5;
+double vitesse_deplacement_fumee_x=0.1;
+double vitesse_deplacement_fumee_y=-1;
 
+double taille_particules_explosion=0.2;
+double taille_particules_explosion_x=50;
+double taille_particules_explosion_y=50;
 //EXPLOSION
 double vitesse_anim_explo=0.5;
-double taille_explosion_depart=0.12;
+double taille_explosion_depart=TAILLE_EXPLOSION_INIT;
 
 //FONDS
 int taille_fond_chargement_x=1200;
 int taille_fond_chargement_y=800;
 
 //COMPETTENCES
-double taille_competences_m=1;
+double taille_competences_c=1;
 int taille_competences_xy=TAILLE_COMPETENCE;
 int anti_marge_competence_x=-600;
 

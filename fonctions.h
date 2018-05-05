@@ -103,8 +103,7 @@
     al_get_keyboard_state(&key);
 #define AFFICHER_CHARGEMENT al_draw_scaled_rotated_bitmap(fond[3],0,0,0,0,Xfenetre/taille_fond_chargement_x,Yfenetre/taille_fond_chargement_y,0,0);\
     al_flip_display();
-#define AJUSTER_ECRAN taille_competences_m=round(XFENETRE*1000/1800)/1000;\
-    anti_marge_competence_x=taille_competences_m*(-600);
+#define AJUSTER_ECRAN anti_marge_competence_x=round(XFENETRE*1000/1800)/1000*(-600);
 #define JAUNE_FONCE al_map_rgba(100,100,0,255)
 #define JAUNE al_map_rgba(255,255,0,255)
 #define SOURIS ALLEGRO_MOUSE_STATE mouse

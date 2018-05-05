@@ -45,7 +45,7 @@ void switcher_deux_blocs(carre* bloc1,carre* bloc2)
     bloc2->pv=pv;
     bloc2->compteur_gravite=compteur_gravite;
 }
-void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j)
+void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j,item i[])
 {
     if(mouse.buttons&1)
     {
@@ -70,12 +70,11 @@ void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CA
                         }
                         j->bombardier.xi=souris.x;
                         j->bombardier.yi=souris.y;
-                        j->bombardier.x=mouse.x;
-                        j->bombardier.y=mouse.y;
                     }
                     else
                     {
                         blocs[souris.y][souris.x].id=j->id_selectionee;
+                        blocs[souris.y][souris.x].pv=i[blocs[souris.y][souris.x].id].pv;
                         blocs[souris.y][souris.x].au_joueur=j->n_joueur;
                     }
                 }
@@ -176,6 +175,7 @@ void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,
             if(bloc[j][i].pv<=0)
             {
                 bloc[j][i].id=0;
+                bloc[j][i].pv=1;
                 bloc[j][i].au_joueur=-1;
             }
             if(it[bloc[j][i].id].soumis_a_la_gravite==1)
@@ -203,8 +203,8 @@ void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,
                     }
                     jo[a].bombardier.xi=i;
                     jo[a].bombardier.yi=j;
-                    jo[a].bombardier.x=(XFENETRE/NBRE_CASES_X)*i;
-                    jo[a].bombardier.y=(YFENETRE/NBRE_CASES_Y)*j;
+                    jo[a].bombardier.x=(XFENETRE/NBRE_CASES_X)*(i+1.5);
+                    jo[a].bombardier.y=(YFENETRE/NBRE_CASES_Y)*(j+0.5);
                 }
             }
         }
@@ -235,6 +235,25 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[])
                 if(j->explosion_debloques[i]==1)
                 {
                     j->explosion_debloques[i]=2;
+                    if(i==1)
+                    {
+                        j->puissance_tir=PUISSANCE_TIR_n1;
+                        j->portee_tir=PORTEE_TIR_n1;
+                    }
+                    if(i==2)
+                    {
+                        j->puissance_tir=PUISSANCE_TIR_n2;
+                        j->portee_tir=PORTEE_TIR_n2;
+                    }
+                    if(i==6)
+                    {
+                        j->portee_tir=PORTEE_TIR_NSUP;
+                    }
+                    if(i==7)
+                    {
+                        j->puissance_tir=PUISSANCE_TIR_n3;
+                        j->portee_tir=PORTEE_TIR_n3;
+                    }
                     for(k=1;k<=NBRE_LIAISONS_COMPTENCES_MAX;k++)
                     {
                         if(o[i].utile2[k]!=0)
@@ -322,8 +341,10 @@ int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X])
         return 0;
     }
 }
-void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X])
+void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X],objet_fixe p[])
 {
+    int x;
+    int y;
     int i;
     for(i=0;i<=NBRE_FUSEES;i++)
     {
@@ -332,8 +353,8 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
             if(f[i].explosion.animation[0]==0)
             {
                 f[i].vy+=attraction;
-                f[i].fusee.x+=f[i].vx/50;
-                f[i].fusee.y+=f[i].vy/50;
+                f[i].fusee.x+=f[i].vx/50*COEF_PIXEL_X;
+                f[i].fusee.y+=f[i].vy/50*COEF_PIXEL_Y;
                 f[i].fusee.angle=atan(f[i].vy/f[i].vx)+PI/2*(f[i].vx/abs(f[i].vx));
             }
             if(collision_objet_fixe_carre(f[i].fusee,c)==1 && f[i].explosion_en_cours==0)
@@ -343,6 +364,18 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
                 f[i].vy=0;
                 f[i].explosion.x=f[i].fusee.x;
                 f[i].explosion.y=f[i].fusee.y;
+                pop_particules(p,f[i].explosion.x,f[i].explosion.y,NBRE_PARTICULE_POP*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE),VITESSE_PARTICULE*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE));
+                for(x=1;x<=NBRE_CASES_X-1;x++)
+                {
+                    for(y=1;y<=NBRE_CASES_Y-1;y++)
+                    {
+                        if(distance(f[i].explosion.x,f[i].explosion.y,x*XFENETRE/NBRE_CASES_X,y*YFENETRE/NBRE_CASES_Y)<=f[i].portee_explosion)
+                        {
+                            c[y][x].pv-=f[i].puissance_explosion/(pow(distance(f[i].fusee.x,f[i].fusee.y,x*XFENETRE/NBRE_CASES_X,y*YFENETRE/NBRE_CASES_Y)*COEF_REDUC_DEGAT_EXPLOSION,2));
+                        }
+                    }
+
+                }
                 animer_objet(&f[i].explosion,1,f[i].explosion.nbre_images_max,f[i].explosion.nbre_images_max);
             }
             if(f[i].fusee.y>YFENETRE || f[i].fusee.x>XFENETRE || f[i].fusee.x<0)
@@ -366,12 +399,16 @@ void tirer_missile(joueur j,double vx,double vy,double x,double y,fusee_missile 
     f[n].fusee.x=x;
     f[n].fusee.y=y;
     f[n].explosion.taille=j.taille_explosion;
+    f[n].puissance_explosion=j.puissance_tir;
+    f[n].portee_explosion=j.portee_tir;
+    f[n].explosion.taille=COEF_TAILLE_EXPLO_DEGATS*TAILLE_EXPLOSION_INIT*(pow(j.puissance_tir,0.5))/PUISSANCE_TIR_INITIALE;
     n=retablisseur(n+1,NBRE_FUSEES,1);
 }
 void pop_fumee(objet_anime o[],fusee_missile f[])
 {
     static int n=0;
     int i;
+    int j;
     for(i=0;i<=NBRE_FUSEES;i++)
     {
         if(f[i].fusee.existence==1)
@@ -381,12 +418,83 @@ void pop_fumee(objet_anime o[],fusee_missile f[])
             {
                 f[i].compteur_fumee=0;
                 o[n].existence=1;
-                o[n].x=f[i].fusee.x;
-                o[n].y=f[i].fusee.y;
-                o[n].taille=f[i].fusee.taille*COEF_FUSEE_FUMEE_TAILLE;
-                animer_objet(&o[n],1,o[i].nbre_images_max,o[i].nbre_images_max);
-                n=retablisseur(n+1,NBRE_FUMEE,0);
+                if(f[i].explosion_en_cours==0)
+                {
+                    o[n].x=f[i].fusee.x;
+                    o[n].y=f[i].fusee.y;
+                }
+                if(f[i].explosion_en_cours==1)
+                {
+                    for(j=0;j<=NBRE_FUMEE_EXPLOSION*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE);j++)
+                    {
+                        o[n].x=f[i].fusee.x+random(-10,10)*sqrt(f[i].puissance_explosion)/50;
+                        o[n].y=f[i].fusee.y+random(-10,10)*sqrt(f[i].puissance_explosion)/50;
+                        o[n].taille=f[i].fusee.taille*COEF_FUSEE_FUMEE_TAILLE;
+                        animer_objet(&o[n],random(2,7),o[i].nbre_images_max,o[i].nbre_images_max);
+                        n=retablisseur(n+1,NBRE_FUMEE,0);
+                    }
+                }
+                else
+                {
+                    o[n].taille=f[i].fusee.taille*COEF_FUSEE_FUMEE_TAILLE;
+                    animer_objet(&o[n],1,o[i].nbre_images_max,o[i].nbre_images_max);
+                    n=retablisseur(n+1,NBRE_FUMEE,0);
+                }
             }
         }
+    }
+}
+void deplacer_objet_constament(objet_anime o[],int nbre_objets,double vitesse_x,double vitesse_y)
+{
+    int i;
+    for(i=0;i<=nbre_objets;i++)
+    {
+        if(o[i].existence==1)
+        {
+            o[i].x+=vitesse_x*COEF_PIXEL_X;
+            o[i].y+=vitesse_y*COEF_PIXEL_Y;
+            if(o[i].x<=0 || o[i].y<=0 || o[i].x>=XFENETRE || o[i].y>=YFENETRE)
+            {
+                o[i].existence=0;
+            }
+        }
+    }
+}
+void deplacer_objet_fixe_constament(objet_fixe o[],int nbre_objets)
+{
+    int i;
+    for(i=0;i<=nbre_objets;i++)
+    {
+        if(o[i].existence==1)
+        {
+            o[i].x+=o[i].vitesse_x*COEF_PIXEL_X;
+            o[i].y+=o[i].vitesse_y*COEF_PIXEL_Y;
+            if(o[i].x<=0 || o[i].y<=0 || o[i].x>=XFENETRE || o[i].y>=YFENETRE)
+            {
+                o[i].existence=0;
+            }
+        }
+    }
+}
+void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double vitesse)
+{
+    static int n=1;
+    int i;
+    for(i=0;i<=nbre_particules;i++)
+    {
+        o[i].existence=1;
+        o[i].x=x;
+        o[i].y=y;
+        o[i].angle=(round(random(-PRECISION_EXPLOSION_PARTICULE/2,PRECISION_EXPLOSION_PARTICULE/2))/PRECISION_EXPLOSION_PARTICULE)*(2*PI);
+        o[i].vitesse_x=cos(o[i].angle)*vitesse;
+        o[i].vitesse_y=sin(o[i].angle)*vitesse;
+        n=retablisseur(n+1,NBRE_PARTICULES_EXPLOSION_MAX,0);
+    }
+}
+void tirs_de_cannon(CLAVIER,joueur j)
+{
+    if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE))
+    {
+        tirer_missile(j,cos(j.angle_tir)*j.puissance_tir_cannon,sin(j.angle_tir)*j.puissance_tir_cannon,j.bombardier.x,j.bombardier.y,j.missile_selectione);
     }
 }

@@ -32,6 +32,22 @@ typedef struct
 }objet_anime;
 typedef struct
 {
+    double x;
+    double y;
+    int id;
+    ALLEGRO_BITMAP* bitmap;
+    double taille;
+    int taille_x;
+    int taille_y;
+    int utile;
+    int utile2[NBRE_LIAISONS_COMPTENCES_MAX]; //POUR COMPETENCES:  [5,7,0,0] <-- FAIT DES LIAISON AVEC COMPETENCE 5 ET 7
+    double angle;
+    int existence;
+    double vitesse_x;
+    double vitesse_y;
+}objet_fixe;
+typedef struct
+{
     objet_anime canon_anime;
     int xi;
     int yi;
@@ -47,6 +63,18 @@ typedef struct
 }fenetre;
 typedef struct
 {
+    objet_fixe fusee;
+    objet_anime explosion;
+    float inclinaison;
+    double vx;
+    double vy;
+    int explosion_en_cours;
+    double compteur_fumee;
+    double puissance_explosion;
+    double portee_explosion;
+}fusee_missile;
+typedef struct
+{
     int id_selectionee;
     int n_joueur;
     int n_item_placable_sel;
@@ -57,6 +85,13 @@ typedef struct
     double precision_debloques[NBRE_COMPETENCES_PRECISION]; //0: PAS DEBLOQUE   1:DEBLOQUABLE    2:DEBLOQUE
     int fini_de_jouer;
     double taille_explosion;
+    double puissance_tir;
+    double portee_tir;
+    double vx_fusee;
+    double vy_fusee;
+    double puissance_tir_cannon;
+    double angle_tir;
+    fusee_missile* missile_selectione;
 }joueur;
 void placer_bloc(ALLEGRO_MOUSE_STATE mouse,carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,fenetre f);
 typedef struct
@@ -68,6 +103,7 @@ void rentrer_souris_dans_une_case(point_case* souris,fenetre f,ALLEGRO_MOUSE_STA
 typedef struct
 {
     int id;
+    double pv;
     int placable;
     int nbre_blocs_actuel;
     int n_placable;
@@ -75,31 +111,7 @@ typedef struct
     int nbre_item_placable;
     int soumis_a_la_gravite; //  0:NON    1:OUI   2:COLLANT
 }item;
-typedef struct
-{
-    double x;
-    double y;
-    int id;
-    ALLEGRO_BITMAP* bitmap;
-    double taille;
-    int taille_x;
-    int taille_y;
-    int utile;
-    int utile2[NBRE_LIAISONS_COMPTENCES_MAX]; //POUR COMPETENCES:  [5,7,0,0] <-- FAIT DES LIAISON AVEC COMPETENCE 5 ET 7
-    float angle;
-    int existence;
-}objet_fixe;
-typedef struct
-{
-    objet_fixe fusee;
-    objet_anime explosion;
-    float inclinaison;
-    double vx;
-    double vy;
-    int explosion_en_cours;
-    double compteur_fumee;
-}fusee_missile;
-void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j);
+void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j,item i[]);
 int clic_objet(SOURIS,objet_anime o);
 int toucher_objet(SOURIS,objet_anime o);
 int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue);
@@ -109,8 +121,12 @@ void switcher_deux_blocs(carre* bloc1,carre* bloc2);
 void enlever_carre(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],point_case p,SOURIS,item i[]);
 void gerer_competences(SOURIS,joueur* j,objet_fixe o[]);
 int toucher_objet_fixe(SOURIS,objet_fixe o);
-void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X]);
+void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X],objet_fixe p[]);
 int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X]);
 void tirer_missile(joueur j,double vx,double vy,double x,double y,fusee_missile f[]);
 void pop_fumee(objet_anime o[],fusee_missile f[]);
+void deplacer_objet_constament(objet_anime o[],int nbre_objets,double vitesse_x,double vitesse_y);
+void deplacer_objet_fixe_constament(objet_fixe o[],int nbre_objets);
+void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double vitesse);
+void tirs_de_cannon(CLAVIER,joueur j);
 #endif // OBJETS_H_INCLUDED

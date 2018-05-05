@@ -75,7 +75,7 @@ void afficher_objet_anime(objet_anime* o)
                 o->etat_animation=round(o->compteur_animation);
             }
         }
-        al_draw_scaled_rotated_bitmap(o->bitmap[o->etat_animation],0,0,o->x-o->taille_x*o->taille/2,o->y-o->taille_y*o->taille/2,o->taille,o->taille,o->angle,0);
+        al_draw_scaled_rotated_bitmap(o->bitmap[o->etat_animation],0,0,o->x-o->taille_x*o->taille/2,o->y-o->taille_y*o->taille/2,o->taille*COEF_PIXEL_X,o->taille*COEF_PIXEL_X,o->angle,0);
     }
 }
 void afficher_objet_anime_en_masse(objet_anime o[],int nbre_objets)
@@ -99,7 +99,7 @@ void afficher_objet_anime_en_masse(objet_anime o[],int nbre_objets)
                     o[i].etat_animation=round(o[i].compteur_animation);
                 }
             }
-            al_draw_scaled_rotated_bitmap(o[i].bitmap[o[i].etat_animation],0,0,o[i].x-o[i].taille_x*o[i].taille/2,o[i].y-o[i].taille_y*o[i].taille/2,o[i].taille,o[i].taille,o[i].angle,0);
+            al_draw_scaled_rotated_bitmap(o[i].bitmap[o[i].etat_animation],0,0,o[i].x-o[i].taille_x*o[i].taille/2,o[i].y-o[i].taille_y*o[i].taille/2,o[i].taille*COEF_PIXEL_X,o[i].taille*COEF_PIXEL_X,o[i].angle,0);
         }
     }
 }
@@ -131,7 +131,18 @@ void interface_competences(CLAVIER,int* interface_du_jeu,int* fond)
 }
 void afficher_objet_fixe(objet_fixe o)
 {
-    if(o.existence==1){al_draw_scaled_rotated_bitmap(o.bitmap,o.taille_x/2,o.taille_y/2,o.x,o.y,o.taille,o.taille,o.angle,0);}
+    if(o.existence==1){al_draw_scaled_rotated_bitmap(o.bitmap,o.taille_x/2,o.taille_y/2,o.x,o.y,o.taille*COEF_PIXEL_X,o.taille*COEF_PIXEL_Y,o.angle,0);}
+}
+void afficher_objet_fixe_en_masse(objet_fixe o[],int nbre_objets)
+{
+    int i;
+    for(i=0;i<=nbre_objets;i++)
+    {
+        if(o[i].existence==1)
+        {
+            al_draw_scaled_rotated_bitmap(o[i].bitmap,o[i].taille_x/2,o[i].taille_y/2,o[i].x,o[i].y,o[i].taille*COEF_PIXEL_X,o[i].taille*COEF_PIXEL_Y,o[i].angle,0);
+        }
+    }
 }
 void tracer_ligne_entre_objets(objet_fixe o1, objet_fixe o2,double epaisseur, ALLEGRO_COLOR couleur)
 {
@@ -147,7 +158,7 @@ void connexions(objet_fixe o[],int nbre_objets,joueur jo)
         {
             if(o[i].utile2[j]!=0)
             {
-                if(o[i].id==1)
+                if(o[i].id==1 && i!=8)
                 {
                     if(jo.explosion_debloques[i]!=2)
                     {
