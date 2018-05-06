@@ -11,114 +11,6 @@
 #include "initialiser_objets.h"
 #include "fonctions.h"
 #include "map.h"
-void initialiser_blocs(fenetre f,carre c[NBRE_CASES_Y][NBRE_CASES_X])
-{
-    int i=0;
-    int j=0;
-    for(i=0;i<f.cases_x;i++)
-    {
-        for(j=0;j<f.cases_y;j++)
-        {
-            c[j][i].xi=i;
-            c[j][i].yi=j;
-            c[j][i].x=i*(f.Xfenetre/f.cases_x);
-            c[j][i].y=j*(f.Yfenetre/f.cases_y);
-            c[j][i].id=MAP_ID[0][j][i];
-            c[j][i].pv=1;
-            c[j][i].compteur_gravite=1;
-            c[j][i].au_joueur=-1;
-            if(c[j][i].id==1)
-            {
-                c[j][i].pv=100;
-            }
-            if(c[j][i].id==2)
-            {
-                c[j][i].pv=200;
-            }
-            if(c[j][i].id==3)
-            {
-                c[j][i].pv=250;
-            }
-            if(c[j][i].id==4)
-            {
-                c[j][i].pv=300;
-            }
-            if(c[j][i].id==5)
-            {
-                c[j][i].pv=600;
-            }
-            if(c[j][i].id==5)
-            {
-                c[j][i].pv=600;
-            }
-            if(c[j][i].id==6)
-            {
-                c[j][i].pv=50;
-            }
-            if(c[j][i].id==7)
-            {
-                c[j][i].pv=150;
-            }
-            if(c[j][i].id==8)
-            {
-                c[j][i].pv=400;
-            }
-            if(c[j][i].id==9)
-            {
-                c[j][i].pv=350;
-            }
-            if(c[j][i].id==10)
-            {
-                c[j][i].pv=20;
-            }
-        }
-    }
-}
-void initialiser_map(fenetre f[],double Xfen,double Yfen,int cases_max_x,int cases_map_y)
-{
-    f[0].cases_x=cases_max_x;
-    f[0].cases_y=cases_map_y;
-    f[0].Xfenetre=Xfen;
-    f[0].Yfenetre=Yfen;
-}
-void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explosion_init,fusee_missile* missile_initiaux)
-{
-    int i;
-    int k;
-    for(i=0;i<=jmax;i++)
-    {
-        j[i].id_selectionee=1;
-        j[i].n_item_placable_sel=1;
-        j[i].n_joueur=i;
-        j[i].bombardier=canon_j[i];
-        j[i].canon_place=0;
-        j[i].taille_explosion=taille_explosion_init;
-        j[i].portee_tir=PORTEE_INITIALE;
-        j[i].puissance_tir=PUISSANCE_TIR_INITIALE;
-        j[i].puissance_tir_cannon=PUISSANCE_CANON_INITIALE;
-        j[i].vx_fusee=0;
-        j[i].vy_fusee=0;
-        j[i].angle_tir=-PI/4;
-        j[i].missile_selectione=missile_initiaux;
-        for(k=1;k<=NBRE_COMPETENCES_EXPLO;k++)
-        {
-            j[i].explosion_debloques[k]=0;
-        }
-        for(k=1;k<=NBRE_COMPETENCES_SCIENCE;k++)
-        {
-            j[i].science_debloques[k]=0;
-        }
-        for(k=1;k<=NBRE_COMPETENCES_PRECISION;k++)
-        {
-            j[i].precision_debloques[k]=0;
-        }
-        j[i].explosion_debloques[1]=1;
-        j[i].science_debloques[1]=1;
-        j[i].precision_debloques[1]=1;
-    }
-    j[0].fini_de_jouer=0;
-    j[1].fini_de_jouer=1;
-}
 void initialiser_item(item i[],int nbre_blocs_actuel)
 {
     int j;
@@ -151,11 +43,11 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
         }
         if(j==2)
         {
-            i[j].pv=200;
+            i[j].pv=300;
         }
         if(j==3)
         {
-            i[j].pv=250;
+            i[j].pv=350;
         }
         if(j==4)
         {
@@ -167,7 +59,7 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
         }
         if(j==5)
         {
-            i[j].pv=600;
+            i[j].pv=800;
         }
         if(j==6)
         {
@@ -179,19 +71,87 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
         }
         if(j==8)
         {
-            i[j].pv=400;
+            i[j].pv=1500;
         }
         if(j==9)
         {
-            i[j].pv=350;
+            i[j].pv=500;
         }
         if(j==10)
         {
-            i[j].pv=20;
+            i[j].pv=15;
         }
     }
     i[1].nbre_item_placable=n-1;
 }
+void initialiser_blocs(fenetre f,carre c[NBRE_CASES_Y][NBRE_CASES_X],item it[])
+{
+    int i=0;
+    int j=0;
+    int k=0;
+    for(i=0;i<f.cases_x;i++)
+    {
+        for(j=0;j<f.cases_y;j++)
+        {
+            c[j][i].xi=i;
+            c[j][i].yi=j;
+            c[j][i].x=i*(f.Xfenetre/f.cases_x);
+            c[j][i].y=j*(f.Yfenetre/f.cases_y);
+            c[j][i].id=MAP_ID[0][j][i];
+            c[j][i].pv=1;
+            c[j][i].compteur_gravite=1;
+            c[j][i].au_joueur=-1;
+            c[j][i].pv=it[c[j][i].id].pv;
+        }
+    }
+}
+void initialiser_map(fenetre f[],double Xfen,double Yfen,int cases_max_x,int cases_map_y)
+{
+    f[0].cases_x=cases_max_x;
+    f[0].cases_y=cases_map_y;
+    f[0].Xfenetre=Xfen;
+    f[0].Yfenetre=Yfen;
+}
+void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explosion_init,fusee_missile* missile_initiaux)
+{
+    int i;
+    int k;
+    for(i=0;i<=jmax;i++)
+    {
+        j[i].id_selectionee=1;
+        j[i].n_item_placable_sel=1;
+        j[i].n_joueur=i;
+        j[i].bombardier=canon_j[i];
+        j[i].canon_place=0;
+        j[i].taille_explosion=taille_explosion_init;
+        j[i].portee_tir=PORTEE_INITIALE;
+        j[i].puissance_tir=PUISSANCE_TIR_INITIALE;
+        j[i].puissance_tir_cannon=PUISSANCE_CANON_INITIALE;
+        j[i].vx_fusee=0;
+        j[i].vy_fusee=0;
+        j[i].missile_selectione=missile_initiaux;
+        for(k=1;k<=NBRE_COMPETENCES_EXPLO;k++)
+        {
+            j[i].explosion_debloques[k]=0;
+        }
+        for(k=1;k<=NBRE_COMPETENCES_SCIENCE;k++)
+        {
+            j[i].science_debloques[k]=0;
+        }
+        for(k=1;k<=NBRE_COMPETENCES_PRECISION;k++)
+        {
+            j[i].precision_debloques[k]=0;
+        }
+        j[i].explosion_debloques[1]=1;
+        j[i].science_debloques[1]=1;
+        j[i].precision_debloques[1]=1;
+    }
+    j[0].angle_tir=-PI/4;
+    j[1].angle_tir=-3*PI/4;
+    j[0].fini_de_jouer=0;
+    j[1].fini_de_jouer=1;
+}
+
 void initialiser_objet_anime(objet_anime* o,int images_max,ALLEGRO_BITMAP* images_animees[],double vitesse_animation,double taille,double x,double y,int taille_x,int taille_y,int existence)
 {
     o->taille_x=taille_x;

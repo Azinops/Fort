@@ -28,7 +28,7 @@ int relache=1;
 
 //IMAGES ACTUELLES
 int nbre_fonds_actuels=3;
-int nbre_blocs_actuels=10;
+int nbre_blocs_actuels=NBRE_BLOCS_ACTUEL;
 int nbre_fin_tour_actuel=18;
 int nbre_c_explo_actuels=NBRE_COMPETENCES_EXPLO;
 int nbre_c_precision_actuels=NBRE_COMPETENCES_PRECISION;

@@ -37,7 +37,6 @@ void jeu()
     initialiser_map(&carte,Xfenetre,Yfenetre,cases_x,cases_y);
 
     carre blocs[cases_y][cases_x];
-    initialiser_blocs(carte[0],&blocs);
 
     AJUSTER_ECRAN
 
@@ -58,6 +57,7 @@ void jeu()
 
     item les_stats_blocs[nbre_blocs_actuels];
     initialiser_item(les_stats_blocs,nbre_blocs_actuels);
+    initialiser_blocs(carte[0],&blocs,les_stats_blocs);
 
     objet_anime explosion;
     initialiser_objet_anime(&explosion,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,0.1,0,0,TAILLE_EXPLOSION_X_Y,TAILLE_EXPLOSION_X_Y,0);
@@ -72,10 +72,6 @@ void jeu()
     initialiser_fumee(fumee,nbre_fumees_actuel,image_fumee,vitese_anim_fumee,taille_initiale_fumee);
     initialiser_joueur(&player,1,bombardiers,taille_explosion_depart,&missile_normaux);
     c_explo[8].angle=0;
-    for(i=0;i<=NBRE_FUSEES;i++)
-    {
-        VOIRSISABUGDOUBLE(player[0].missile_selectione[i].portee_explosion)
-    }
     while(!fin)
     {
         OBTENIRMOUSEETKEY
@@ -105,6 +101,14 @@ void jeu()
                 gerer_fusees(missile_normaux,attraction,blocs,particule_explosion);
                 afficher_fusees(missile_normaux);
                 deplacer_objet_fixe_constament(particule_explosion,NBRE_PARTICULES_EXPLOSION_MAX);
+                if(al_key_down(&key,ALLEGRO_KEY_UP))
+                {
+                    player[joueur_qui_joue].angle_tir-=0.01;
+                }
+                if(al_key_down(&key,ALLEGRO_KEY_DOWN))
+                {
+                    player[joueur_qui_joue].angle_tir+=0.01;
+                }
             }
             if(interface_jeu==1)
             {

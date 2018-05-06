@@ -2,7 +2,7 @@
 #define INITIALISER_OBJETS_H_INCLUDED
 #include "objets.h"
 #include "dimensions.h"
-void initialiser_blocs(fenetre f,carre c[NBRE_CASES_Y][NBRE_CASES_X]);
+void initialiser_blocs(fenetre f,carre c[NBRE_CASES_Y][NBRE_CASES_X],item it[]);
 void initialiser_map(fenetre f[],double Xfen,double Yfen,int cases_max_x,int cases_map_y);
 void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explosion_init,fusee_missile* missile_initiaux);
 void initialiser_item(item i[],int nbre_blocs_actuel);

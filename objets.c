@@ -67,6 +67,8 @@ void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CA
                         {
                             blocs[souris.y][souris.x].id=j->id_selectionee;
                             j->canon_place=1;
+                            blocs[souris.y][souris.x].au_joueur=j->n_joueur;
+                            blocs[souris.y][souris.x].pv=i[blocs[souris.y][souris.x].id].pv;
                         }
                         j->bombardier.xi=souris.x;
                         j->bombardier.yi=souris.y;
@@ -203,8 +205,8 @@ void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,
                     }
                     jo[a].bombardier.xi=i;
                     jo[a].bombardier.yi=j;
-                    jo[a].bombardier.x=(XFENETRE/NBRE_CASES_X)*(i+1.5);
-                    jo[a].bombardier.y=(YFENETRE/NBRE_CASES_Y)*(j+0.5);
+                    jo[a].bombardier.x=(XFENETRE/NBRE_CASES_X)*(i+0.5);
+                    jo[a].bombardier.y=(YFENETRE/NBRE_CASES_Y)*(j+1.5);
                 }
             }
         }
@@ -253,6 +255,10 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[])
                     {
                         j->puissance_tir=PUISSANCE_TIR_n3;
                         j->portee_tir=PORTEE_TIR_n3;
+                    }
+                    if(i==8)
+                    {
+                        j->puissance_tir=PUISSANCE_TIR_NUCLEAIRE;
                     }
                     for(k=1;k<=NBRE_LIAISONS_COMPTENCES_MAX;k++)
                     {
@@ -364,7 +370,10 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
                 f[i].vy=0;
                 f[i].explosion.x=f[i].fusee.x;
                 f[i].explosion.y=f[i].fusee.y;
-                pop_particules(p,f[i].explosion.x,f[i].explosion.y,NBRE_PARTICULE_POP*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE),VITESSE_PARTICULE*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE));
+                if(f[i].puissance_explosion<=PUISSANCE_TIR_n3)
+                {
+                    pop_particules(p,f[i].explosion.x,f[i].explosion.y,NBRE_PARTICULE_POP*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE),VITESSE_PARTICULE*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE));
+                }
                 for(x=1;x<=NBRE_CASES_X-1;x++)
                 {
                     for(y=1;y<=NBRE_CASES_Y-1;y++)
@@ -493,8 +502,15 @@ void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double 
 }
 void tirs_de_cannon(CLAVIER,joueur j)
 {
-    if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE))
+    static int appuye=0;
+    al_draw_line(j.bombardier.x,j.bombardier.y,j.bombardier.x+LONGEUR_LIGNE_TIR*cos(j.angle_tir),j.bombardier.y+LONGEUR_LIGNE_TIR*sin(j.angle_tir),ROUGE,LARGEUR_LIGNE_TIR);
+    if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0)
     {
+        appuye=1;
         tirer_missile(j,cos(j.angle_tir)*j.puissance_tir_cannon,sin(j.angle_tir)*j.puissance_tir_cannon,j.bombardier.x,j.bombardier.y,j.missile_selectione);
+    }
+    if(!al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE))
+    {
+        appuye=0;
     }
 }
