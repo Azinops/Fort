@@ -51,9 +51,9 @@ void jeu()
     objet_fixe c_explo[nbre_c_explo_actuels+1];
     objet_fixe c_science[nbre_c_scientifique_actuels+1];
     objet_fixe c_precision[nbre_c_precision_actuels+1];
-    initialiser_objet_fixe_c(c_explo,competence_explo,taille_competences_c,taille_competences_xy,((XFENETRE-anti_marge_competence_x)/4)*1+anti_marge_competence_x/2,1);
-    initialiser_objet_fixe_c(c_science,competence_scientifique,taille_competences_c,taille_competences_xy,((XFENETRE-anti_marge_competence_x)/4)*2+anti_marge_competence_x/2,2);
-    initialiser_objet_fixe_c(c_precision,competence_precision,taille_competences_c,taille_competences_xy,((XFENETRE-anti_marge_competence_x)/4)*3+anti_marge_competence_x/2,3);
+    initialiser_objet_fixe_c(c_explo,competence_explo,taille_competences_c*COEF_PIXEL_X,taille_competences_xy,((XFENETRE-anti_marge_competence_x)/4)*1+anti_marge_competence_x/2,1);
+    initialiser_objet_fixe_c(c_science,competence_scientifique,taille_competences_c*COEF_PIXEL_X,taille_competences_xy,((XFENETRE-anti_marge_competence_x)/4)*2+anti_marge_competence_x/2,2);
+    initialiser_objet_fixe_c(c_precision,competence_precision,taille_competences_c*COEF_PIXEL_X,taille_competences_xy,((XFENETRE-anti_marge_competence_x)/4)*3+anti_marge_competence_x/2,3);
 
     item les_stats_blocs[nbre_blocs_actuels];
     initialiser_item(les_stats_blocs,nbre_blocs_actuels);
@@ -115,9 +115,9 @@ void jeu()
                 connexions(c_explo,nbre_c_explo_actuels,player[joueur_qui_joue]);
                 connexions(c_science,nbre_c_scientifique_actuels,player[joueur_qui_joue]);
                 connexions(c_precision,nbre_c_precision_actuels,player[joueur_qui_joue]);
-                afficher_objet_fixe_en_masse(c_explo,NBRE_COMPETENCES_EXPLO);
-                afficher_objet_fixe_en_masse(c_science,NBRE_COMPETENCES_SCIENCE);
-                afficher_objet_fixe_en_masse(c_precision,NBRE_COMPETENCES_PRECISION);
+                afficher_objet_fixe_en_masse_c(c_explo,NBRE_COMPETENCES_EXPLO);
+                afficher_objet_fixe_en_masse_c(c_science,NBRE_COMPETENCES_SCIENCE);
+                afficher_objet_fixe_en_masse_c(c_precision,NBRE_COMPETENCES_PRECISION);
                 gerer_competences(mouse,&player[joueur_qui_joue],c_explo);
                 gerer_competences(mouse,&player[joueur_qui_joue],c_science);
                 gerer_competences(mouse,&player[joueur_qui_joue],c_precision);
