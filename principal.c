@@ -35,6 +35,7 @@ void jeu()
     INITIALISER_IMAGES_EN_MASSE(images_explosion,nbre_explosion_actuel,"./images/explosion/")
     INITIALISER_IMAGES_EN_MASSE(image_fumee,nbre_fumees_actuel,"./images/fumee/")
     INITIALISER_IMAGES_EN_MASSE(particules_explosion,nbre_particules_explosion_actuel,"./images/particules_explosion/")
+    INITIALISER_IMAGES_EN_MASSE(icones_fusees,nbre_icones_fusees_actuels,"./images/icones_inventaires/")
 
     fenetre carte[0];
     initialiser_map(&carte,Xfenetre,Yfenetre,cases_x,cases_y);
@@ -109,7 +110,7 @@ void jeu()
                 afficher_fusees(missile_normaux);
                 deplacer_objet_fixe_constament(particule_explosion,NBRE_PARTICULES_EXPLOSION_MAX);
                 afficher_objet_fixe(bouton_inventaire);
-                gerer_bouton_inventaire(&bouton_inventaire,selecCons,mouse,inventaire,case_inventaire,4,6,10,Xfenetre/2,Yfenetre/2);
+                gerer_bouton_inventaire(&bouton_inventaire,selecCons,mouse,inventaire,case_inventaire,nbre_cases_x_inventaire,nbre_cases_y_inventaire,taille_inventaire,Xfenetre/2,Yfenetre/2,icones_fusees,player[joueur_qui_joue]);
             }
             if(interface_jeu==1)
             {

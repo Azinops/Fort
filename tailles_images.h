@@ -16,4 +16,7 @@ double taille_inventaire_x=100;
 double taille_inventaire_y=100;
 double taille_case_x=50;
 double taille_case_y=50;
+
+double taille_icones_x=100;
+double taille_icones_y=100;
 #endif // TAILLES_IMAGES_H_INCLUDED

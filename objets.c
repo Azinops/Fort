@@ -550,7 +550,7 @@ void tirs_de_cannon(CLAVIER,joueur* j)
         }
     }
 }
-void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y)
+void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur j)
 {
     static int b=0;
     int c=0;
@@ -575,6 +575,6 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
     }
     if(b==1)
     {
-        afficher_inventaire(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y);
+        afficher_inventaire(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,j);
     }
 }

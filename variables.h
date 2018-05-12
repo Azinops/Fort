@@ -38,6 +38,7 @@ int nbre_explosion_actuel=9;
 int nbre_fusees_actuel=1;
 int nbre_fumees_actuel=10;
 int nbre_particules_explosion_actuel=1;
+int nbre_icones_fusees_actuels=3;
 
 //FUSEES
 double taille_fusees_normales=0.2;
@@ -78,4 +79,8 @@ double taille_bouton_invenaire_x=50;
 double taille_bouton_invenaire_y=50;
 double distance_fin_tour_inventaire=50;
 
+//INVENTAIRE
+double taille_inventaire=10;
+int nbre_cases_x_inventaire=4;
+int nbre_cases_y_inventaire=6;
 #endif // VARIABLES_H_INCLUDED

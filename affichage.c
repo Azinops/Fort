@@ -283,7 +283,7 @@ void afficher_fusees(fusee_missile f[])
         }
     }
 }
-void afficher_inventaire(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y)
+void afficher_inventaire(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur jo)
 {
     int i;
     int j;
@@ -293,6 +293,10 @@ void afficher_inventaire(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int
         for(j=1;j<=nbre_cases_y;j++)
         {
             al_draw_scaled_rotated_bitmap(case_inv,taille_case_x/2,taille_case_y/2,x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y)),y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y)),0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_x/taille_case_x,0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_y/taille_case_y,0,0);
+            if(jo.inventaire[i+(j-1)*nbre_cases_y]!=0)
+            {
+                al_draw_scaled_rotated_bitmap(icones[jo.inventaire[i+(j-1)*nbre_cases_y]],taille_icones_x/2,taille_icones_y/2,x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y)),y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y)),0.8*taille/(nbre_cases_x+nbre_cases_y),0.8*taille/(nbre_cases_x+nbre_cases_y),0,0);
+            }
         }
     }
 }

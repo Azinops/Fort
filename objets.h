@@ -94,7 +94,8 @@ typedef struct
     double puissance_tir_cannon;
     double angle_tir;
     fusee_missile* missile_selectione;
-    int inventaire[NBRE_CASES_INVENTAIRE];
+    int inventaire[NBRE_CASES_INVENTAIRE*2];
+    int n_competence_ocupee;
 }joueur;
 void placer_bloc(ALLEGRO_MOUSE_STATE mouse,carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,fenetre f);
 typedef struct
@@ -132,5 +133,5 @@ void deplacer_objet_constament(objet_anime o[],int nbre_objets,double vitesse_x,
 void deplacer_objet_fixe_constament(objet_fixe o[],int nbre_objets);
 void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double vitesse);
 void tirs_de_cannon(CLAVIER,joueur* j);
-void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y);
+void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur j);
 #endif // OBJETS_H_INCLUDED
