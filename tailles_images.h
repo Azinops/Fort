@@ -12,5 +12,8 @@ int marge_competence=100;
 
 double taille_liaisons=10;
 
-
+double taille_inventaire_x=100;
+double taille_inventaire_y=100;
+double taille_case_x=50;
+double taille_case_y=50;
 #endif // TAILLES_IMAGES_H_INCLUDED

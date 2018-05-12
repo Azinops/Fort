@@ -20,9 +20,12 @@ void jeu()
     INITIALISER_BIBLIOTHEQUE
     INITIALISER_IMAGES_EN_MASSE(fond,nbre_fonds_actuels,"./images/fonts/")
     AFFICHER_CHARGEMENT
+    INITIALISERIMAGE(image_bouton_inventaire,"./images/boutons/inventaire.png")
     INITIALISERIMAGE(selecCons,"./images/effets/selectionConstruction.png")
     INITIALISERIMAGE(inaccessible,"./images/effets/inaccessible.png")
     INITIALISERIMAGE(debloque,"./images/effets/debloque.png")
+    INITIALISERIMAGE(inventaire,"./images/inventaire/inventaire.png")
+    INITIALISERIMAGE(case_inventaire,"./images/inventaire/case.png")
     INITIALISER_IMAGES_EN_MASSE(fusee,nbre_fusees_actuel,"./images/fusees/")
     INITIALISER_IMAGES_EN_MASSE(bloc,nbre_blocs_actuels,"./images/blocs/")
     INITIALISER_IMAGES_EN_MASSE(fin_tour,nbre_fin_tour_actuel,"./images/fin_tour/")
@@ -46,7 +49,7 @@ void jeu()
     canon bombardiers[2];
 
     objet_anime bouton_fin_tour;
-    initialiser_objet_anime(&bouton_fin_tour,nbre_fin_tour_actuel,fin_tour,vitesse_animation_bouton_fin_tour,taille_bouton_fin_tour,Xfenetre/2,taille_bouton_fin_tour_y*taille_bouton_fin_tour/2,taille_bouton_fin_tour_x,taille_bouton_fin_tour_y,1);
+    initialiser_objet_anime(&bouton_fin_tour,nbre_fin_tour_actuel,fin_tour,vitesse_animation_bouton_fin_tour,taille_bouton_fin_tour,Xfenetre/2,taille_bouton_fin_tour_y*taille_bouton_fin_tour/2*COEF_PIXEL_Y,taille_bouton_fin_tour_x,taille_bouton_fin_tour_y,1);
 
     objet_fixe c_explo[nbre_c_explo_actuels+1];
     objet_fixe c_science[nbre_c_scientifique_actuels+1];
@@ -63,7 +66,7 @@ void jeu()
     initialiser_objet_anime(&explosion,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,0.1,0,0,TAILLE_EXPLOSION_X_Y,TAILLE_EXPLOSION_X_Y,0);
 
     objet_fixe particule_explosion[NBRE_PARTICULES_EXPLOSION_MAX];
-    initialiser_objet_fixe_en_masse(particule_explosion,particules_explosion[1],taille_particules_explosion,0,0,taille_particules_explosion_x,taille_particules_explosion_y,NBRE_PARTICULES_EXPLOSION_MAX);
+    initialiser_objet_fixe_en_masse(particule_explosion,particules_explosion[1],taille_particules_explosion,taille_particules_explosion,0,0,taille_particules_explosion_x,taille_particules_explosion_y,NBRE_PARTICULES_EXPLOSION_MAX);
 
     fusee_missile missile_normaux[NBRE_FUSEES+1];
     initialiser_fusees(missile_normaux,NBRE_FUSEES,fusee[1],taille_fusees_normales,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart);
@@ -71,6 +74,10 @@ void jeu()
     objet_anime fumee[NBRE_FUMEE];
     initialiser_fumee(fumee,nbre_fumees_actuel,image_fumee,vitese_anim_fumee,taille_initiale_fumee);
     initialiser_joueur(&player,1,bombardiers,taille_explosion_depart,&missile_normaux);
+
+    objet_fixe bouton_inventaire;
+    initialiser_objet_fixe(&bouton_inventaire,image_bouton_inventaire,tailleX_bouton_invenaire,tailleY_bouton_invenaire,Xfenetre/2+(distance_fin_tour_inventaire+taille_bouton_fin_tour_x/2*taille_bouton_fin_tour+tailleX_bouton_invenaire*taille_bouton_invenaire_x/2)*COEF_PIXEL_X,(tailleY_bouton_invenaire*taille_bouton_invenaire_y/2)*COEF_PIXEL_Y,taille_bouton_invenaire_y,taille_bouton_invenaire_y,1);
+
     c_explo[8].angle=0;
     while(!fin)
     {
@@ -94,21 +101,15 @@ void jeu()
                 enlever_carre(blocs,souris_case,mouse,les_stats_blocs);
                 joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue);
                 gerer_blocs(blocs,vitesse_inversee_gravite,les_stats_blocs,player);
-                tirs_de_cannon(&key,player[joueur_qui_joue]);
+                tirs_de_cannon(&key,&player[joueur_qui_joue]);
                 pop_fumee(fumee,missile_normaux);
                 deplacer_objet_constament(fumee,NBRE_FUMEE,vitesse_deplacement_fumee_x,vitesse_deplacement_fumee_y);
                 afficher_objet_anime_en_masse(&fumee,NBRE_FUMEE);
-                gerer_fusees(missile_normaux,attraction,blocs,particule_explosion);
+                gerer_fusees(missile_normaux,attraction,blocs,particule_explosion,joueur_qui_joue);
                 afficher_fusees(missile_normaux);
                 deplacer_objet_fixe_constament(particule_explosion,NBRE_PARTICULES_EXPLOSION_MAX);
-                if(al_key_down(&key,ALLEGRO_KEY_UP))
-                {
-                    player[joueur_qui_joue].angle_tir-=0.01;
-                }
-                if(al_key_down(&key,ALLEGRO_KEY_DOWN))
-                {
-                    player[joueur_qui_joue].angle_tir+=0.01;
-                }
+                afficher_objet_fixe(bouton_inventaire);
+                gerer_bouton_inventaire(&bouton_inventaire,selecCons,mouse,inventaire,case_inventaire,4,6,10,Xfenetre/2,Yfenetre/2);
             }
             if(interface_jeu==1)
             {

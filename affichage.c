@@ -131,7 +131,7 @@ void interface_competences(CLAVIER,int* interface_du_jeu,int* fond)
 }
 void afficher_objet_fixe(objet_fixe o)
 {
-    if(o.existence==1){al_draw_scaled_rotated_bitmap(o.bitmap,o.taille_x/2*COEF_PIXEL_X,o.taille_y/2*COEF_PIXEL_Y,o.x,o.y,o.taille*COEF_PIXEL_X,o.taille*COEF_PIXEL_Y,o.angle,0);}
+    if(o.existence==1){al_draw_scaled_rotated_bitmap(o.bitmap,o.taille_x/2,o.taille_y/2,o.x,o.y,o.tailleX*COEF_PIXEL_X,o.tailleY*COEF_PIXEL_Y,o.angle,0);}
 }
 void afficher_objet_fixe_en_masse(objet_fixe o[],int nbre_objets)
 {
@@ -140,7 +140,7 @@ void afficher_objet_fixe_en_masse(objet_fixe o[],int nbre_objets)
     {
         if(o[i].existence==1)
         {
-            al_draw_scaled_rotated_bitmap(o[i].bitmap,o[i].taille_x/2*COEF_PIXEL_X,o[i].taille_y/2*COEF_PIXEL_Y,o[i].x,o[i].y,o[i].taille*COEF_PIXEL_X,o[i].taille*COEF_PIXEL_Y,o[i].angle,0);
+            al_draw_scaled_rotated_bitmap(o[i].bitmap,o[i].taille_x/2*COEF_PIXEL_X,o[i].taille_y/2*COEF_PIXEL_Y,o[i].x,o[i].y,o[i].tailleX*COEF_PIXEL_X,o[i].tailleY*COEF_PIXEL_Y,o[i].angle,0);
         }
     }
 }
@@ -151,13 +151,13 @@ void afficher_objet_fixe_en_masse_c(objet_fixe o[],int nbre_objets)
     {
         if(o[i].existence==1)
         {
-            al_draw_scaled_rotated_bitmap(o[i].bitmap,o[i].taille_x/2,o[i].taille_y/2,o[i].x,o[i].y,o[i].taille,o[i].taille,o[i].angle,0);
+            al_draw_scaled_rotated_bitmap(o[i].bitmap,o[i].taille_x/2,o[i].taille_y/2,o[i].x,o[i].y,o[i].tailleX,o[i].tailleY,o[i].angle,0);
         }
     }
 }
 void tracer_ligne_entre_objets(objet_fixe o1, objet_fixe o2,double epaisseur, ALLEGRO_COLOR couleur)
 {
-    al_draw_line(o1.x,o1.y,o2.x,o2.y,couleur,epaisseur*(o1.taille+o2.taille)/2);
+    al_draw_line(o1.x,o1.y,o2.x,o2.y,couleur,epaisseur*(o1.tailleX+o1.tailleY/2)+(o2.tailleY+o1.tailleY/2)/2);
 }
 void connexions(objet_fixe o[],int nbre_objets,joueur jo)
 {
@@ -216,33 +216,33 @@ void afficher_acces_comptetences(ALLEGRO_BITMAP* debloque,ALLEGRO_BITMAP* inacce
         {
             if(j->explosion_debloques[i]>=0 && j->explosion_debloques[i]<1)
             {
-                al_draw_scaled_rotated_bitmap(inaccessible,0,0,o[i].x-o[i].taille_x*o[i].taille/2,o[i].y-o[i].taille_y*o[i].taille/2,TAILLE_COMPETENCE*o[i].taille/taille_inaccessible,TAILLE_COMPETENCE*o[i].taille/taille_inaccessible,0,0);
+                al_draw_scaled_rotated_bitmap(inaccessible,0,0,o[i].x-o[i].taille_x*o[i].tailleX/2,o[i].y-o[i].taille_y*o[i].tailleY/2,TAILLE_COMPETENCE*o[i].tailleX/taille_inaccessible,TAILLE_COMPETENCE*o[i].tailleY/taille_inaccessible,0,0);
             }
             if(j->explosion_debloques[i]==2)
             {
-                al_draw_scaled_rotated_bitmap(debloque,0,0,o[i].x-o[i].taille_x*o[i].taille/2,o[i].y-o[i].taille_y*o[i].taille/2,TAILLE_COMPETENCE*o[i].taille/taille_inaccessible,TAILLE_COMPETENCE*o[i].taille/taille_inaccessible,0,0);
+                al_draw_scaled_rotated_bitmap(debloque,0,0,o[i].x-o[i].taille_x*o[i].tailleX/2,o[i].y-o[i].taille_y*o[i].tailleY/2,TAILLE_COMPETENCE*o[i].tailleX/taille_inaccessible,TAILLE_COMPETENCE*o[i].tailleY/taille_inaccessible,0,0);
             }
         }
         if(o[i].id==2)
         {
             if(j->science_debloques[i]>=0 && j->science_debloques[i]<1)
             {
-                al_draw_scaled_rotated_bitmap(inaccessible,0,0,o[i].x-o[i].taille_x*o[i].taille/2,o[i].y-o[i].taille_y*o[i].taille/2,TAILLE_COMPETENCE*o[i].taille/taille_inaccessible,TAILLE_COMPETENCE*o[i].taille/taille_inaccessible,0,0);
+                al_draw_scaled_rotated_bitmap(inaccessible,0,0,o[i].x-o[i].taille_x*o[i].tailleX/2,o[i].y-o[i].taille_y*o[i].tailleY/2,TAILLE_COMPETENCE*o[i].tailleX/taille_inaccessible,TAILLE_COMPETENCE*o[i].tailleY/taille_inaccessible,0,0);
             }
             if(j->science_debloques[i]==2)
             {
-                al_draw_scaled_rotated_bitmap(debloque,0,0,o[i].x-o[i].taille_x*o[i].taille/2,o[i].y-o[i].taille_y*o[i].taille/2,TAILLE_COMPETENCE*o[i].taille/taille_inaccessible,TAILLE_COMPETENCE*o[i].taille/taille_inaccessible,0,0);
+                al_draw_scaled_rotated_bitmap(debloque,0,0,o[i].x-o[i].taille_x*o[i].tailleX/2,o[i].y-o[i].taille_y*o[i].tailleY/2,TAILLE_COMPETENCE*o[i].tailleX/taille_inaccessible,TAILLE_COMPETENCE*o[i].tailleY/taille_inaccessible,0,0);
             }
         }
         if(o[i].id==3)
         {
             if(j->precision_debloques[i]>=0 && j->precision_debloques[i]<1)
             {
-                al_draw_scaled_rotated_bitmap(inaccessible,0,0,o[i].x-o[i].taille_x*o[i].taille/2,o[i].y-o[i].taille_y*o[i].taille/2,TAILLE_COMPETENCE*o[i].taille/taille_inaccessible,TAILLE_COMPETENCE*o[i].taille/taille_inaccessible,0,0);
+                al_draw_scaled_rotated_bitmap(inaccessible,0,0,o[i].x-o[i].taille_x*o[i].tailleX/2,o[i].y-o[i].taille_y*o[i].tailleY/2,TAILLE_COMPETENCE*o[i].tailleX/taille_inaccessible,TAILLE_COMPETENCE*o[i].tailleY/taille_inaccessible,0,0);
             }
             if(j->precision_debloques[i]==2)
             {
-                al_draw_scaled_rotated_bitmap(debloque,0,0,o[i].x-o[i].taille_x*o[i].taille/2,o[i].y-o[i].taille_y*o[i].taille/2,TAILLE_COMPETENCE*o[i].taille/taille_inaccessible,TAILLE_COMPETENCE*o[i].taille/taille_inaccessible,0,0);
+                al_draw_scaled_rotated_bitmap(debloque,0,0,o[i].x-o[i].taille_x*o[i].tailleX/2,o[i].y-o[i].taille_y*o[i].tailleY/2,TAILLE_COMPETENCE*o[i].tailleX/taille_inaccessible,TAILLE_COMPETENCE*o[i].tailleY/taille_inaccessible,0,0);
             }
         }
     }
@@ -254,8 +254,15 @@ void selection_objets_jaune(ALLEGRO_BITMAP* selection_jaune,objet_fixe o[],int n
     {
         if(toucher_objet_fixe(mouse,o[i]))
         {
-            al_draw_scaled_rotated_bitmap(selection_jaune,0,0,o[i].x-o[i].taille_x*o[i].taille/2,o[i].y-o[i].taille_y*o[i].taille/2,o[i].taille_x*o[i].taille/taille_selec,o[i].taille_y*o[i].taille/taille_selec,0,0);
+            al_draw_scaled_rotated_bitmap(selection_jaune,0,0,o[i].x-o[i].taille_x*o[i].tailleX/2,o[i].y-o[i].taille_y*o[i].tailleY/2,o[i].taille_x*o[i].tailleX/taille_selec,o[i].taille_y*o[i].tailleY/taille_selec,0,0);
         }
+    }
+}
+void selection_objet_jaune(ALLEGRO_BITMAP* selection_jaune,objet_fixe o,SOURIS)
+{
+    if(toucher_objet_fixe(mouse,o))
+    {
+        al_draw_scaled_rotated_bitmap(selection_jaune,0,0,o.x-o.taille_x*o.tailleX/2*COEF_PIXEL_X,o.y-o.taille_y*o.tailleY/2*COEF_PIXEL_Y,o.taille_x*o.tailleX/taille_selec*COEF_PIXEL_X,o.taille_y*o.tailleY/taille_selec*COEF_PIXEL_Y,0,0);
     }
 }
 void afficher_fusees(fusee_missile f[])
@@ -276,4 +283,16 @@ void afficher_fusees(fusee_missile f[])
         }
     }
 }
-
+void afficher_inventaire(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y)
+{
+    int i;
+    int j;
+    al_draw_scaled_rotated_bitmap(inventaire,taille_inventaire_x/2,taille_inventaire_y/2,x,y,taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y),taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y),0,0);
+    for(i=1;i<=nbre_cases_x;i++)
+    {
+        for(j=1;j<=nbre_cases_y;j++)
+        {
+            al_draw_scaled_rotated_bitmap(case_inv,taille_case_x/2,taille_case_y/2,x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y)),y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y)),0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_x/taille_case_x,0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_y/taille_case_y,0,0);
+        }
+    }
+}

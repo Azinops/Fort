@@ -86,7 +86,7 @@ void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CA
 }
 int clic_objet_fixe(SOURIS,objet_fixe o)
 {
-    if(mouse.x>o.x-o.taille_x*o.taille/2 && mouse.y>o.y-o.taille_y*o.taille/2 && mouse.x<o.x+o.taille_x*o.taille/2 && mouse.y<o.y+o.taille_y*o.taille/2 && mouse.buttons&1)
+    if(mouse.x>o.x-o.taille_x*o.tailleX/2*COEF_PIXEL_X && mouse.y>o.y-o.taille_y*o.tailleY/2*COEF_PIXEL_Y && mouse.x<o.x+o.taille_x*o.tailleX/2*COEF_PIXEL_X && mouse.y<o.y+o.taille_y*o.tailleY/2*COEF_PIXEL_Y && mouse.buttons&1)
     {
         return 1;
     }
@@ -97,7 +97,7 @@ int clic_objet_fixe(SOURIS,objet_fixe o)
 }
 int clic_objet(SOURIS,objet_anime o)
 {
-    if(mouse.x>o.x-o.taille_x*o.taille/2 && mouse.y>o.y-o.taille_y*o.taille/2 && mouse.x<o.x+o.taille_x*o.taille/2 && mouse.y<o.y+o.taille_y*o.taille/2 && mouse.buttons&1)
+    if(mouse.x>o.x-o.taille_x*o.taille/2*COEF_PIXEL_X && mouse.y>o.y-o.taille_y*o.taille/2*COEF_PIXEL_Y && mouse.x<o.x+o.taille_x*o.taille/2*COEF_PIXEL_X && mouse.y<o.y+o.taille_y*o.taille/2*COEF_PIXEL_Y && mouse.buttons&1)
     {
         return 1;
     }
@@ -108,7 +108,7 @@ int clic_objet(SOURIS,objet_anime o)
 }
 int toucher_objet(SOURIS,objet_anime o)
 {
-    if(mouse.x>o.x-o.taille_x*o.taille/2 && mouse.y>o.y-o.taille_y*o.taille/2 && mouse.x<o.x+o.taille_x*o.taille/2 && mouse.y<o.y+o.taille_y*o.taille/2)
+    if(mouse.x>o.x-o.taille_x*o.taille/2*COEF_PIXEL_X && mouse.y>o.y-o.taille_y*o.taille/2*COEF_PIXEL_Y && mouse.x<o.x+o.taille_x*o.taille/2*COEF_PIXEL_X && mouse.y<o.y+o.taille_y*o.taille/2*COEF_PIXEL_Y)
     {
         return 1;
     }
@@ -119,7 +119,7 @@ int toucher_objet(SOURIS,objet_anime o)
 }
 int toucher_objet_fixe(SOURIS,objet_fixe o)
 {
-    if(mouse.x>o.x-o.taille_x*o.taille/2 && mouse.y>o.y-o.taille_y*o.taille/2 && mouse.x<o.x+o.taille_x*o.taille/2 && mouse.y<o.y+o.taille_y*o.taille/2)
+    if(mouse.x>o.x-(o.taille_x*o.tailleX/2)*COEF_PIXEL_X && mouse.y>o.y-(o.taille_y*o.tailleY/2)*COEF_PIXEL_Y && mouse.x<o.x+(o.taille_x*o.tailleX/2)*COEF_PIXEL_X && mouse.y<o.y+(o.taille_y*o.tailleY/2)*COEF_PIXEL_Y)
     {
         return 1;
     }
@@ -334,20 +334,26 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[])
         }
     }
 }
-int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X])
+int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X],int joueur_qui_joue)
 {
     int xi=floor((o.x)/XFENETRE*NBRE_CASES_X);
     int yi=floor((o.y)/YFENETRE*NBRE_CASES_Y);
     if(c[yi][xi].id!=0)
     {
-        return 1;
+        if(c[yi][xi].id==5 && c[yi][xi].au_joueur==joueur_qui_joue)
+        {
+        }
+        else
+        {
+            return 1;
+        }
     }
     else
     {
         return 0;
     }
 }
-void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X],objet_fixe p[])
+void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X],objet_fixe p[],int joueur_qui_joue)
 {
     int x;
     int y;
@@ -358,18 +364,20 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
         {
             if(f[i].explosion.animation[0]==0)
             {
+                f[i].chrono+=1;
                 f[i].vy+=attraction;
                 f[i].fusee.x+=f[i].vx/50*COEF_PIXEL_X;
                 f[i].fusee.y+=f[i].vy/50*COEF_PIXEL_Y;
                 f[i].fusee.angle=atan(f[i].vy/f[i].vx)+PI/2*(f[i].vx/abs(f[i].vx));
             }
-            if(collision_objet_fixe_carre(f[i].fusee,c)==1 && f[i].explosion_en_cours==0)
+            if(collision_objet_fixe_carre(f[i].fusee,c,joueur_qui_joue)==1 && f[i].explosion_en_cours==0)
             {
                 f[i].explosion_en_cours=1;
                 f[i].vx=0;
                 f[i].vy=0;
                 f[i].explosion.x=f[i].fusee.x;
                 f[i].explosion.y=f[i].fusee.y;
+                f[i].chrono=0;
                 if(f[i].puissance_explosion<=PUISSANCE_TIR_n3)
                 {
                     pop_particules(p,f[i].explosion.x,f[i].explosion.y,NBRE_PARTICULE_POP*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE),VITESSE_PARTICULE*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE));
@@ -438,14 +446,14 @@ void pop_fumee(objet_anime o[],fusee_missile f[])
                     {
                         o[n].x=f[i].fusee.x+random(-10,10)*sqrt(f[i].puissance_explosion)/50;
                         o[n].y=f[i].fusee.y+random(-10,10)*sqrt(f[i].puissance_explosion)/50;
-                        o[n].taille=f[i].fusee.taille*COEF_FUSEE_FUMEE_TAILLE;
+                        o[n].taille=f[i].fusee.tailleX*COEF_FUSEE_FUMEE_TAILLE;
                         animer_objet(&o[n],random(2,7),o[i].nbre_images_max,o[i].nbre_images_max);
                         n=retablisseur(n+1,NBRE_FUMEE,0);
                     }
                 }
                 else
                 {
-                    o[n].taille=f[i].fusee.taille*COEF_FUSEE_FUMEE_TAILLE;
+                    o[n].taille=f[i].fusee.tailleX*COEF_FUSEE_FUMEE_TAILLE;
                     animer_objet(&o[n],1,o[i].nbre_images_max,o[i].nbre_images_max);
                     n=retablisseur(n+1,NBRE_FUMEE,0);
                 }
@@ -500,17 +508,73 @@ void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double 
         n=retablisseur(n+1,NBRE_PARTICULES_EXPLOSION_MAX,0);
     }
 }
-void tirs_de_cannon(CLAVIER,joueur j)
+void tirs_de_cannon(CLAVIER,joueur* j)
 {
     static int appuye=0;
-    al_draw_line(j.bombardier.x,j.bombardier.y,j.bombardier.x+LONGEUR_LIGNE_TIR*cos(j.angle_tir),j.bombardier.y+LONGEUR_LIGNE_TIR*sin(j.angle_tir),ROUGE,LARGEUR_LIGNE_TIR);
+    al_draw_line(j->bombardier.x,j->bombardier.y,j->bombardier.x+LONGEUR_LIGNE_TIR*cos(j->angle_tir),j->bombardier.y+LONGEUR_LIGNE_TIR*sin(j->angle_tir),ROUGE,LARGEUR_LIGNE_TIR);
+    if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_UP))
+    {
+        j->angle_tir-=0.01;
+    }
+    if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_DOWN))
+    {
+        j->angle_tir+=0.01;
+    }
     if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0)
     {
         appuye=1;
-        tirer_missile(j,cos(j.angle_tir)*j.puissance_tir_cannon,sin(j.angle_tir)*j.puissance_tir_cannon,j.bombardier.x,j.bombardier.y,j.missile_selectione);
+        tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,j->bombardier.x,j->bombardier.y,j->missile_selectione);
     }
     if(!al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE))
     {
         appuye=0;
+    }
+    if(j->precision_debloques[1]==2)
+    {
+        al_draw_line(j->bombardier.x,j->bombardier.y+YFENETRE/NBRE_CASES_Y,j->bombardier.x+LONGEUR_LIGNE_TIR*j->puissance_tir_cannon/PUISSANCE_CANON_INITIALE,j->bombardier.y+YFENETRE/NBRE_CASES_Y,JAUNE,LARGEUR_LIGNE_TIR);
+        if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_LEFT))
+        {
+            j->puissance_tir_cannon-=5;
+            if(j->puissance_tir_cannon<0)
+            {
+                j->puissance_tir_cannon+=5;
+            }
+        }
+        if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_RIGHT))
+        {
+            j->puissance_tir_cannon+=5;
+            if(j->puissance_tir_cannon>1.5*PUISSANCE_CANON_INITIALE)
+            {
+                j->puissance_tir_cannon-=5;
+            }
+        }
+    }
+}
+void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y)
+{
+    static int b=0;
+    int c=0;
+    static int clic;
+    selection_objet_jaune(selection_jaune,*o,mouse);
+    if(clic_objet_fixe(mouse,*o) && clic==0)
+    {
+        clic=1;
+        if(b==1)
+        {
+            b=0;
+            c=1;
+        }
+        if(b==0 && c==0)
+        {
+            b=1;
+        }
+    }
+    if(!clic_objet_fixe(mouse,*o))
+    {
+        clic=0;
+    }
+    if(b==1)
+    {
+        afficher_inventaire(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y);
     }
 }

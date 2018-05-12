@@ -130,6 +130,11 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].vx_fusee=0;
         j[i].vy_fusee=0;
         j[i].missile_selectione=missile_initiaux;
+        for(k=0;k<=NBRE_CASES_INVENTAIRE;k++)
+        {
+            j[i].inventaire[k]=0;
+        }
+        j[i].inventaire[0]=1;
         for(k=1;k<=NBRE_COMPETENCES_EXPLO;k++)
         {
             j[i].explosion_debloques[k]=0;
@@ -175,24 +180,27 @@ void initialiser_objet_anime(objet_anime* o,int images_max,ALLEGRO_BITMAP* image
         o->bitmap[i]=images_animees[i];
     }
 }
-void initialiser_objet_fixe(objet_fixe* o,ALLEGRO_BITMAP* image,double taille,double x,double y,int taille_x,int taille_y)
+void initialiser_objet_fixe(objet_fixe* o,ALLEGRO_BITMAP* image,double tailleX,double tailleY,double x,double y,int taille_x,int taille_y,int existence)
 {
     o->taille_x=taille_x;
     o->taille_y=taille_y;
-    o->taille=taille;
+    o->tailleX=tailleX;
+    o->tailleY=tailleY;
     o->x=x;
     o->y=y;
     o->bitmap=image;
     o->angle=0;
+    o->existence=existence;
 }
-void initialiser_objet_fixe_en_masse(objet_fixe o[],ALLEGRO_BITMAP* image,double taille,double x,double y,int taille_x,int taille_y,int nbre_objets)
+void initialiser_objet_fixe_en_masse(objet_fixe o[],ALLEGRO_BITMAP* image,double tailleX,double tailleY,double x,double y,int taille_x,int taille_y,int nbre_objets)
 {
     int i;
     for(i=0;i<=nbre_objets;i++)
     {
         o[i].taille_x=taille_x;
         o[i].taille_y=taille_y;
-        o[i].taille=taille;
+        o[i].tailleX=tailleX;
+        o[i].tailleY=tailleY;
         o[i].x=x;
         o[i].y=y;
         o[i].bitmap=image;
@@ -220,7 +228,8 @@ void initialiser_objet_fixe_c(objet_fixe o[],ALLEGRO_BITMAP* image[],double tail
         mettre_id(o,id);
         o[k].taille_x=taille_xy;
         o[k].taille_y=taille_xy;
-        o[k].taille=taille;
+        o[k].tailleX=taille;
+        o[k].tailleY=taille;
         o[k].angle=0;
         o[k].existence=1;
         for(i=1;i<=4;i++){o[k].utile2[i]=0;}
@@ -237,7 +246,7 @@ void initialiser_objet_fixe_c(objet_fixe o[],ALLEGRO_BITMAP* image[],double tail
             n=k-2;
             o[k].utile2[1]=6-2*n;
             o[k].utile2[2]=7-2*n;
-            o[k].x=x+(2*(k-2)-1)*(taille_xy*o[k].taille);
+            o[k].x=x+(2*(k-2)-1)*(taille_xy*o[k].tailleX);
         }
         if(k>=4 && k<=7)
         {
@@ -248,7 +257,7 @@ void initialiser_objet_fixe_c(objet_fixe o[],ALLEGRO_BITMAP* image[],double tail
             o[k].y=(YFENETRE/(NBRE_COLONE_COMPETENCE+1))*3;
             n=k-5;
             if(n<=0){n-=1;}
-            o[k].x=x+(n/(abs(n)))*(taille_xy*o[k].taille/2)-(n)*(taille_xy*o[k].taille*1.2);
+            o[k].x=x+(n/(abs(n)))*(taille_xy*o[k].tailleX/2)-(n)*(taille_xy*o[k].tailleX*1.2);
         }
         if(k==8)
         {
@@ -265,7 +274,7 @@ void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_
     {
         f[i].fusee.existence=0;
         f[i].inclinaison=0;
-        initialiser_objet_fixe(&f[i].fusee,image_fusee,taille_fusees,0,0,TAILLE_FUSEE_X_Y,TAILLE_FUSEE_X_Y);
+        initialiser_objet_fixe(&f[i].fusee,image_fusee,taille_fusees,taille_fusees,0,0,TAILLE_FUSEE_X_Y,TAILLE_FUSEE_X_Y,0);
         initialiser_objet_anime(&f[i].explosion,nbre_explosion,explosions,vitesse_anim_explosion,taille_explosion,0,0,TAILLE_EXPLOSION_X_Y,TAILLE_EXPLOSION_X_Y,1);
         f[i].vx=0;
         f[i].vy=0;
@@ -273,6 +282,7 @@ void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_
         f[i].compteur_fumee=0;
         f[i].portee_explosion=PORTEE_INITIALE;
         f[i].puissance_explosion=6000;
+        f[i].chrono=0;
     }
 }
 void initialiser_fumee(objet_anime o[],int nbre_fumee,ALLEGRO_BITMAP* fumees[],double vitesse_anim,double taille)

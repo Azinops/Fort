@@ -18,7 +18,7 @@ char chemin[256];
 
 //AFFICHAGE
 int fond_actuel=1;
-int taille_blocs_a_selectionner=3;
+int taille_blocs_a_selectionner=3*COEF_PIXEL_X;
 
 //TOUT
 double vitesse_inversee_gravite=4;
@@ -70,4 +70,12 @@ double vitesse_animation_bouton_fin_tour=0.5;
 double taille_bouton_fin_tour=0.8;
 int taille_bouton_fin_tour_x=300;
 int taille_bouton_fin_tour_y=100;
+
+//BOUTON INVENTAIRE
+double tailleX_bouton_invenaire=1.5;
+double tailleY_bouton_invenaire=1.5;
+double taille_bouton_invenaire_x=50;
+double taille_bouton_invenaire_y=50;
+double distance_fin_tour_inventaire=50;
+
 #endif // VARIABLES_H_INCLUDED

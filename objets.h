@@ -36,7 +36,8 @@ typedef struct
     double y;
     int id;
     ALLEGRO_BITMAP* bitmap;
-    double taille;
+    double tailleX;
+    double tailleY;
     int taille_x;
     int taille_y;
     int utile;
@@ -72,6 +73,7 @@ typedef struct
     double compteur_fumee;
     double puissance_explosion;
     double portee_explosion;
+    double chrono;
 }fusee_missile;
 typedef struct
 {
@@ -92,6 +94,7 @@ typedef struct
     double puissance_tir_cannon;
     double angle_tir;
     fusee_missile* missile_selectione;
+    int inventaire[NBRE_CASES_INVENTAIRE];
 }joueur;
 void placer_bloc(ALLEGRO_MOUSE_STATE mouse,carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,fenetre f);
 typedef struct
@@ -121,12 +124,13 @@ void switcher_deux_blocs(carre* bloc1,carre* bloc2);
 void enlever_carre(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],point_case p,SOURIS,item i[]);
 void gerer_competences(SOURIS,joueur* j,objet_fixe o[]);
 int toucher_objet_fixe(SOURIS,objet_fixe o);
-void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X],objet_fixe p[]);
-int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X]);
+void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X],objet_fixe p[],int joueur_qui_joue);
+int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X],int joueur_qui_joue);
 void tirer_missile(joueur j,double vx,double vy,double x,double y,fusee_missile f[]);
 void pop_fumee(objet_anime o[],fusee_missile f[]);
 void deplacer_objet_constament(objet_anime o[],int nbre_objets,double vitesse_x,double vitesse_y);
 void deplacer_objet_fixe_constament(objet_fixe o[],int nbre_objets);
 void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double vitesse);
-void tirs_de_cannon(CLAVIER,joueur j);
+void tirs_de_cannon(CLAVIER,joueur* j);
+void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y);
 #endif // OBJETS_H_INCLUDED
