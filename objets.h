@@ -99,6 +99,7 @@ typedef struct
     int inventaire[NBRE_CASES_INVENTAIRE*2];
     int n_competence_ocupee;
     int id_missile_selectione;
+    int points_destruction;
 }joueur;
 void placer_bloc(ALLEGRO_MOUSE_STATE mouse,carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,fenetre f);
 typedef struct

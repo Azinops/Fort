@@ -130,6 +130,7 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].puissance_tir_cannon=PUISSANCE_CANON_INITIALE;
         j[i].vx_fusee=0;
         j[i].vy_fusee=0;
+        j[i].points_destruction=0;
         for(k=1;k<=NBRE_CASES_INVENTAIRE*2;k++)
         {
             j[i].inventaire[k]=0;
