@@ -76,14 +76,19 @@ void jeu()
     fusee_missile obus_rouges[NBRE_FUSEES+1];
     initialiser_fusees(obus_rouges,NBRE_FUSEES,fusee[2],taille_obus_rouge,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIR_OBUS_ROUGE,PORTEE_TIR_OBUS_ROUGE);
 
+    fusee_missile bombe_nucleaire[NBRE_FUSEES+1];
+    initialiser_fusees(bombe_nucleaire,NBRE_FUSEES,fusee[3],taille_bombe_nucleaires,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIR_NUCLEAIRE,PORTEE_TIR_NSUP);
+
     objet_anime fumee[NBRE_FUMEE];
     initialiser_fumee(fumee,nbre_fumees_actuel,image_fumee,vitese_anim_fumee,taille_initiale_fumee);
-    initialiser_joueur(&player,1,bombardiers,taille_explosion_depart,&missile_normaux);
+    initialiser_joueur(&player,1,bombardiers,taille_explosion_depart,&bombe_nucleaire);
 
     objet_fixe bouton_inventaire;
     initialiser_objet_fixe(&bouton_inventaire,image_bouton_inventaire,tailleX_bouton_invenaire,tailleY_bouton_invenaire,Xfenetre/2+(distance_fin_tour_inventaire+taille_bouton_fin_tour_x/2*taille_bouton_fin_tour+tailleX_bouton_invenaire*taille_bouton_invenaire_x/2)*COEF_PIXEL_X,(tailleY_bouton_invenaire*taille_bouton_invenaire_y/2)*COEF_PIXEL_Y,taille_bouton_invenaire_y,taille_bouton_invenaire_y,1);
 
     c_explo[8].angle=0;
+
+
     while(!fin)
     {
         OBTENIRMOUSEETKEY

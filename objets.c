@@ -577,6 +577,7 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
     {
         id=j->id_missile_selectione;
         j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id);
+
     }
 }
 int passer_souris_sur_carre(SOURIS,double x1 ,double y1, double x2,double y2)

@@ -35,7 +35,7 @@ int nbre_c_precision_actuels=NBRE_COMPETENCES_PRECISION;
 int nbre_c_scientifique_actuels=NBRE_COMPETENCES_SCIENCE;
 int joueur_qui_joue=0;
 int nbre_explosion_actuel=9;
-int nbre_fusees_actuel=2;
+int nbre_fusees_actuel=3;
 int nbre_fumees_actuel=10;
 int nbre_particules_explosion_actuel=1;
 int nbre_icones_fusees_actuels=3;
@@ -43,6 +43,7 @@ int nbre_icones_fusees_actuels=3;
 //FUSEES
 double taille_fusees_normales=0.2;
 double taille_obus_rouge=0.21;
+double taille_bombe_nucleaires=0.25;
 double attraction = 15;
 
 //FUMEE
