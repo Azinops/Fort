@@ -73,9 +73,12 @@ void jeu()
     fusee_missile missile_normaux[NBRE_FUSEES+1];
     initialiser_fusees(missile_normaux,NBRE_FUSEES,fusee[1],taille_fusees_normales,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIR_INITIALE,PORTEE_INITIALE);
 
+    fusee_missile obus_rouges[NBRE_FUSEES+1];
+    initialiser_fusees(obus_rouges,NBRE_FUSEES,fusee[2],taille_obus_rouge,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIR_OBUS_ROUGE,PORTEE_TIR_OBUS_ROUGE);
+
     objet_anime fumee[NBRE_FUMEE];
     initialiser_fumee(fumee,nbre_fumees_actuel,image_fumee,vitese_anim_fumee,taille_initiale_fumee);
-    initialiser_joueur(&player,1,bombardiers,taille_explosion_depart,&missile_normaux);
+    initialiser_joueur(&player,1,bombardiers,taille_explosion_depart,&obus_rouges);
 
     objet_fixe bouton_inventaire;
     initialiser_objet_fixe(&bouton_inventaire,image_bouton_inventaire,tailleX_bouton_invenaire,tailleY_bouton_invenaire,Xfenetre/2+(distance_fin_tour_inventaire+taille_bouton_fin_tour_x/2*taille_bouton_fin_tour+tailleX_bouton_invenaire*taille_bouton_invenaire_x/2)*COEF_PIXEL_X,(tailleY_bouton_invenaire*taille_bouton_invenaire_y/2)*COEF_PIXEL_Y,taille_bouton_invenaire_y,taille_bouton_invenaire_y,1);
@@ -104,11 +107,14 @@ void jeu()
                 joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue);
                 gerer_blocs(blocs,vitesse_inversee_gravite,les_stats_blocs,player);
                 tirs_de_cannon(&key,&player[joueur_qui_joue]);
-                pop_fumee(fumee,missile_normaux);
                 deplacer_objet_constament(fumee,NBRE_FUMEE,vitesse_deplacement_fumee_x,vitesse_deplacement_fumee_y);
                 afficher_objet_anime_en_masse(&fumee,NBRE_FUMEE);
                 gerer_fusees(missile_normaux,attraction,blocs,particule_explosion,joueur_qui_joue);
+                gerer_fusees(obus_rouges,attraction,blocs,particule_explosion,joueur_qui_joue);
+                pop_fumee(fumee,missile_normaux);
+                pop_fumee(fumee,obus_rouges);
                 afficher_fusees(missile_normaux);
+                afficher_fusees(obus_rouges);
                 deplacer_objet_fixe_constament(particule_explosion,NBRE_PARTICULES_EXPLOSION_MAX);
                 afficher_objet_fixe(bouton_inventaire);
                 gerer_bouton_inventaire(&bouton_inventaire,selecCons,mouse,inventaire,case_inventaire,nbre_cases_x_inventaire,nbre_cases_y_inventaire,taille_inventaire,Xfenetre/2,Yfenetre/2,icones_fusees,&player[joueur_qui_joue],selection_inventaire);

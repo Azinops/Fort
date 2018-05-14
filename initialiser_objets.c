@@ -118,6 +118,7 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
     int k;
     for(i=0;i<=jmax;i++)
     {
+        j[i].missile_selectione=missile_initiaux;
         j[i].id_selectionee=1;
         j[i].n_item_placable_sel=1;
         j[i].n_joueur=i;
@@ -129,12 +130,13 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].puissance_tir_cannon=PUISSANCE_CANON_INITIALE;
         j[i].vx_fusee=0;
         j[i].vy_fusee=0;
-        j[i].missile_selectione=missile_initiaux;
         for(k=1;k<=NBRE_CASES_INVENTAIRE*2;k++)
         {
             j[i].inventaire[k]=0;
         }
         j[i].inventaire[1]=1;
+        j[i].inventaire[2]=2;
+        j[i].inventaire[3]=3;
         j[i].n_competence_ocupee=1;
         j[i].id_missile_selectione=1;
         for(k=1;k<=NBRE_COMPETENCES_EXPLO;k++)
