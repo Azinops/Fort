@@ -378,7 +378,7 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
                 f[i].explosion.x=f[i].fusee.x;
                 f[i].explosion.y=f[i].fusee.y;
                 f[i].chrono=0;
-                if(f[i].puissance_explosion<=PUISSANCE_TIR_n3)
+                if(f[i].puissance_explosion<=PUISSANCE_TIR_n3*PUISSANCE_TIR_INITIALE)
                 {
                     pop_particules(p,f[i].explosion.x,f[i].explosion.y,NBRE_PARTICULE_POP*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE),VITESSE_PARTICULE*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE));
                 }
@@ -416,9 +416,9 @@ void tirer_missile(joueur j,double vx,double vy,double x,double y,fusee_missile 
     f[n].fusee.x=x;
     f[n].fusee.y=y;
     f[n].explosion.taille=j.taille_explosion;
-    f[n].puissance_explosion=j.puissance_tir;
-    f[n].portee_explosion=j.portee_tir;
-    f[n].explosion.taille=COEF_TAILLE_EXPLO_DEGATS*TAILLE_EXPLOSION_INIT*(pow(j.puissance_tir,0.5))/PUISSANCE_TIR_INITIALE;
+    f[n].puissance_explosion=f[n].puissance_explosion_initiale*j.puissance_tir;
+    f[n].portee_explosion=j.portee_tir*f[n].portee_explosion_initiale;
+    f[n].explosion.taille=COEF_TAILLE_EXPLO_DEGATS*TAILLE_EXPLOSION_INIT*(pow(j.puissance_tir*PUISSANCE_TIR_INITIALE,0.5))/PUISSANCE_TIR_INITIALE;
     n=retablisseur(n+1,NBRE_FUSEES,1);
 }
 void pop_fumee(objet_anime o[],fusee_missile f[])
@@ -550,11 +550,12 @@ void tirs_de_cannon(CLAVIER,joueur* j)
         }
     }
 }
-void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur j)
+void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur* j,ALLEGRO_BITMAP* selection)
 {
     static int b=0;
     int c=0;
     static int clic;
+    int id;
     selection_objet_jaune(selection_jaune,*o,mouse);
     if(clic_objet_fixe(mouse,*o) && clic==0)
     {
@@ -575,6 +576,18 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
     }
     if(b==1)
     {
-        afficher_inventaire(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,j);
+        id=j->id_missile_selectione;
+        j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id);
+    }
+}
+int passer_souris_sur_carre(SOURIS,double x1 ,double y1, double x2,double y2)
+{
+    if(mouse.x>=x1 && mouse.y>=y1 && mouse.x<=x2 && mouse.y<=y2)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
     }
 }

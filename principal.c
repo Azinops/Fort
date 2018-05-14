@@ -26,6 +26,7 @@ void jeu()
     INITIALISERIMAGE(debloque,"./images/effets/debloque.png")
     INITIALISERIMAGE(inventaire,"./images/inventaire/inventaire.png")
     INITIALISERIMAGE(case_inventaire,"./images/inventaire/case.png")
+    INITIALISERIMAGE(selection_inventaire,"./images/inventaire/selection.png")
     INITIALISER_IMAGES_EN_MASSE(fusee,nbre_fusees_actuel,"./images/fusees/")
     INITIALISER_IMAGES_EN_MASSE(bloc,nbre_blocs_actuels,"./images/blocs/")
     INITIALISER_IMAGES_EN_MASSE(fin_tour,nbre_fin_tour_actuel,"./images/fin_tour/")
@@ -70,7 +71,7 @@ void jeu()
     initialiser_objet_fixe_en_masse(particule_explosion,particules_explosion[1],taille_particules_explosion,taille_particules_explosion,0,0,taille_particules_explosion_x,taille_particules_explosion_y,NBRE_PARTICULES_EXPLOSION_MAX);
 
     fusee_missile missile_normaux[NBRE_FUSEES+1];
-    initialiser_fusees(missile_normaux,NBRE_FUSEES,fusee[1],taille_fusees_normales,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart);
+    initialiser_fusees(missile_normaux,NBRE_FUSEES,fusee[1],taille_fusees_normales,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIR_INITIALE,PORTEE_INITIALE);
 
     objet_anime fumee[NBRE_FUMEE];
     initialiser_fumee(fumee,nbre_fumees_actuel,image_fumee,vitese_anim_fumee,taille_initiale_fumee);
@@ -110,7 +111,7 @@ void jeu()
                 afficher_fusees(missile_normaux);
                 deplacer_objet_fixe_constament(particule_explosion,NBRE_PARTICULES_EXPLOSION_MAX);
                 afficher_objet_fixe(bouton_inventaire);
-                gerer_bouton_inventaire(&bouton_inventaire,selecCons,mouse,inventaire,case_inventaire,nbre_cases_x_inventaire,nbre_cases_y_inventaire,taille_inventaire,Xfenetre/2,Yfenetre/2,icones_fusees,player[joueur_qui_joue]);
+                gerer_bouton_inventaire(&bouton_inventaire,selecCons,mouse,inventaire,case_inventaire,nbre_cases_x_inventaire,nbre_cases_y_inventaire,taille_inventaire,Xfenetre/2,Yfenetre/2,icones_fusees,&player[joueur_qui_joue],selection_inventaire);
             }
             if(interface_jeu==1)
             {

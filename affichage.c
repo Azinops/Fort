@@ -283,20 +283,38 @@ void afficher_fusees(fusee_missile f[])
         }
     }
 }
-void afficher_inventaire(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur jo)
+int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur jo, ALLEGRO_BITMAP* selection,SOURIS,int item_selectione_initial)
 {
     int i;
     int j;
+    int a=0;
+    a=item_selectione_initial;
     al_draw_scaled_rotated_bitmap(inventaire,taille_inventaire_x/2,taille_inventaire_y/2,x,y,taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y),taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y),0,0);
     for(i=1;i<=nbre_cases_x;i++)
     {
         for(j=1;j<=nbre_cases_y;j++)
         {
             al_draw_scaled_rotated_bitmap(case_inv,taille_case_x/2,taille_case_y/2,x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y)),y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y)),0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_x/taille_case_x,0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_y/taille_case_y,0,0);
-            if(jo.inventaire[i+(j-1)*nbre_cases_y]!=0)
+            if(jo.inventaire[i+(j-1)*nbre_cases_x]!=0)
             {
-                al_draw_scaled_rotated_bitmap(icones[jo.inventaire[i+(j-1)*nbre_cases_y]],taille_icones_x/2,taille_icones_y/2,x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y)),y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y)),0.8*taille/(nbre_cases_x+nbre_cases_y),0.8*taille/(nbre_cases_x+nbre_cases_y),0,0);
+                al_draw_scaled_rotated_bitmap(icones[jo.inventaire[i+(j-1)*nbre_cases_x]],taille_icones_x/2,taille_icones_y/2,x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y)),y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y)),0.8*taille/(nbre_cases_x+nbre_cases_y),0.8*taille/(nbre_cases_x+nbre_cases_y),0,0);
+                if(jo.inventaire[i+(j-1)*nbre_cases_x]==jo.id_missile_selectione)
+                {
+                    al_draw_scaled_rotated_bitmap(selection,taille_case_x/2,taille_case_y/2,x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y)),y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y)),0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_x/taille_case_x,0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_y/taille_case_y,0,0);
+                }
+            }
+            if(passer_souris_sur_carre(mouse,-taille_case_x*0.8*taille/(nbre_cases_x+nbre_cases_y)+x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y))
+                                       ,-taille_case_y*0.8*taille/(nbre_cases_x+nbre_cases_y)+y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y))
+                                       ,taille_case_x*0.8*taille/(nbre_cases_x+nbre_cases_y)+x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y))
+                                       ,taille_case_y*0.8*taille/(nbre_cases_x+nbre_cases_y)+y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y))))
+            {
+                al_draw_scaled_rotated_bitmap(selection,taille_case_x/2,taille_case_y/2,x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y)),y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y)),0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_x/taille_case_x,0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_y/taille_case_y,0,0);
+                if(mouse.buttons&1 && jo.inventaire[i+(j-1)*nbre_cases_x]!=0)
+                {
+                    a=jo.inventaire[i+(j-1)*nbre_cases_x];
+                }
             }
         }
     }
+    return a;
 }

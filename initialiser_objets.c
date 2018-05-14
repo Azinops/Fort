@@ -124,8 +124,8 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].bombardier=canon_j[i];
         j[i].canon_place=0;
         j[i].taille_explosion=taille_explosion_init;
-        j[i].portee_tir=PORTEE_INITIALE;
-        j[i].puissance_tir=PUISSANCE_TIR_INITIALE;
+        j[i].portee_tir=1;
+        j[i].puissance_tir=1;
         j[i].puissance_tir_cannon=PUISSANCE_CANON_INITIALE;
         j[i].vx_fusee=0;
         j[i].vy_fusee=0;
@@ -135,8 +135,8 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
             j[i].inventaire[k]=0;
         }
         j[i].inventaire[1]=1;
-        j[i].inventaire[9]=3;
         j[i].n_competence_ocupee=1;
+        j[i].id_missile_selectione=1;
         for(k=1;k<=NBRE_COMPETENCES_EXPLO;k++)
         {
             j[i].explosion_debloques[k]=0;
@@ -269,7 +269,7 @@ void initialiser_objet_fixe_c(objet_fixe o[],ALLEGRO_BITMAP* image[],double tail
         o[k].bitmap=image[k];
     }
 }
-void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_fusee,double taille_fusees,int nbre_explosion,ALLEGRO_BITMAP* explosions[],double vitesse_anim_explosion,double taille_explosion)
+void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_fusee,double taille_fusees,int nbre_explosion,ALLEGRO_BITMAP* explosions[],double vitesse_anim_explosion,double taille_explosion,double puissance,double portee)
 {
     int i;
     for(i=0;i<=nbre_fusees;i++)
@@ -282,8 +282,10 @@ void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_
         f[i].vy=0;
         f[i].explosion_en_cours=0;
         f[i].compteur_fumee=0;
-        f[i].portee_explosion=PORTEE_INITIALE;
-        f[i].puissance_explosion=6000;
+        f[i].portee_explosion=portee;
+        f[i].puissance_explosion=puissance;
+        f[i].puissance_explosion_initiale=puissance;
+        f[i].portee_explosion_initiale=portee;
         f[i].chrono=0;
     }
 }
