@@ -412,9 +412,16 @@ void tirer_missile(joueur j,double vx,double vy,double x,double y,fusee_missile 
     f[n].fusee.existence=1;
     f[n].fusee.x=x;
     f[n].fusee.y=y;
-    f[n].puissance_explosion=f[n].puissance_explosion_initiale*j.puissance_tir;
+    if(f[n].id!=3)
+    {
+        f[n].puissance_explosion=f[n].puissance_explosion_initiale*j.puissance_tir;
+    }
+    else
+    {
+        f[n].puissance_explosion=f[n].puissance_explosion_initiale;
+    }
     f[n].portee_explosion=j.portee_tir*f[n].portee_explosion_initiale;
-    f[n].explosion.taille=COEF_TAILLE_EXPLO_DEGATS*f[n].taille_initiale*(pow(j.puissance_tir*f[n].puissance_explosion,0.5))/PUISSANCE_TIR_INITIALE;
+    f[n].explosion.taille=COEF_TAILLE_EXPLO_DEGATS*f[n].taille_initiale*(pow(f[n].puissance_explosion,0.5))/PUISSANCE_TIR_INITIALE;
     n=retablisseur(n+1,NBRE_FUSEES,1);
 }
 void pop_fumee(objet_anime o[],fusee_missile f[])

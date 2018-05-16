@@ -275,6 +275,7 @@ void initialiser_objet_fixe_c(objet_fixe o[],ALLEGRO_BITMAP* image[],double tail
 void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_fusee,double taille_fusees,int nbre_explosion,ALLEGRO_BITMAP* explosions[],double vitesse_anim_explosion,double taille_explosion,double puissance,double portee)
 {
     int i;
+    static int id=1;
     for(i=0;i<=nbre_fusees;i++)
     {
         f[i].fusee.existence=0;
@@ -291,7 +292,9 @@ void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_
         f[i].portee_explosion_initiale=portee;
         f[i].chrono=0;
         f[i].taille_initiale=taille_explosion;
+        f[i].id=id;
     }
+    id+=1;
 }
 void initialiser_fumee(objet_anime o[],int nbre_fumee,ALLEGRO_BITMAP* fumees[],double vitesse_anim,double taille)
 {

@@ -77,6 +77,7 @@ typedef struct
     double puissance_explosion_initiale;
     double portee_explosion_initiale;
     double taille_initiale;
+    int id;
 }fusee_missile;
 typedef struct
 {
