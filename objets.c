@@ -205,8 +205,6 @@ void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,
                     }
                     jo[a].bombardier.xi=i;
                     jo[a].bombardier.yi=j;
-                    jo[a].bombardier.x=(XFENETRE/NBRE_CASES_X)*(i+0.5);
-                    jo[a].bombardier.y=(YFENETRE/NBRE_CASES_Y)*(j+1.5);
                 }
             }
         }
@@ -216,7 +214,7 @@ void enlever_carre(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],point_case p,SOURIS,it
 {
     if(mouse.buttons&2)
     {
-        if(i[bloc[p.y][p.x].id].placable==1)
+        if(i[bloc[p.y][p.x].id].placable==1 && i[bloc[p.y][p.x].id].id!=5)
         {
             bloc[p.y][p.x].id=0;
             bloc[p.y][p.x].etat=1;
@@ -514,7 +512,7 @@ void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double 
 void tirs_de_cannon(CLAVIER,joueur* j)
 {
     static int appuye=0;
-    al_draw_line(j->bombardier.x,j->bombardier.y,j->bombardier.x+LONGEUR_LIGNE_TIR*cos(j->angle_tir),j->bombardier.y+LONGEUR_LIGNE_TIR*sin(j->angle_tir),ROUGE,LARGEUR_LIGNE_TIR);
+    al_draw_line((j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,(j->bombardier.xi+0.5)*TAILLE_CASE_X+LONGEUR_LIGNE_TIR*cos(j->angle_tir),(j->bombardier.yi+0.5)*TAILLE_CASE_Y+LONGEUR_LIGNE_TIR*sin(j->angle_tir),ROUGE,LARGEUR_LIGNE_TIR);
     if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_UP))
     {
         j->angle_tir-=0.01;
@@ -526,7 +524,7 @@ void tirs_de_cannon(CLAVIER,joueur* j)
     if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0)
     {
         appuye=1;
-        tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,j->bombardier.x,j->bombardier.y,j->missile_selectione);
+        tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
     }
     if(!al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE))
     {
@@ -534,7 +532,7 @@ void tirs_de_cannon(CLAVIER,joueur* j)
     }
     if(j->precision_debloques[1]==2)
     {
-        al_draw_line(j->bombardier.x,j->bombardier.y+YFENETRE/NBRE_CASES_Y,j->bombardier.x+LONGEUR_LIGNE_TIR*j->puissance_tir_cannon/PUISSANCE_CANON_INITIALE,j->bombardier.y+YFENETRE/NBRE_CASES_Y,JAUNE,LARGEUR_LIGNE_TIR);
+        al_draw_line((j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y+YFENETRE/NBRE_CASES_Y,(j->bombardier.xi+0.5)*TAILLE_CASE_X+LONGEUR_LIGNE_TIR*j->puissance_tir_cannon/PUISSANCE_CANON_INITIALE,(j->bombardier.yi+0.5)*TAILLE_CASE_Y+YFENETRE/NBRE_CASES_Y,JAUNE,LARGEUR_LIGNE_TIR);
         if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_LEFT))
         {
             j->puissance_tir_cannon-=5;

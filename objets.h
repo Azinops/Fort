@@ -52,8 +52,6 @@ typedef struct
     objet_anime canon_anime;
     int xi;
     int yi;
-    double x;
-    double y;
 }canon;
 typedef struct
 {
@@ -101,7 +99,9 @@ typedef struct
     int inventaire[NBRE_CASES_INVENTAIRE*2];
     int n_competence_ocupee;
     int id_missile_selectione;
-    int points_destruction;
+    double points_destruction;
+    double xp;
+    double coef_exp;
 }joueur;
 void placer_bloc(ALLEGRO_MOUSE_STATE mouse,carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,fenetre f);
 typedef struct
