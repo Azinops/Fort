@@ -102,6 +102,7 @@ void initialiser_blocs(fenetre f,carre c[NBRE_CASES_Y][NBRE_CASES_X],item it[])
             c[j][i].compteur_gravite=1;
             c[j][i].au_joueur=-1;
             c[j][i].pv=it[c[j][i].id].pv;
+            c[j][i].pv_initiaux=it[c[j][i].id].pv;
         }
     }
 }
@@ -131,6 +132,10 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].vx_fusee=0;
         j[i].vy_fusee=0;
         j[i].points_destruction=0;
+        j[i].xp=0;
+        j[i].coef_xp=1;
+        j[i].coef_points=1;
+        j[i].points_destruction_debut_tour=0;
         for(k=1;k<=NBRE_CASES_INVENTAIRE*2;k++)
         {
             j[i].inventaire[k]=0;

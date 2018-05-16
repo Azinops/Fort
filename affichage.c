@@ -318,3 +318,8 @@ int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,A
     }
     return a;
 }
+void afficher_scores(ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,joueur j)
+{
+    int points_entiers=round(j.points_destruction);
+    al_draw_textf(police,couleur,XFENETRE/4,0,0,"Points: %d",points_entiers);
+}

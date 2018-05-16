@@ -13,6 +13,7 @@ typedef struct
     double pv;
     int compteur_gravite;
     int au_joueur;
+    double pv_initiaux;
 }carre;
 typedef struct
 {
@@ -76,6 +77,7 @@ typedef struct
     double portee_explosion_initiale;
     double taille_initiale;
     int id;
+    int prix;
 }fusee_missile;
 typedef struct
 {
@@ -101,7 +103,9 @@ typedef struct
     int id_missile_selectione;
     double points_destruction;
     double xp;
-    double coef_exp;
+    double coef_xp;
+    double coef_points;
+    double points_destruction_debut_tour;
 }joueur;
 void placer_bloc(ALLEGRO_MOUSE_STATE mouse,carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,fenetre f);
 typedef struct
@@ -124,14 +128,14 @@ typedef struct
 void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j,item i[]);
 int clic_objet(SOURIS,objet_anime o);
 int toucher_objet(SOURIS,objet_anime o);
-int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue);
+int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,joueur j[]);
 void animer_objet(objet_anime* o,int image_depart,int image_fin_anim,int image_a_mettre_apres_animation);
 void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,item it[],joueur jo[]);
 void switcher_deux_blocs(carre* bloc1,carre* bloc2);
 void enlever_carre(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],point_case p,SOURIS,item i[]);
 void gerer_competences(SOURIS,joueur* j,objet_fixe o[]);
 int toucher_objet_fixe(SOURIS,objet_fixe o);
-void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X],objet_fixe p[],int joueur_qui_joue);
+void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X],objet_fixe p[],int joueur_qui_joue,joueur j[]);
 int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X],int joueur_qui_joue);
 void tirer_missile(joueur j,double vx,double vy,double x,double y,fusee_missile f[]);
 void pop_fumee(objet_anime o[],fusee_missile f[]);

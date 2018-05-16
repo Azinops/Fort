@@ -102,6 +102,7 @@ void jeu()
             interface_competences(&key,&interface_jeu,&fond_actuel);
             if(interface_jeu==0)
             {
+                afficher_scores(arial52,rougefonce,player[joueur_qui_joue]);
                 rentrer_souris_dans_une_case(&souris_case,carte[0],mouse);
                 afficher_objet_fixe_en_masse(particule_explosion,NBRE_PARTICULES_EXPLOSION_MAX);
                 afficher_blocs(carte[0],blocs,bloc);
@@ -110,12 +111,12 @@ void jeu()
                 afficher_objet_anime(&bouton_fin_tour);
                 placer_item(mouse,souris_case,blocs,&player[joueur_qui_joue],les_stats_blocs);
                 enlever_carre(blocs,souris_case,mouse,les_stats_blocs);
-                joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue);
+                joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue,player);
                 gerer_blocs(blocs,vitesse_inversee_gravite,les_stats_blocs,player);
                 tirs_de_cannon(&key,&player[joueur_qui_joue]);
                 deplacer_objet_constament(fumee,NBRE_FUMEE,vitesse_deplacement_fumee_x,vitesse_deplacement_fumee_y);
                 afficher_objet_anime_en_masse(&fumee,NBRE_FUMEE);
-                gerer_fusees(player[joueur_qui_joue].missile_selectione,attraction,blocs,particule_explosion,joueur_qui_joue);
+                gerer_fusees(player[joueur_qui_joue].missile_selectione,attraction,blocs,particule_explosion,joueur_qui_joue,player);
                 pop_fumee(fumee,player[joueur_qui_joue].missile_selectione);
                 afficher_fusees(player[joueur_qui_joue].missile_selectione);
                 deplacer_objet_fixe_constament(particule_explosion,NBRE_PARTICULES_EXPLOSION_MAX);

@@ -77,6 +77,7 @@ void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CA
                     {
                         blocs[souris.y][souris.x].id=j->id_selectionee;
                         blocs[souris.y][souris.x].pv=i[blocs[souris.y][souris.x].id].pv;
+                        blocs[souris.y][souris.x].pv_initiaux=i[blocs[souris.y][souris.x].id].pv;
                         blocs[souris.y][souris.x].au_joueur=j->n_joueur;
                     }
                 }
@@ -137,10 +138,15 @@ void animer_objet(objet_anime* o,int image_depart,int image_fin_anim,int image_a
     o->animation[2]=image_fin_anim;
     o->animation[3]=image_a_mettre_apres_animation;
 }
-int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue)
+int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,joueur j[])
 {
+    int i;
     if(clic_objet(mouse,*bouton)==1 && bouton->animation[0]==0)
     {
+        for(i=0;i<=1;i++)
+        {
+            j[i].points_destruction_debut_tour=j[i].points_destruction;
+        }
         animer_objet(bouton,3,18,1);
         if(quel_joueur_joue==1)
         {
@@ -347,7 +353,7 @@ int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X],
         return 0;
     }
 }
-void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X],objet_fixe p[],int joueur_qui_joue)
+void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X],objet_fixe p[],int joueur_qui_joue,joueur j[])
 {
     int x;
     int y;
@@ -383,6 +389,11 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
                         if(distance(f[i].explosion.x,f[i].explosion.y,x*XFENETRE/NBRE_CASES_X,y*YFENETRE/NBRE_CASES_Y)<=f[i].portee_explosion)
                         {
                             c[y][x].pv-=f[i].puissance_explosion/(pow(distance(f[i].fusee.x,f[i].fusee.y,x*XFENETRE/NBRE_CASES_X,y*YFENETRE/NBRE_CASES_Y)*COEF_REDUC_DEGAT_EXPLOSION,2));
+                            if(c[y][x].pv<=0 && c[y][x].id!=0)
+                            {
+                                j[joueur_qui_joue].points_destruction+=c[y][x].pv_initiaux*j[joueur_qui_joue].coef_points/100;
+                                j[joueur_qui_joue].xp+=c[y][x].pv_initiaux*j[joueur_qui_joue].coef_xp;
+                            }
                         }
                     }
 
@@ -579,7 +590,6 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
     {
         id=j->id_missile_selectione;
         j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id);
-
     }
 }
 int passer_souris_sur_carre(SOURIS,double x1 ,double y1, double x2,double y2)

@@ -48,7 +48,7 @@
 #define INITIALISER_BIBLIOTHEQUE double X0=0;\
     double Y0=0;\
     ALLEGRO_DISPLAY*display;\
-    ALLEGRO_FONT*arial72;\
+    ALLEGRO_FONT*arial52;\
     ALLEGRO_EVENT_QUEUE*queue;\
     ALLEGRO_TIMER*timer;\
     if(!al_init_image_addon())\
@@ -65,8 +65,8 @@
     al_init_font_addon();\
     if(!al_init_ttf_addon())\
         erreur("al_init_ttf_addon()");\
-    arial72 = al_load_font("./tff/arial.ttf",72,0);\
-    if(!arial72)\
+    arial52 = al_load_font("./tff/arial.ttf",52,0);\
+    if(!arial52)\
         erreur("al_load_font()");\
     if(!al_init_primitives_addon())\
         erreur("al_primitives_addon()");\
@@ -84,6 +84,7 @@
     ALLEGRO_COLOR noir =al_map_rgba(0,0,0,255);\
     ALLEGRO_COLOR bleuClair =al_map_rgba(51,204,255,255);\
     ALLEGRO_COLOR bleu =al_map_rgba(0,0,255,0);\
+    ALLEGRO_COLOR bleu_fonce =al_map_rgba(0,0,80,255);\
     ALLEGRO_COLOR vert =al_map_rgba(51,153,0,0);\
     ALLEGRO_COLOR blancbi =al_map_rgba(230,230,230,0);\
     ALLEGRO_COLOR blanc =al_map_rgba(255,255,255,0);\
