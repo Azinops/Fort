@@ -76,6 +76,7 @@ typedef struct
     double chrono;
     double puissance_explosion_initiale;
     double portee_explosion_initiale;
+    double taille_initiale;
 }fusee_missile;
 typedef struct
 {

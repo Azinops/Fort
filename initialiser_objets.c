@@ -290,6 +290,7 @@ void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_
         f[i].puissance_explosion_initiale=puissance;
         f[i].portee_explosion_initiale=portee;
         f[i].chrono=0;
+        f[i].taille_initiale=taille_explosion;
     }
 }
 void initialiser_fumee(objet_anime o[],int nbre_fumee,ALLEGRO_BITMAP* fumees[],double vitesse_anim,double taille)

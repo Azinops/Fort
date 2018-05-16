@@ -256,10 +256,6 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[])
                         j->puissance_tir=PUISSANCE_TIR_n3;
                         j->portee_tir=PORTEE_TIR_n3;
                     }
-                    if(i==8)
-                    {
-                        j->puissance_tir=PUISSANCE_TIR_NUCLEAIRE;
-                    }
                     for(k=1;k<=NBRE_LIAISONS_COMPTENCES_MAX;k++)
                     {
                         if(o[i].utile2[k]!=0)
@@ -403,6 +399,7 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
             {
                 f[i].fusee.existence=0;
                 f[i].explosion_en_cours=0;
+                f[i].puissance_explosion=f[i].puissance_explosion_initiale;
             }
         }
     }
@@ -417,7 +414,7 @@ void tirer_missile(joueur j,double vx,double vy,double x,double y,fusee_missile 
     f[n].fusee.y=y;
     f[n].puissance_explosion=f[n].puissance_explosion_initiale*j.puissance_tir;
     f[n].portee_explosion=j.portee_tir*f[n].portee_explosion_initiale;
-    f[n].explosion.taille=COEF_TAILLE_EXPLO_DEGATS*TAILLE_EXPLOSION_INIT*(pow(j.puissance_tir*f[n].puissance_explosion,0.5))/PUISSANCE_TIR_INITIALE;
+    f[n].explosion.taille=COEF_TAILLE_EXPLO_DEGATS*f[n].taille_initiale*(pow(j.puissance_tir*f[n].puissance_explosion,0.5))/PUISSANCE_TIR_INITIALE;
     n=retablisseur(n+1,NBRE_FUSEES,1);
 }
 void pop_fumee(objet_anime o[],fusee_missile f[])
