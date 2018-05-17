@@ -25,6 +25,7 @@ double vitesse_inversee_gravite=4;
 int interface_jeu=0; //   0:ZONE COMBAT   1:COMPETENCES
 int temps=0;
 int relache=1;
+int tour=0;
 
 //IMAGES ACTUELLES
 int nbre_fonds_actuels=3;

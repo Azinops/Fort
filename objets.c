@@ -138,14 +138,25 @@ void animer_objet(objet_anime* o,int image_depart,int image_fin_anim,int image_a
     o->animation[2]=image_fin_anim;
     o->animation[3]=image_a_mettre_apres_animation;
 }
-int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,joueur j[])
+int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,joueur j[],int* n_tour)
 {
     int i;
+    int q;
+    q=quel_joueur_joue;
     if(clic_objet(mouse,*bouton)==1 && bouton->animation[0]==0)
     {
         for(i=0;i<=1;i++)
         {
             j[i].points_destruction_debut_tour=j[i].points_destruction;
+            j[i].nbre_tirs=0;
+            if(*n_tour!=0-MOD_CHEAT)
+            {
+                j[i].id_missile_selectione=1;
+            }
+            else
+            {
+                j[i].id_missile_selectione=0;
+            }
         }
         animer_objet(bouton,3,18,1);
         if(quel_joueur_joue==1)
@@ -167,6 +178,10 @@ int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,
         {
             bouton->etat_animation=1;
         }
+    }
+    if(q==1 && quel_joueur_joue==0)
+    {
+        *n_tour+=1;
     }
     return quel_joueur_joue;
 }
@@ -532,10 +547,11 @@ void tirs_de_cannon(CLAVIER,joueur* j)
     {
         j->angle_tir+=0.01;
     }
-    if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0)
+    if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0 && j->id_missile_selectione!=0 && (j->nbre_tirs<j->nbre_tirs_max || MOD_CHEAT==1))
     {
         appuye=1;
         tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
+        j->nbre_tirs+=1;
     }
     if(!al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE))
     {
@@ -562,34 +578,45 @@ void tirs_de_cannon(CLAVIER,joueur* j)
         }
     }
 }
-void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur* j,ALLEGRO_BITMAP* selection)
+void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,
+                             ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,
+                             int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],
+                            joueur* j,ALLEGRO_BITMAP* selection,item_missile missiles[],int n_tour)
 {
     static int b=0;
     int c=0;
     static int clic;
     int id;
     selection_objet_jaune(selection_jaune,*o,mouse);
-    if(clic_objet_fixe(mouse,*o) && clic==0)
+    if(n_tour!=0-MOD_CHEAT && (j->nbre_tirs==0 || MOD_CHEAT==1))
     {
-        clic=1;
+        if(clic_objet_fixe(mouse,*o) && clic==0)
+        {
+            clic=1;
+            if(b==1)
+            {
+                b=0;
+                c=1;
+            }
+            if(b==0 && c==0)
+            {
+                b=1;
+            }
+        }
+        if(!clic_objet_fixe(mouse,*o))
+        {
+            clic=0;
+        }
         if(b==1)
         {
-            b=0;
-            c=1;
+            id=j->id_missile_selectione;
+            j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id);
+            j->points_destruction=j->points_destruction_debut_tour-missiles[id].prix;
+            if(id!=0)
+            {
+                j->missile_selectione=missiles[id].missile;
+            }
         }
-        if(b==0 && c==0)
-        {
-            b=1;
-        }
-    }
-    if(!clic_objet_fixe(mouse,*o))
-    {
-        clic=0;
-    }
-    if(b==1)
-    {
-        id=j->id_missile_selectione;
-        j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id);
     }
 }
 int passer_souris_sur_carre(SOURIS,double x1 ,double y1, double x2,double y2)

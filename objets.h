@@ -106,6 +106,8 @@ typedef struct
     double coef_xp;
     double coef_points;
     double points_destruction_debut_tour;
+    int nbre_tirs;
+    int nbre_tirs_max;
 }joueur;
 void placer_bloc(ALLEGRO_MOUSE_STATE mouse,carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,fenetre f);
 typedef struct
@@ -125,10 +127,16 @@ typedef struct
     int nbre_item_placable;
     int soumis_a_la_gravite; //  0:NON    1:OUI   2:COLLANT
 }item;
+typedef struct
+{
+    int id;
+    double prix;
+    fusee_missile* missile;
+}item_missile;
 void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j,item i[]);
 int clic_objet(SOURIS,objet_anime o);
 int toucher_objet(SOURIS,objet_anime o);
-int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,joueur j[]);
+int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,joueur j[],int* n_tour);
 void animer_objet(objet_anime* o,int image_depart,int image_fin_anim,int image_a_mettre_apres_animation);
 void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,item it[],joueur jo[]);
 void switcher_deux_blocs(carre* bloc1,carre* bloc2);
@@ -143,6 +151,6 @@ void deplacer_objet_constament(objet_anime o[],int nbre_objets,double vitesse_x,
 void deplacer_objet_fixe_constament(objet_fixe o[],int nbre_objets);
 void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double vitesse);
 void tirs_de_cannon(CLAVIER,joueur* j);
-void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur* j,ALLEGRO_BITMAP* selection);
+void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur* j,ALLEGRO_BITMAP* selection,item_missile missiles[],int n_tour);
 int passer_souris_sur_carre(SOURIS,double x1 ,double y1, double x2,double y2);
 #endif // OBJETS_H_INCLUDED

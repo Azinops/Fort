@@ -57,10 +57,6 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
         {
             i[j].pv=600;
         }
-        if(j==5)
-        {
-            i[j].pv=800;
-        }
         if(j==6)
         {
             i[j].pv=50;
@@ -136,6 +132,9 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].coef_xp=1;
         j[i].coef_points=1;
         j[i].points_destruction_debut_tour=0;
+        j[i].id_missile_selectione=0;
+        j[i].nbre_tirs=0;
+        j[i].nbre_tirs_max=1;
         for(k=1;k<=NBRE_CASES_INVENTAIRE*2;k++)
         {
             j[i].inventaire[k]=0;
@@ -144,7 +143,6 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].inventaire[2]=2;
         j[i].inventaire[3]=3;
         j[i].n_competence_ocupee=1;
-        j[i].id_missile_selectione=1;
         for(k=1;k<=NBRE_COMPETENCES_EXPLO;k++)
         {
             j[i].explosion_debloques[k]=0;
@@ -277,7 +275,7 @@ void initialiser_objet_fixe_c(objet_fixe o[],ALLEGRO_BITMAP* image[],double tail
         o[k].bitmap=image[k];
     }
 }
-void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_fusee,double taille_fusees,int nbre_explosion,ALLEGRO_BITMAP* explosions[],double vitesse_anim_explosion,double taille_explosion,double puissance,double portee)
+void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_fusee,double taille_fusees,int nbre_explosion,ALLEGRO_BITMAP* explosions[],double vitesse_anim_explosion,double taille_explosion,double puissance,double portee,item_missile it[])
 {
     int i;
     static int id=1;
@@ -299,6 +297,8 @@ void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_
         f[i].taille_initiale=taille_explosion;
         f[i].id=id;
     }
+    int* p_fusee=&f;
+    it[id].missile=*p_fusee;
     id+=1;
 }
 void initialiser_fumee(objet_anime o[],int nbre_fumee,ALLEGRO_BITMAP* fumees[],double vitesse_anim,double taille)
@@ -308,4 +308,15 @@ void initialiser_fumee(objet_anime o[],int nbre_fumee,ALLEGRO_BITMAP* fumees[],d
     {
         initialiser_objet_anime(&o[i],nbre_fumee,fumees,vitesse_anim,taille,0,0,TAILLE_FUMEE_XY,TAILLE_FUMEE_XY,0);
     }
+}
+void initialiser_items_missiles(item_missile it[])
+{
+    int i;
+    for(i=1;i<=NBRE_TYPES_MISSILES;i++)
+    {
+        it[i].id=i;
+    }
+    it[1].prix=0;
+    it[2].prix=4;
+    it[3].prix=100;
 }
