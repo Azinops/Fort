@@ -144,7 +144,7 @@ void animer_objet(objet_anime* o,int image_depart,int image_fin_anim,int image_a
 	o->animation[2]=image_fin_anim;
 	o->animation[3]=image_a_mettre_apres_animation;
 }
-int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,joueur j[],int* n_tour)
+int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,joueur j[],int* n_tour,item_missile missiles[])
 {
 	int i;
 	int q;
@@ -158,6 +158,7 @@ int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,
         	if(*n_tour!=0-MOD_CHEAT)
         	{
             	j[i].id_missile_selectione=1;
+                j->missile_selectione=missiles[1].missile;
         	}
         	else
         	{
@@ -191,6 +192,8 @@ int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,
         {
             *n_tour+=1;
             j[i].tune+=POINT_CONSTRUCTION_PAR_TOUR*j[i].coef_gain_tune;
+            j[i].id_missile_selectione=1;
+            j->missile_selectione=missiles[1].missile;
         }
 	}
 	return quel_joueur_joue;
@@ -622,7 +625,7 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
     	{
         	id=j->id_missile_selectione;
         	j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id);
-        	if(j->points_destruction>=missiles[id].prix)
+        	if(round(j->points_destruction_debut_tour)>=missiles[id].prix)
             {
                 j->points_destruction=j->points_destruction_debut_tour-missiles[id].prix;
                 if(id!=0)

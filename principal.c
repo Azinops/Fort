@@ -115,7 +115,7 @@ void jeu()
                 afficher_objet_anime(&bouton_fin_tour);
                 placer_item(mouse,souris_case,blocs,&player[joueur_qui_joue],les_stats_blocs);
                 enlever_carre(blocs,souris_case,mouse,les_stats_blocs,&player[joueur_qui_joue]);
-                joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue,player,&tour);
+                joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue,player,&tour,les_stats_misssiles);
                 gerer_blocs(blocs,vitesse_inversee_gravite,les_stats_blocs,player);
                 tirs_de_cannon(&key,&player[joueur_qui_joue]);
                 deplacer_objet_constament(fumee,NBRE_FUMEE,vitesse_deplacement_fumee_x,vitesse_deplacement_fumee_y);
