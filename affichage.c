@@ -323,3 +323,8 @@ void afficher_scores(ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,joueur j)
     int points_entiers=round(j.points_destruction);
     al_draw_textf(police,couleur,XFENETRE/4,0,0,"Points: %d",points_entiers);
 }
+void afficher_tune(ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,joueur j)
+{
+    int tune_entiers=round(j.tune);
+    al_draw_textf(police,couleur,0,0,0,"Argent: %d",tune_entiers);
+}

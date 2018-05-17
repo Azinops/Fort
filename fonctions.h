@@ -6,6 +6,7 @@
 #define CYAN al_map_rgb(0,255,255)
 #define ROUGE al_map_rgb(255,0,0)
 #define FINPARENTHESE }
+#include "dimensions.h"
 
 #define COMPTEUR(comp, t_max) comp+=1;\
                           if(comp>=t_max)\
@@ -65,7 +66,7 @@
     al_init_font_addon();\
     if(!al_init_ttf_addon())\
         erreur("al_init_ttf_addon()");\
-    arial52 = al_load_font("./tff/arial.ttf",52,0);\
+    arial52 = al_load_font("./tff/arial.ttf",52*COEF_PIXEL_X,0);\
     if(!arial52)\
         erreur("al_load_font()");\
     if(!al_init_primitives_addon())\

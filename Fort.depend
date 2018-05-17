@@ -143,9 +143,10 @@
 	<allegro5/allegro_image.h>
 	<math.h>
 
-1526493630 c:\users\meli\desktop\tout\programmation\calegro\fort\fonctions.h
+1526560852 c:\users\meli\desktop\tout\programmation\calegro\fort\fonctions.h
+	"dimensions.h"
 
-1526555765 source:c:\users\meli\desktop\tout\programmation\calegro\fort\initialiser_objets.c
+1526566272 source:c:\users\meli\desktop\tout\programmation\calegro\fort\initialiser_objets.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -160,11 +161,11 @@
 	"fonctions.h"
 	"map.h"
 
-1526554569 c:\users\meli\desktop\tout\programmation\calegro\fort\initialiser_objets.h
+1526554570 c:\users\meli\desktop\tout\programmation\calegro\fort\initialiser_objets.h
 	"objets.h"
 	"dimensions.h"
 
-1526554915 c:\users\meli\desktop\tout\programmation\calegro\fort\objets.h
+1526566238 c:\users\meli\desktop\tout\programmation\calegro\fort\objets.h
 	"dimensions.h"
 	"fonctions.h"
 
@@ -174,7 +175,7 @@
 
 1519064906 c:\users\meli\desktop\tout\programmation\calegro\fort\principal.h
 
-1526556151 source:c:\users\meli\desktop\tout\programmation\calegro\fort\objets.c
+1526566452 source:c:\users\meli\desktop\tout\programmation\calegro\fort\objets.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -189,7 +190,7 @@
 	"objets.h"
 	"fonctions.h"
 
-1526494226 source:c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.c
+1526564728 source:c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.c
 	<time.h>
 	<stdlib.h>
 	<allegro5/allegro.h>
@@ -204,11 +205,11 @@
 	"objets.h"
 	"tailles_images.h"
 
-1526494043 c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.h
+1526494044 c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.h
 	"objets.h"
 	"dimensions.h"
 
-1526554537 source:c:\users\meli\desktop\tout\programmation\calegro\fort\principal.c
+1526563386 source:c:\users\meli\desktop\tout\programmation\calegro\fort\principal.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -227,7 +228,7 @@
 	"initialiser_objets.h"
 	<windows.h>
 
-1526553131 c:\users\meli\desktop\tout\programmation\calegro\fort\variables.h
+1526553132 c:\users\meli\desktop\tout\programmation\calegro\fort\variables.h
 	"dimensions.h"
 
 1521049449 c:\users\meli\desktop\tout\programmation\calegro\fort\const.h
@@ -330,7 +331,7 @@
 1522937411 k:\isn\c\fort\variables.h
 	"dimensions.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\allegro.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\allegro.h
 	"allegro5/base.h"
 	"allegro5/altime.h"
 	"allegro5/bitmap.h"
@@ -365,7 +366,7 @@
 	"allegro5/utf8.h"
 	"allegro5/alcompat.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\base.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\base.h
 	<errno.h>
 	<limits.h>
 	<limits.h>
@@ -379,7 +380,7 @@
 	<dmalloc.h>
 	"allegro5/internal/alconfig.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\internal\alconfig.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\internal\alconfig.h
 	"allegro5/platform/alplatf.h"
 	"allegro5/platform/alwatcom.h"
 	"allegro5/platform/almngw32.h"
@@ -391,9 +392,9 @@
 	"allegro5/platform/astdint.h"
 	"allegro5/platform/astdbool.h"
 
-1372625928 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\alplatf.h
+1372622328 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\alplatf.h
 
-1368966308 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\alwatcom.h
+1368962708 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\alwatcom.h
 	<io.h>
 	<i86.h>
 	<conio.h>
@@ -401,20 +402,20 @@
 	<direct.h>
 	<malloc.h>
 
-1368966308 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\almngw32.h
+1368962708 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\almngw32.h
 	<io.h>
 	<fcntl.h>
 	<direct.h>
 	<malloc.h>
 	"allegro5/platform/alplatf.h"
 
-1368966308 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\albcc32.h
+1368962708 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\albcc32.h
 	<io.h>
 	<fcntl.h>
 	<direct.h>
 	<malloc.h>
 
-1368966308 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\almsvc.h
+1368962708 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\almsvc.h
 	<io.h>
 	<fcntl.h>
 	<direct.h>
@@ -425,10 +426,10 @@
 	<fcntl.h>
 	<unistd.h>
 
-1368966308 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\alosxcfg.h
+1368962708 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\alosxcfg.h
 	"allegro5/platform/alplatf.h"
 
-1368966308 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\alucfg.h
+1368962708 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\platform\alucfg.h
 	<fcntl.h>
 	<unistd.h>
 	"alunix.h"
@@ -446,16 +447,16 @@
 1362327500 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\altime.h
 	"allegro5/base.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\bitmap.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\bitmap.h
 	"allegro5/color.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\color.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\color.h
 	"allegro5/base.h"
 
 1362327500 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\bitmap_draw.h
 	"allegro5/bitmap.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\bitmap_io.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\bitmap_io.h
 	"allegro5/bitmap.h"
 	"allegro5/file.h"
 
@@ -473,24 +474,24 @@
 1362327500 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\bitmap_lock.h
 	"allegro5/bitmap.h"
 
-1372624684 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\blender.h
+1372621084 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\blender.h
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\config.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\config.h
 	"allegro5/file.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\debug.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\debug.h
 	<assert.h>
 	"allegro5/base.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\display.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\display.h
 	"allegro5/bitmap.h"
 	"allegro5/color.h"
 	"allegro5/events.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\events.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\events.h
 	"allegro5/altime.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\drawing.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\drawing.h
 	"allegro5/color.h"
 
 1362327500 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\error.h
@@ -504,7 +505,7 @@
 	"allegro5/fixed.h"
 	"allegro5/inline/fmaths.inl"
 
-1368966308 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\inline\fmaths.inl
+1368962708 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\inline\fmaths.inl
 	"allegro5/error.h"
 
 1362327500 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\fshook.h
@@ -515,7 +516,7 @@
 
 1362327500 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\fullscreen_mode.h
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\joystick.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\joystick.h
 	"allegro5/base.h"
 	"allegro5/events.h"
 
@@ -524,7 +525,7 @@
 	"allegro5/events.h"
 	"allegro5/keycodes.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\keycodes.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\keycodes.h
 
 1362327500 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\memory.h
 
@@ -550,29 +551,29 @@
 1362327500 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\tls.h
 	"allegro5/base.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\transformations.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\transformations.h
 	"allegro5/display.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\alcompat.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\alcompat.h
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\allegro_native_dialog.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\allegro_native_dialog.h
 	"allegro5/allegro.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\allegro_font.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\allegro_font.h
 	"allegro5/allegro.h"
 
 1362327500 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\allegro_ttf.h
 	"allegro5/allegro.h"
 	"allegro5/allegro_font.h"
 
-1372624732 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\allegro_primitives.h
+1372621132 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\allegro_primitives.h
 	<allegro5/allegro.h>
 
 1362327500 k:\isn\c\allegro-5.0.10-mingw-4.7.0\include\allegro5\allegro_image.h
 
 1522777704 c:\users\meli\desktop\tout\programmation\calegro\fort\map.h
 
-1526121013 c:\users\meli\desktop\tout\programmation\calegro\fort\tailles_images.h
+1526121014 c:\users\meli\desktop\tout\programmation\calegro\fort\tailles_images.h
 
 1522779770 k:\isn\c\fort\tailles_images.h
 
@@ -580,7 +581,7 @@
 
 1522937544 k:\isn\c\fort\dimensions.h
 
-1526556216 c:\users\meli\desktop\tout\programmation\calegro\fort\dimensions.h
+1526575799 c:\users\meli\desktop\tout\programmation\calegro\fort\dimensions.h
 
 1522937358 source:c:\users\meli\desktop\fort\affichage.c
 	<time.h>
@@ -686,7 +687,7 @@
 1522937412 c:\users\meli\desktop\fort\variables.h
 	"dimensions.h"
 
-1525705740 source:\\srv-2012\baucher$\isn\c\fort\affichage.c
+1526564727 source:\\srv-2012\baucher$\isn\c\fort\affichage.c
 	<time.h>
 	<stdlib.h>
 	<allegro5/allegro.h>
@@ -701,19 +702,20 @@
 	"objets.h"
 	"tailles_images.h"
 
-1525369290 \\srv-2012\baucher$\isn\c\fort\fonctions.h
+1526560850 \\srv-2012\baucher$\isn\c\fort\fonctions.h
+	"dimensions.h"
 
-1523732772 \\srv-2012\baucher$\isn\c\fort\affichage.h
+1526494044 \\srv-2012\baucher$\isn\c\fort\affichage.h
 	"objets.h"
 	"dimensions.h"
 
-1525520620 \\srv-2012\baucher$\isn\c\fort\objets.h
+1526566236 \\srv-2012\baucher$\isn\c\fort\objets.h
 	"dimensions.h"
 	"fonctions.h"
 
-1525705565 \\srv-2012\baucher$\isn\c\fort\dimensions.h
+1526566192 \\srv-2012\baucher$\isn\c\fort\dimensions.h
 
-1523657286 \\srv-2012\baucher$\isn\c\fort\tailles_images.h
+1526121014 \\srv-2012\baucher$\isn\c\fort\tailles_images.h
 
 1520008866 source:\\srv-2012\baucher$\isn\c\fort\fonctions.c
 	"fonctions.h"
@@ -728,7 +730,7 @@
 	<allegro5/allegro_image.h>
 	<math.h>
 
-1525640940 source:\\srv-2012\baucher$\isn\c\fort\initialiser_objets.c
+1526564273 source:\\srv-2012\baucher$\isn\c\fort\initialiser_objets.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -743,19 +745,19 @@
 	"fonctions.h"
 	"map.h"
 
-1525522812 \\srv-2012\baucher$\isn\c\fort\initialiser_objets.h
+1526554570 \\srv-2012\baucher$\isn\c\fort\initialiser_objets.h
 	"objets.h"
 	"dimensions.h"
 
-1522781304 \\srv-2012\baucher$\isn\c\fort\map.h
+1522777704 \\srv-2012\baucher$\isn\c\fort\map.h
 
-1523467408 source:\\srv-2012\baucher$\isn\c\fort\main.c
+1523463808 source:\\srv-2012\baucher$\isn\c\fort\main.c
 	"fonctions.h"
 	"principal.h"
 
 1519064906 \\srv-2012\baucher$\isn\c\fort\principal.h
 
-1525702145 source:\\srv-2012\baucher$\isn\c\fort\objets.c
+1526564835 source:\\srv-2012\baucher$\isn\c\fort\objets.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -770,7 +772,7 @@
 	"objets.h"
 	"fonctions.h"
 
-1525706016 source:\\srv-2012\baucher$\isn\c\fort\principal.c
+1526563384 source:\\srv-2012\baucher$\isn\c\fort\principal.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -789,6 +791,112 @@
 	"initialiser_objets.h"
 	<windows.h>
 
-1525522682 \\srv-2012\baucher$\isn\c\fort\variables.h
+1526553132 \\srv-2012\baucher$\isn\c\fort\variables.h
+	"dimensions.h"
+
+1526494228 source:m:\scolaire\edgar\programmation c\fort\affichage.c
+	<time.h>
+	<stdlib.h>
+	<allegro5/allegro.h>
+	<allegro5/allegro_native_dialog.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_ttf.h>
+	<allegro5/allegro_primitives.h>
+	<allegro5/allegro_image.h>
+	<math.h>
+	"fonctions.h"
+	"affichage.h"
+	"objets.h"
+	"tailles_images.h"
+
+1526493632 m:\scolaire\edgar\programmation c\fort\fonctions.h
+
+1526494044 m:\scolaire\edgar\programmation c\fort\affichage.h
+	"objets.h"
+	"dimensions.h"
+
+1526554916 m:\scolaire\edgar\programmation c\fort\objets.h
+	"dimensions.h"
+	"fonctions.h"
+
+1526557562 m:\scolaire\edgar\programmation c\fort\dimensions.h
+
+1526121014 m:\scolaire\edgar\programmation c\fort\tailles_images.h
+
+1520008866 source:m:\scolaire\edgar\programmation c\fort\fonctions.c
+	"fonctions.h"
+	<stdio.h>
+	<time.h>
+	<stdlib.h>
+	<allegro5/allegro.h>
+	<allegro5/allegro_native_dialog.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_ttf.h>
+	<allegro5/allegro_primitives.h>
+	<allegro5/allegro_image.h>
+	<math.h>
+
+1526555766 source:m:\scolaire\edgar\programmation c\fort\initialiser_objets.c
+	<stdio.h>
+	<time.h>
+	<stdlib.h>
+	<allegro5/allegro.h>
+	<allegro5/allegro_native_dialog.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_ttf.h>
+	<allegro5/allegro_primitives.h>
+	<allegro5/allegro_image.h>
+	<math.h>
+	"initialiser_objets.h"
+	"fonctions.h"
+	"map.h"
+
+1526554570 m:\scolaire\edgar\programmation c\fort\initialiser_objets.h
+	"objets.h"
+	"dimensions.h"
+
+1522777704 m:\scolaire\edgar\programmation c\fort\map.h
+
+1523463808 source:m:\scolaire\edgar\programmation c\fort\main.c
+	"fonctions.h"
+	"principal.h"
+
+1519064906 m:\scolaire\edgar\programmation c\fort\principal.h
+
+1526556380 source:m:\scolaire\edgar\programmation c\fort\objets.c
+	<stdio.h>
+	<time.h>
+	<stdlib.h>
+	<time.h>
+	<allegro5/allegro.h>
+	<allegro5/allegro_native_dialog.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_ttf.h>
+	<allegro5/allegro_primitives.h>
+	<allegro5/allegro_image.h>
+	<math.h>
+	"objets.h"
+	"fonctions.h"
+
+1526554538 source:m:\scolaire\edgar\programmation c\fort\principal.c
+	<stdio.h>
+	<time.h>
+	<stdlib.h>
+	<allegro5/allegro.h>
+	<allegro5/allegro_native_dialog.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_ttf.h>
+	<allegro5/allegro_primitives.h>
+	<allegro5/allegro_image.h>
+	<math.h>
+	"principal.h"
+	"fonctions.h"
+	"variables.h"
+	"affichage.h"
+	"objets.h"
+	"initialiser_objets.h"
+	<windows.h>
+
+1526553132 m:\scolaire\edgar\programmation c\fort\variables.h
 	"dimensions.h"
 

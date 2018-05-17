@@ -105,6 +105,7 @@ void jeu()
             interface_competences(&key,&interface_jeu,&fond_actuel);
             if(interface_jeu==0)
             {
+                afficher_tune(arial52,rougefonce,player[joueur_qui_joue]);
                 afficher_scores(arial52,rougefonce,player[joueur_qui_joue]);
                 rentrer_souris_dans_une_case(&souris_case,carte[0],mouse);
                 afficher_objet_fixe_en_masse(particule_explosion,NBRE_PARTICULES_EXPLOSION_MAX);
@@ -113,7 +114,7 @@ void jeu()
                 afficher_blocs_selec(selecCons,bloc,&player[joueur_qui_joue],taille_blocs_a_selectionner,carte[0],les_stats_blocs,mouse);
                 afficher_objet_anime(&bouton_fin_tour);
                 placer_item(mouse,souris_case,blocs,&player[joueur_qui_joue],les_stats_blocs);
-                enlever_carre(blocs,souris_case,mouse,les_stats_blocs);
+                enlever_carre(blocs,souris_case,mouse,les_stats_blocs,&player[joueur_qui_joue]);
                 joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue,player,&tour);
                 gerer_blocs(blocs,vitesse_inversee_gravite,les_stats_blocs,player);
                 tirs_de_cannon(&key,&player[joueur_qui_joue]);
