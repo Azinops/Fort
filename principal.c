@@ -38,6 +38,7 @@ void jeu()
     INITIALISER_IMAGES_EN_MASSE(particules_explosion,nbre_particules_explosion_actuel,"./images/particules_explosion/")
     INITIALISER_IMAGES_EN_MASSE(icones_fusees,nbre_icones_fusees_actuels,"./images/icones_inventaires/")
     INITIALISER_IMAGES_EN_MASSE(explosion_nucleaire,nbre_explosion_nucleaire_actuel,"./images/explosion_nucleaire/")
+    INITIALISER_IMAGES_EN_MASSE(barre_xp,nbre_barre_xp_actuel,"./images/barre_xp/")
 
     fenetre carte[0];
     initialiser_map(&carte,Xfenetre,Yfenetre,cases_x,cases_y);
@@ -105,14 +106,15 @@ void jeu()
             interface_competences(&key,&interface_jeu,&fond_actuel);
             if(interface_jeu==0)
             {
-                afficher_tune(arial52,rougefonce,player[joueur_qui_joue]);
-                afficher_scores(arial52,rougefonce,player[joueur_qui_joue]);
+                afficher_tune(arial36,rougefonce,player[joueur_qui_joue]);
+                afficher_scores(arial36,jaune,player[joueur_qui_joue],Xfenetre/2+(distance_fin_tour_inventaire+taille_bouton_fin_tour_x/2*taille_bouton_fin_tour+tailleX_bouton_invenaire*taille_bouton_invenaire_x)*COEF_PIXEL_X);
                 rentrer_souris_dans_une_case(&souris_case,carte[0],mouse);
                 afficher_objet_fixe_en_masse(particule_explosion,NBRE_PARTICULES_EXPLOSION_MAX);
                 afficher_blocs(carte[0],blocs,bloc);
                 afficher_selection(selecCons,souris_case,carte[0]);
                 afficher_blocs_selec(selecCons,bloc,&player[joueur_qui_joue],taille_blocs_a_selectionner,carte[0],les_stats_blocs,mouse);
                 afficher_objet_anime(&bouton_fin_tour);
+                afficher_barre_xp(barre_xp,player[joueur_qui_joue],bleuClair,arial36);
                 placer_item(mouse,souris_case,blocs,&player[joueur_qui_joue],les_stats_blocs);
                 enlever_carre(blocs,souris_case,mouse,les_stats_blocs,&player[joueur_qui_joue]);
                 joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue,player,&tour,les_stats_misssiles);
@@ -127,10 +129,13 @@ void jeu()
                 afficher_objet_fixe(bouton_inventaire);
                 gerer_bouton_inventaire(&bouton_inventaire,selecCons,mouse,inventaire,case_inventaire,
                                         nbre_cases_x_inventaire,nbre_cases_y_inventaire,taille_inventaire,Xfenetre/2,Yfenetre/2,
-                                        icones_fusees,&player[joueur_qui_joue],selection_inventaire,les_stats_misssiles,tour);
+                                        icones_fusees,&player[joueur_qui_joue],selection_inventaire,les_stats_misssiles,tour,
+                                        arial22,noir);
+                gere_xp(player);
             }
             if(interface_jeu==1)
             {
+                afficher_pts_competences(player[joueur_qui_joue],jaune,arial66);
                 connexions(c_explo,nbre_c_explo_actuels,player[joueur_qui_joue]);
                 connexions(c_science,nbre_c_scientifique_actuels,player[joueur_qui_joue]);
                 connexions(c_precision,nbre_c_precision_actuels,player[joueur_qui_joue]);

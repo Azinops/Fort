@@ -131,19 +131,21 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].xp=0;
         j[i].coef_xp=1;
         j[i].coef_points=1;
-        j[i].tune=1500;
+        j[i].tune=3000;
         j[i].points_destruction_debut_tour=0;
         j[i].id_missile_selectione=0;
         j[i].nbre_tirs=0;
         j[i].nbre_tirs_max=1;
         j[i].coef_gain_tune=1;
+        j[i].xp_pour_lvlup=1800;
+        j[i].pts_competences=1;
+        j[i].niveau=1;
+        j[i].coef_xp_lvl_sup=1.8;
         for(k=1;k<=NBRE_CASES_INVENTAIRE*2;k++)
         {
             j[i].inventaire[k]=0;
         }
         j[i].inventaire[1]=1;
-        j[i].inventaire[2]=2;
-        j[i].inventaire[3]=3;
         j[i].n_competence_ocupee=1;
         for(k=1;k<=NBRE_COMPETENCES_EXPLO;k++)
         {

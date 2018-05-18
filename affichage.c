@@ -283,7 +283,7 @@ void afficher_fusees(fusee_missile f[])
         }
     }
 }
-int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur jo, ALLEGRO_BITMAP* selection,SOURIS,int item_selectione_initial)
+int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur jo, ALLEGRO_BITMAP* selection,SOURIS,int item_selectione_initial,ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,item_missile missiles[])
 {
     int i;
     int j;
@@ -302,6 +302,7 @@ int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,A
                 {
                     al_draw_scaled_rotated_bitmap(selection,taille_case_x/2,taille_case_y/2,x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y)),y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y)),0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_x/taille_case_x,0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_y/taille_case_y,0,0);
                 }
+                al_draw_textf(police,couleur,-3*taille_case_x/2*COEF_PIXEL_X+taille_case_x*0.8*taille/(nbre_cases_x+nbre_cases_y)+x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y)),taille_case_y*0.8*taille/(nbre_cases_x+nbre_cases_y)+y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y))-3*COEF_PIXEL_Y,0,"%.0f pts",missiles[jo.inventaire[i+(j-1)*nbre_cases_x]].prix);
             }
             if(passer_souris_sur_carre(mouse,-taille_case_x*0.8*taille/(nbre_cases_x+nbre_cases_y)+x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y))
                                        ,-taille_case_y*0.8*taille/(nbre_cases_x+nbre_cases_y)+y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y))
@@ -318,13 +319,24 @@ int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,A
     }
     return a;
 }
-void afficher_scores(ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,joueur j)
+void afficher_scores(ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,joueur j,double x)
 {
     int points_entiers=round(j.points_destruction);
-    al_draw_textf(police,couleur,XFENETRE/4,0,0,"Points: %d",points_entiers);
+    al_draw_textf(police,couleur,x,0,0,"Points: %d",points_entiers);
 }
 void afficher_tune(ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,joueur j)
 {
     int tune_entiers=round(j.tune);
-    al_draw_textf(police,couleur,0,0,0,"Argent: %d",tune_entiers);
+    al_draw_textf(police,couleur,0,-1,0,"Argent: %d",tune_entiers);
+}
+void afficher_barre_xp(ALLEGRO_BITMAP* barre[],joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police)
+{
+    double jsp_pk_ca_bug=round(YFENETRE*100/950)/100;
+    al_draw_textf(police,couleur,XFENETRE/4,-1,0,"Niveau: %d",j.niveau);
+    al_draw_tinted_scaled_rotated_bitmap_region(barre[1],0,0,taille_barre_xp_x,taille_barre_xp_y,al_map_rgba_f(1,1,1,1),0,0,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,COEF_PIXEL_X,jsp_pk_ca_bug,0,0);
+    al_draw_tinted_scaled_rotated_bitmap_region(barre[2],0,0,j.xp/j.xp_pour_lvlup*taille_barre_xp_x,taille_barre_xp_y,al_map_rgba_f(1,1,1,1),0,0,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,COEF_PIXEL_X,jsp_pk_ca_bug,0,0);
+}
+void afficher_pts_competences(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police)
+{
+    al_draw_textf(police,couleur,XFENETRE/3-20*COEF_PIXEL_X,0,0,"Points disponibles: %d",j.pts_competences);
 }

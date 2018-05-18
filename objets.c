@@ -267,9 +267,10 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[])
     	{
         	if(clic_objet_fixe(mouse,o[i]))
         	{
-            	if(j->explosion_debloques[i]==1)
+            	if(j->explosion_debloques[i]==1 && j->pts_competences>=1)
             	{
                 	j->explosion_debloques[i]=2;
+                	j->pts_competences-=1;
                 	if(i==1)
                 	{
                     	j->puissance_tir=PUISSANCE_TIR_n1;
@@ -313,9 +314,10 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[])
     	{
         	if(clic_objet_fixe(mouse,o[i]))
         	{
-            	if(j->science_debloques[i]==1)
+            	if(j->science_debloques[i]==1 && j->pts_competences>=1)
             	{
                 	j->science_debloques[i]=2;
+                	j->pts_competences-=1;
                 	for(k=1;k<=NBRE_LIAISONS_COMPTENCES_MAX;k++)
                 	{
                     	if(o[i].utile2[k]!=0)
@@ -341,9 +343,10 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[])
     	{
         	if(clic_objet_fixe(mouse,o[i]))
         	{
-            	if(j->precision_debloques[i]==1)
+            	if(j->precision_debloques[i]==1 && j->pts_competences>=1)
             	{
                 	j->precision_debloques[i]=2;
+                	j->pts_competences-=1;
                 	for(k=1;k<=NBRE_LIAISONS_COMPTENCES_MAX;k++)
                 	{
                     	if(o[i].utile2[k]!=0)
@@ -595,7 +598,8 @@ void tirs_de_cannon(CLAVIER,joueur* j)
 void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,
                          	ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,
                          	int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],
-                        	joueur* j,ALLEGRO_BITMAP* selection,item_missile missiles[],int n_tour)
+                        	joueur* j,ALLEGRO_BITMAP* selection,item_missile missiles[],int n_tour,
+                        	ALLEGRO_FONT* police,ALLEGRO_COLOR couleur)
 {
 	static int b=0;
 	int c=0;
@@ -624,7 +628,8 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
     	if(b==1)
     	{
         	id=j->id_missile_selectione;
-        	j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id);
+        	j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id,
+                                                                                  police,couleur,missiles);
         	if(round(j->points_destruction_debut_tour)>=missiles[id].prix)
             {
                 j->points_destruction=j->points_destruction_debut_tour-missiles[id].prix;
@@ -652,4 +657,30 @@ int passer_souris_sur_carre(SOURIS,double x1 ,double y1, double x2,double y2)
 	}
 }
 
-
+void gere_xp(joueur j[])
+{
+    int i;
+    for(i=0;i<=1;i++)
+    {
+        if(j[i].xp>=j[i].xp_pour_lvlup)
+        {
+            j[i].xp-=j[i].xp_pour_lvlup;
+            j[i].pts_competences+=1;
+            j[i].niveau+=1;
+            j[i].xp_pour_lvlup*=j[i].coef_xp_lvl_sup;
+        }
+    }
+}
+void ajouter_missile_dans_inventaire(joueur* j,int id_item)
+{
+    int a=0;
+    int i;
+    for(i=1;i<=NBRE_CASES_INVENTAIRE;i++)
+    {
+        if(j->inventaire[i]==0 && a==0)
+        {
+            a=1;
+            j->inventaire[i]=id_item;
+        }
+    }
+}

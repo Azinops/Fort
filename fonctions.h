@@ -49,7 +49,9 @@
 #define INITIALISER_BIBLIOTHEQUE double X0=0;\
     double Y0=0;\
     ALLEGRO_DISPLAY*display;\
-    ALLEGRO_FONT*arial52;\
+    ALLEGRO_FONT*arial36;\
+    ALLEGRO_FONT*arial22;\
+    ALLEGRO_FONT*arial66;\
     ALLEGRO_EVENT_QUEUE*queue;\
     ALLEGRO_TIMER*timer;\
     if(!al_init_image_addon())\
@@ -66,8 +68,14 @@
     al_init_font_addon();\
     if(!al_init_ttf_addon())\
         erreur("al_init_ttf_addon()");\
-    arial52 = al_load_font("./tff/arial.ttf",52*COEF_PIXEL_X,0);\
-    if(!arial52)\
+    arial36 = al_load_font("./tff/arial.ttf",TAILLE_ECRITUR_SCORE*COEF_PIXEL_X,0);\
+    if(!arial36)\
+        erreur("al_load_font()");\
+    arial22 = al_load_font("./tff/arial.ttf",22*COEF_PIXEL_X,0);\
+    if(!arial22)\
+        erreur("al_load_font()");\
+    arial66 = al_load_font("./tff/arial.ttf",66*COEF_PIXEL_X,0);\
+    if(!arial66)\
         erreur("al_load_font()");\
     if(!al_init_primitives_addon())\
         erreur("al_primitives_addon()");\
@@ -79,17 +87,17 @@
         erreur("al_create_timer()");\
     ALLEGRO_KEYBOARD_STATE key;\
     ALLEGRO_MOUSE_STATE mouse;\
-    ALLEGRO_COLOR vertc =al_map_rgba(165,230,20,0);\
+    ALLEGRO_COLOR vertc =al_map_rgba(165,230,20,255);\
     ALLEGRO_COLOR rouge =al_map_rgba(255,0,0,255);\
-    ALLEGRO_COLOR rougefonce =al_map_rgba(100,50,20,255);\
+    ALLEGRO_COLOR rougefonce =al_map_rgba(80,0,0,255);\
     ALLEGRO_COLOR noir =al_map_rgba(0,0,0,255);\
     ALLEGRO_COLOR bleuClair =al_map_rgba(51,204,255,255);\
-    ALLEGRO_COLOR bleu =al_map_rgba(0,0,255,0);\
+    ALLEGRO_COLOR bleu =al_map_rgba(0,0,255,255);\
     ALLEGRO_COLOR bleu_fonce =al_map_rgba(0,0,80,255);\
-    ALLEGRO_COLOR vert =al_map_rgba(51,153,0,0);\
-    ALLEGRO_COLOR blancbi =al_map_rgba(230,230,230,0);\
-    ALLEGRO_COLOR blanc =al_map_rgba(255,255,255,0);\
-    ALLEGRO_COLOR violet =al_map_rgba(130,80,200,0);\
+    ALLEGRO_COLOR vert =al_map_rgba(51,153,0,255);\
+    ALLEGRO_COLOR blancbi =al_map_rgba(230,230,230,255);\
+    ALLEGRO_COLOR blanc =al_map_rgba(255,255,255,255);\
+    ALLEGRO_COLOR violet =al_map_rgba(130,80,200,255);\
     ALLEGRO_COLOR jaune =al_map_rgba(255,255,0,255);\
     ALLEGRO_COLOR jaune_fonce =al_map_rgba(100,100,100,255);\
     ALLEGRO_COLOR jaunetrans =al_map_rgba(255,255,0,0);\

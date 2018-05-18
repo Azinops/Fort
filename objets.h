@@ -110,6 +110,10 @@ typedef struct
 	int nbre_tirs_max;
 	double tune;
     double coef_gain_tune;
+    double xp_pour_lvlup;
+    int pts_competences;
+    int niveau;
+    double coef_xp_lvl_sup;
 }joueur;
 void placer_bloc(ALLEGRO_MOUSE_STATE mouse,carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,fenetre f);
 typedef struct
@@ -153,8 +157,10 @@ void deplacer_objet_constament(objet_anime o[],int nbre_objets,double vitesse_x,
 void deplacer_objet_fixe_constament(objet_fixe o[],int nbre_objets);
 void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double vitesse);
 void tirs_de_cannon(CLAVIER,joueur* j);
-void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur* j,ALLEGRO_BITMAP* selection,item_missile missiles[],int n_tour);
+void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur* j,ALLEGRO_BITMAP* selection,item_missile missiles[],int n_tour,ALLEGRO_FONT* police,ALLEGRO_COLOR couleur);
 int passer_souris_sur_carre(SOURIS,double x1 ,double y1, double x2,double y2);
+void gere_xp(joueur j[]);
+void ajouter_missile_dans_inventaire(joueur* j,int id_item);
 #endif // OBJETS_H_INCLUDED
 
 

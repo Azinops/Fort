@@ -41,6 +41,7 @@ int nbre_fumees_actuel=10;
 int nbre_particules_explosion_actuel=1;
 int nbre_icones_fusees_actuels=3;
 int nbre_explosion_nucleaire_actuel=37;
+int nbre_barre_xp_actuel=2;
 
 //FUSEES
 double taille_fusees_normales=0.2;
