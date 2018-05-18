@@ -138,7 +138,7 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].nbre_tirs_max=1;
         j[i].coef_gain_tune=1;
         j[i].xp_pour_lvlup=1800;
-        j[i].pts_competences=1;
+        j[i].pts_competences=1+MOD_CHEAT*100;
         j[i].niveau=1;
         j[i].coef_xp_lvl_sup=1.8;
         for(k=1;k<=NBRE_CASES_INVENTAIRE*2;k++)

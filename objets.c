@@ -290,6 +290,18 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[])
                     	j->puissance_tir=PUISSANCE_TIR_n3;
                     	j->portee_tir=PORTEE_TIR_n3;
                 	}
+                	if(i==5)
+                    {
+                        ajouter_missile_dans_inventaire(j,2);
+                    }
+                    if(i==8)
+                    {
+                        ajouter_missile_dans_inventaire(j,3);
+                    }
+                    if(i==4)
+                    {
+                        j->nbre_tirs_max=3;
+                    }
                 	for(k=1;k<=NBRE_LIAISONS_COMPTENCES_MAX;k++)
                 	{
                     	if(o[i].utile2[k]!=0)
@@ -567,7 +579,17 @@ void tirs_de_cannon(CLAVIER,joueur* j)
 	if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0 && j->id_missile_selectione!=0 && (j->nbre_tirs<j->nbre_tirs_max || MOD_CHEAT==1))
 	{
     	appuye=1;
-    	tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
+    	if(j->nbre_tirs==0)
+        {
+            tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
+        }
+        else
+        {
+            if(j->id_missile_selectione==1)
+            {
+                tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
+            }
+        }
     	j->nbre_tirs+=1;
 	}
 	if(!al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE))
