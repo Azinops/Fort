@@ -36,7 +36,7 @@ void jeu()
     INITIALISER_IMAGES_EN_MASSE(images_explosion,nbre_explosion_actuel,"./images/explosion/")
     INITIALISER_IMAGES_EN_MASSE(image_fumee,nbre_fumees_actuel,"./images/fumee/")
     INITIALISER_IMAGES_EN_MASSE(particules_explosion,nbre_particules_explosion_actuel,"./images/particules_explosion/")
-    INITIALISER_IMAGES_EN_MASSE(icones_fusees,nbre_icones_fusees_actuels,"./images/icones_inventaires/")
+    INITIALISER_IMAGES_EN_MASSE(icones_fusees,nbre_fusees_actuel,"./images/icones_inventaires/")
     INITIALISER_IMAGES_EN_MASSE(explosion_nucleaire,nbre_explosion_nucleaire_actuel,"./images/explosion_nucleaire/")
     INITIALISER_IMAGES_EN_MASSE(barre_xp,nbre_barre_xp_actuel,"./images/barre_xp/")
 
@@ -84,6 +84,12 @@ void jeu()
     fusee_missile bombe_nucleaire[NBRE_FUSEES+1];
     initialiser_fusees(bombe_nucleaire,NBRE_FUSEES,fusee[3],taille_bombe_nucleaires,nbre_explosion_nucleaire_actuel,explosion_nucleaire,vitesse_anim_explo*0.5,taille_explosion_nucleaire,PUISSANCE_TIR_NUCLEAIRE,PORTEE_TIR_NSUP,les_stats_misssiles);
 
+    fusee_missile missile_teleguide[NBRE_FUSEES+1];
+    initialiser_fusees(missile_teleguide,NBRE_FUSEES,fusee[4],taille_missile_teleguide,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_MISSILE_TELEGUIDE,PORTEE_INITIALE,les_stats_misssiles);
+
+    fusee_missile taupinier[NBRE_FUSEES+1];
+    initialiser_fusees(taupinier,NBRE_FUSEES,fusee[5],taille_taupinier,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIR_TAUPINIER,PORTEE_INITIALE,les_stats_misssiles);
+
     objet_anime fumee[NBRE_FUMEE];
     initialiser_fumee(fumee,nbre_fumees_actuel,image_fumee,vitese_anim_fumee,taille_initiale_fumee);
     initialiser_joueur(&player,1,bombardiers,taille_explosion_depart,&missile_normaux);
@@ -116,13 +122,13 @@ void jeu()
                 afficher_objet_anime(&bouton_fin_tour);
                 afficher_barre_xp(barre_xp,player[joueur_qui_joue],bleuClair,arial36);
                 placer_item(mouse,souris_case,blocs,&player[joueur_qui_joue],les_stats_blocs);
-                enlever_carre(blocs,souris_case,mouse,les_stats_blocs,&player[joueur_qui_joue]);
+                enlever_carre(blocs,souris_case,mouse,les_stats_blocs,&player[joueur_qui_joue],tour);
                 joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue,player,&tour,les_stats_misssiles);
                 gerer_blocs(blocs,vitesse_inversee_gravite,les_stats_blocs,player);
                 tirs_de_cannon(&key,&player[joueur_qui_joue]);
                 deplacer_objet_constament(fumee,NBRE_FUMEE,vitesse_deplacement_fumee_x,vitesse_deplacement_fumee_y);
                 afficher_objet_anime_en_masse(&fumee,NBRE_FUMEE);
-                gerer_fusees(player[joueur_qui_joue].missile_selectione,attraction,blocs,particule_explosion,joueur_qui_joue,player);
+                gerer_fusees(player[joueur_qui_joue].missile_selectione,attraction,blocs,particule_explosion,joueur_qui_joue,player,&key);
                 pop_fumee(fumee,player[joueur_qui_joue].missile_selectione);
                 afficher_fusees(player[joueur_qui_joue].missile_selectione);
                 deplacer_objet_fixe_constament(particule_explosion,NBRE_PARTICULES_EXPLOSION_MAX);
@@ -142,9 +148,9 @@ void jeu()
                 afficher_objet_fixe_en_masse_c(c_explo,NBRE_COMPETENCES_EXPLO);
                 afficher_objet_fixe_en_masse_c(c_science,NBRE_COMPETENCES_SCIENCE);
                 afficher_objet_fixe_en_masse_c(c_precision,NBRE_COMPETENCES_PRECISION);
-                gerer_competences(mouse,&player[joueur_qui_joue],c_explo);
-                gerer_competences(mouse,&player[joueur_qui_joue],c_science);
-                gerer_competences(mouse,&player[joueur_qui_joue],c_precision);
+                gerer_competences(mouse,&player[joueur_qui_joue],c_explo,blocs);
+                gerer_competences(mouse,&player[joueur_qui_joue],c_science,blocs);
+                gerer_competences(mouse,&player[joueur_qui_joue],c_precision,blocs);
                 afficher_acces_comptetences(debloque,inaccessible,&player[joueur_qui_joue],c_science);
                 afficher_acces_comptetences(debloque,inaccessible,&player[joueur_qui_joue],c_explo);
                 afficher_acces_comptetences(debloque,inaccessible,&player[joueur_qui_joue],c_precision);

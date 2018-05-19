@@ -322,7 +322,8 @@ int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,A
 void afficher_scores(ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,joueur j,double x)
 {
     int points_entiers=round(j.points_destruction);
-    al_draw_textf(police,couleur,x,0,0,"Points: %d",points_entiers);
+    al_draw_textf(police,couleur,x,0,0,"Points:");
+    al_draw_textf(police,couleur,x,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,0,"%d",points_entiers);
 }
 void afficher_tune(ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,joueur j)
 {

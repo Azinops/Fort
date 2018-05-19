@@ -19,7 +19,7 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
     {
         i[j].id=j;
         i[j].nbre_blocs_actuel=nbre_blocs_actuel;
-        if(j==1 || j==5 || (j>=7 && j<=8) || j==10)
+        if(j==1 || j==5 || (j>=6 && j<=8) || j==10)
             i[j].soumis_a_la_gravite=1;
         else
             i[j].soumis_a_la_gravite=0;
@@ -27,7 +27,7 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
         {
             i[j].soumis_a_la_gravite=3;
         }
-        if(j==1 || j==4 || j==5 || j==5 || (j>=7 && j<=10))
+        if(j==1 || j==4 || j==5 || j==5 || j==6 || (j>=7 && j<=10 && j!=9))
         {
             i[j].placable=1;
             i[j].n_placable=n;
@@ -55,11 +55,11 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
         }
         if(j==5)
         {
-            i[j].pv=600;
+            i[j].pv=500;
         }
         if(j==6)
         {
-            i[j].pv=50;
+            i[j].pv=1500;
         }
         if(j==7)
         {
@@ -127,12 +127,12 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].puissance_tir_cannon=PUISSANCE_CANON_INITIALE;
         j[i].vx_fusee=0;
         j[i].vy_fusee=0;
-        j[i].points_destruction=0;
+        j[i].points_destruction=0+MOD_CHEAT*500;
         j[i].xp=0;
         j[i].coef_xp=1;
         j[i].coef_points=1;
-        j[i].tune=3000;
-        j[i].points_destruction_debut_tour=0;
+        j[i].tune=3000+MOD_CHEAT*100000;
+        j[i].points_destruction_debut_tour=0+MOD_CHEAT*500;
         j[i].id_missile_selectione=0;
         j[i].nbre_tirs=0;
         j[i].nbre_tirs_max=1;
@@ -141,6 +141,9 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].pts_competences=1+MOD_CHEAT*100;
         j[i].niveau=1;
         j[i].coef_xp_lvl_sup=1.8;
+        j[i].coeur_xi=0;
+        j[i].coeur_yi=0;
+        j[i].coeur_pose=0;
         for(k=1;k<=NBRE_CASES_INVENTAIRE*2;k++)
         {
             j[i].inventaire[k]=0;
@@ -300,6 +303,8 @@ void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_
         f[i].chrono=0;
         f[i].taille_initiale=taille_explosion;
         f[i].id=id;
+        f[i].utile1=0;
+        f[i].utile2=0;
     }
     int* p_fusee=&f;
     it[id].missile=*p_fusee;
@@ -323,4 +328,6 @@ void initialiser_items_missiles(item_missile it[])
     it[1].prix=0;
     it[2].prix=4;
     it[3].prix=100;
+    it[4].prix=20;
+    it[5].prix=30;
 }

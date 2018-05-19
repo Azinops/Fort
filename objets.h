@@ -78,6 +78,8 @@ typedef struct
 	double taille_initiale;
 	int id;
 	int prix;
+	int utile1; //POUR TAUPINER: 0:NORMAL  1:CREUSE LE TROU   2:EXPLOSE
+	double utile2; //POUR TAUPINER: chrono creusage
 }fusee_missile;
 typedef struct
 {
@@ -114,6 +116,9 @@ typedef struct
     int pts_competences;
     int niveau;
     double coef_xp_lvl_sup;
+    int coeur_xi;
+    int coeur_yi;
+    int coeur_pose;
 }joueur;
 void placer_bloc(ALLEGRO_MOUSE_STATE mouse,carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,fenetre f);
 typedef struct
@@ -146,10 +151,10 @@ int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,
 void animer_objet(objet_anime* o,int image_depart,int image_fin_anim,int image_a_mettre_apres_animation);
 void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,item it[],joueur jo[]);
 void switcher_deux_blocs(carre* bloc1,carre* bloc2);
-void enlever_carre(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],point_case p,SOURIS,item i[],joueur* j);
-void gerer_competences(SOURIS,joueur* j,objet_fixe o[]);
+void enlever_carre(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],point_case p,SOURIS,item i[],joueur* j,int n_tour);
+void gerer_competences(SOURIS,joueur* j,objet_fixe o[],carre blocs[NBRE_CASES_Y][NBRE_CASES_X]);
 int toucher_objet_fixe(SOURIS,objet_fixe o);
-void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X],objet_fixe p[],int joueur_qui_joue,joueur j[]);
+void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE_CASES_X],objet_fixe p[],int joueur_qui_joue,joueur j[],CLAVIER);
 int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X],int joueur_qui_joue);
 void tirer_missile(joueur j,double vx,double vy,double x,double y,fusee_missile f[]);
 void pop_fumee(objet_anime o[],fusee_missile f[]);
