@@ -41,6 +41,7 @@ int nbre_fumees_actuel=10;
 int nbre_particules_explosion_actuel=1;
 int nbre_explosion_nucleaire_actuel=37;
 int nbre_barre_xp_actuel=2;
+int nbre_deflagration_actuel=17;
 
 //FUSEES
 double taille_fusees_normales=0.2;
@@ -48,7 +49,14 @@ double taille_obus_rouge=0.21;
 double taille_bombe_nucleaires=0.25;
 double taille_missile_teleguide=0.3;
 double taille_taupinier=0.3;
+double taille_bombe_xp=0.22;
+
+double coef_xp_missile_initial=1;
+double coef_xp_missile_nucleaire=0.05;
+double coef_xp_missile_teleguide=1.8;
+double coef_xp_bombe_xp=2.5;
 double attraction = 15;
+
 
 //FUMEE
 double vitese_anim_fumee=0.2;
@@ -62,8 +70,11 @@ double taille_particules_explosion_y=50;
 
 //EXPLOSION
 double vitesse_anim_explo=0.5;
+double vitesse_anim_deflagration=0.5;
 double taille_explosion_depart=TAILLE_EXPLOSION_INIT;
 double taille_explosion_nucleaire=TAILLE_EXPLOSION_INIT*0.4;
+double taille_explosion_xp=TAILLE_EXPLOSION_INIT*1.5;
+double taille_x_y_explosion_xp=500;
 
 //FONDS
 int taille_fond_chargement_x=1200;

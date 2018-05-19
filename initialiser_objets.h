@@ -11,7 +11,7 @@ void initialiser_objet_fixe(objet_fixe* o,ALLEGRO_BITMAP* image,double tailleX,d
 void initialiser_objet_fixe_c(objet_fixe o[],ALLEGRO_BITMAP* image[],double taille,int taille_xy,double x,int id);
 void mettre_id(objet_fixe o[],int id);
 void initialiser_objet_fixe_en_masse(objet_fixe o[],ALLEGRO_BITMAP* image,double tailleX,double tailleY,double x,double y,int taille_x,int taille_y,int nbre_objets);
-void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_fusee,double taille_fusees,int nbre_explosion,ALLEGRO_BITMAP* explosions[],double vitesse_anim_explosion,double taille_explosion,double puissance,double portee,item_missile it[]);
+void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_fusee,double taille_fusees,int nbre_explosion,ALLEGRO_BITMAP* explosions[],double vitesse_anim_explosion,double taille_explosion,double puissance,double portee,item_missile it[],double coef_xp,double taille_x_y_explosion);
 void initialiser_fumee(objet_anime o[],int nbre_fumee,ALLEGRO_BITMAP* fumees[],double vitesse_anim,double taille);
 void initialiser_items_missiles(item_missile it[]);
 #endif // INITIALISER_OBJETS_H_INCLUDED

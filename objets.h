@@ -78,6 +78,7 @@ typedef struct
 	double taille_initiale;
 	int id;
 	int prix;
+	double coef_xp;
 	int utile1; //POUR TAUPINER: 0:NORMAL  1:CREUSE LE TROU   2:EXPLOSE
 	double utile2; //POUR TAUPINER: chrono creusage
 }fusee_missile;

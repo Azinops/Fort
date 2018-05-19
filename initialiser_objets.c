@@ -140,7 +140,7 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].xp_pour_lvlup=1800;
         j[i].pts_competences=1+MOD_CHEAT*100;
         j[i].niveau=1;
-        j[i].coef_xp_lvl_sup=1.8;
+        j[i].coef_xp_lvl_sup=1.6;
         j[i].coeur_xi=0;
         j[i].coeur_yi=0;
         j[i].coeur_pose=0;
@@ -282,7 +282,7 @@ void initialiser_objet_fixe_c(objet_fixe o[],ALLEGRO_BITMAP* image[],double tail
         o[k].bitmap=image[k];
     }
 }
-void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_fusee,double taille_fusees,int nbre_explosion,ALLEGRO_BITMAP* explosions[],double vitesse_anim_explosion,double taille_explosion,double puissance,double portee,item_missile it[])
+void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_fusee,double taille_fusees,int nbre_explosion,ALLEGRO_BITMAP* explosions[],double vitesse_anim_explosion,double taille_explosion,double puissance,double portee,item_missile it[],double coef_xp,double taille_x_y_explosion)
 {
     int i;
     static int id=1;
@@ -291,7 +291,7 @@ void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_
         f[i].fusee.existence=0;
         f[i].inclinaison=0;
         initialiser_objet_fixe(&f[i].fusee,image_fusee,taille_fusees,taille_fusees,0,0,TAILLE_FUSEE_X_Y,TAILLE_FUSEE_X_Y,0);
-        initialiser_objet_anime(&f[i].explosion,nbre_explosion,explosions,vitesse_anim_explosion,taille_explosion,0,0,TAILLE_EXPLOSION_X_Y,TAILLE_EXPLOSION_X_Y,1);
+        initialiser_objet_anime(&f[i].explosion,nbre_explosion,explosions,vitesse_anim_explosion,taille_explosion,0,0,taille_x_y_explosion,taille_x_y_explosion,1);
         f[i].vx=0;
         f[i].vy=0;
         f[i].explosion_en_cours=0;
@@ -305,6 +305,7 @@ void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_
         f[i].id=id;
         f[i].utile1=0;
         f[i].utile2=0;
+        f[i].coef_xp=coef_xp;
     }
     int* p_fusee=&f;
     it[id].missile=*p_fusee;
@@ -330,4 +331,5 @@ void initialiser_items_missiles(item_missile it[])
     it[3].prix=100;
     it[4].prix=20;
     it[5].prix=30;
+    it[6].prix=35;
 }

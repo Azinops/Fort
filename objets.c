@@ -356,7 +356,7 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[],carre blocs[NBRE_CASES_Y]
                     }
                     if(i==5)
                     {
-                        j->coef_xp_lvl_sup=1.2;
+                        ajouter_missile_dans_inventaire(j,6);
                     }
                     if(i==2)
                     {
@@ -364,7 +364,7 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[],carre blocs[NBRE_CASES_Y]
                     }
                     if(i==6)
                     {
-                        blocs[j->coeur_yi][j->coeur_xi].pv=2500;
+                        blocs[j->coeur_yi][j->coeur_xi].pv*=1.5;
                     }
                     if(i==8)
                     {
@@ -526,8 +526,8 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
                                 c[y][x].pv-=f[i].puissance_explosion/(pow(distance(f[i].fusee.x,f[i].fusee.y,x*XFENETRE/NBRE_CASES_X,y*YFENETRE/NBRE_CASES_Y)*COEF_REDUC_DEGAT_EXPLOSION,2));
                                 if(c[y][x].pv<=0 && c[y][x].id!=0)
                                 {
-                                    j[joueur_qui_joue].points_destruction+=c[y][x].pv_initiaux*j[joueur_qui_joue].coef_points/100;
-                                    j[joueur_qui_joue].xp+=c[y][x].pv_initiaux*j[joueur_qui_joue].coef_xp;
+                                    j[joueur_qui_joue].points_destruction+=c[y][x].pv_initiaux*j[joueur_qui_joue].coef_points/100*f[i].coef_xp;
+                                    j[joueur_qui_joue].xp+=c[y][x].pv_initiaux*j[joueur_qui_joue].coef_xp*f[i].coef_xp;
                                 }
                             }
                         }
@@ -559,6 +559,8 @@ void tirer_missile(joueur j,double vx,double vy,double x,double y,fusee_missile 
 	f[n].fusee.existence=1;
 	f[n].fusee.x=x;
 	f[n].fusee.y=y;
+	f[n].utile1=0;
+	f[n].utile2=0;
 	if(f[n].id!=3)
 	{
     	f[n].puissance_explosion=f[n].puissance_explosion_initiale*j.puissance_tir;
@@ -673,7 +675,7 @@ void tirs_de_cannon(CLAVIER,joueur* j)
 	if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0 && j->id_missile_selectione!=0 && (j->nbre_tirs<j->nbre_tirs_max || MOD_CHEAT==1))
 	{
     	appuye=1;
-    	if(j->nbre_tirs==0)
+    	if(j->nbre_tirs==0 || MOD_CHEAT==1)
         {
             tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
         }
