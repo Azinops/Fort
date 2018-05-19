@@ -49,7 +49,9 @@ double taille_obus_rouge=0.21;
 double taille_bombe_nucleaires=0.25;
 double taille_missile_teleguide=0.3;
 double taille_taupinier=0.3;
+double taille_fusees_droites=0.28;
 double taille_bombe_xp=0.22;
+double taille_fusees_stop=0.25;
 
 double coef_xp_missile_initial=1;
 double coef_xp_missile_nucleaire=0.05;

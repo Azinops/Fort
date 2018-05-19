@@ -79,7 +79,8 @@ typedef struct
 	int id;
 	int prix;
 	double coef_xp;
-	int utile1; //POUR TAUPINER: 0:NORMAL  1:CREUSE LE TROU   2:EXPLOSE
+	double compteur_depuis_tir;
+	int utile1; //POUR TAUPINER: 0:NORMAL  1:CREUSE LE TROU   2:EXPLOSE  | POUR MISSILE_STOP: 0:CONTINU  1:GRAVITE
 	double utile2; //POUR TAUPINER: chrono creusage
 }fusee_missile;
 typedef struct

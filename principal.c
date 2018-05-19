@@ -94,6 +94,12 @@ void jeu()
     fusee_missile bombe_xp[NBRE_FUSEES+1];
     initialiser_fusees(bombe_xp,NBRE_FUSEES,fusee[6],taille_bombe_xp,nbre_deflagration_actuel,deflagration,vitesse_anim_deflagration,taille_explosion_xp,PUISSANCE_BOMBE_XP,PORTEE_BOMBE_XP,les_stats_misssiles,coef_xp_bombe_xp,taille_x_y_explosion_xp);
 
+    fusee_missile tirs_droits[NBRE_FUSEES+1];
+    initialiser_fusees(tirs_droits,NBRE_FUSEES,fusee[7],taille_fusees_droites,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIR_INITIALE*2,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
+
+    fusee_missile missile_stop[NBRE_FUSEES+1];
+    initialiser_fusees(missile_stop,NBRE_FUSEES,fusee[8],taille_fusees_stop,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIR_INITIALE*1.5,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
+
     objet_anime fumee[NBRE_FUMEE];
     initialiser_fumee(fumee,nbre_fumees_actuel,image_fumee,vitese_anim_fumee,taille_initiale_fumee);
     initialiser_joueur(&player,1,bombardiers,taille_explosion_depart,&missile_normaux);

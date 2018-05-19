@@ -306,6 +306,7 @@ void initialiser_fusees(fusee_missile f[],int nbre_fusees,ALLEGRO_BITMAP* image_
         f[i].utile1=0;
         f[i].utile2=0;
         f[i].coef_xp=coef_xp;
+        f[i].compteur_depuis_tir=0;
     }
     int* p_fusee=&f;
     it[id].missile=*p_fusee;
@@ -332,4 +333,6 @@ void initialiser_items_missiles(item_missile it[])
     it[4].prix=20;
     it[5].prix=30;
     it[6].prix=35;
+    it[7].prix=15;
+    it[8].prix=20;
 }
