@@ -349,3 +349,10 @@ void afficher_pointeur_souris(joueur j,SOURIS,ALLEGRO_BITMAP* pointeur)
         al_draw_scaled_rotated_bitmap(pointeur,taille_cible_x_y/2,taille_cible_x_y/2,mouse.x,mouse.y,COEF_PIXEL_X,jsp_pk_ca_bug,0,0);
     }
 }
+void afficher_conseil(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police)
+{
+    if(j.canon_place==2 && j.compteur_tour_replacer_canon>=NRBE_TOURS_POUR_REPLACER_CANON)
+    {
+        al_draw_textf(police,couleur,XFENETRE/4,YFENETRE/4,0,"Joueur %d, vous pouvez replacer votre canon",1+j.n_joueur);
+    }
+}

@@ -56,7 +56,7 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
         }
         if(j==5)
         {
-            i[j].pv=500;
+            i[j].pv=PV_CANON;
         }
         if(j==6)
         {
@@ -122,6 +122,7 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].n_item_placable_sel=1;
         j[i].n_joueur=i;
         j[i].bombardier=canon_j[i];
+        j[i].bombardier.pv=PV_CANON;
         j[i].canon_place=0;
         j[i].taille_explosion=taille_explosion_init;
         j[i].portee_tir=1;

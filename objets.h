@@ -54,6 +54,7 @@ typedef struct
 	objet_anime canon_anime;
 	int xi;
 	int yi;
+	double pv;
 }canon;
 typedef struct
 {
@@ -122,6 +123,7 @@ typedef struct
     int coeur_xi;
     int coeur_yi;
     int coeur_pose;
+    int compteur_tour_replacer_canon;
 }joueur;
 void placer_bloc(ALLEGRO_MOUSE_STATE mouse,carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,fenetre f);
 typedef struct
@@ -171,6 +173,7 @@ int passer_souris_sur_carre(SOURIS,double x1 ,double y1, double x2,double y2);
 void gere_xp(joueur j[]);
 void ajouter_missile_dans_inventaire(joueur* j,int id_item);
 void enlever_tempo_blocs_bois(carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,CLAVIER);
+void gerer_victoire(joueur j[],carre c[NBRE_CASES_Y][NBRE_CASES_X],int joueur_qui_joue,int tour,int* fond,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
 #endif // OBJETS_H_INCLUDED
 
 

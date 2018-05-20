@@ -61,7 +61,7 @@ void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CA
         	{
             	if(mouse.x*(1-j->n_joueur*2)<(1-j->n_joueur*2)*(XFENETRE/2))
             	{
-                	if(j->id_selectionee==5)
+                	if((j->id_selectionee==5 && tour==0) || (j->canon_place==2 && j->compteur_tour_replacer_canon>=NRBE_TOURS_POUR_REPLACER_CANON))
                 	{
                     	if(j->canon_place==1)
                     	{
@@ -76,8 +76,9 @@ void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CA
                     	}
                     	j->bombardier.xi=souris.x;
                     	j->bombardier.yi=souris.y;
+                    	j->bombardier.pv=blocs[j->bombardier.yi][j->bombardier.xi].pv;
                 	}
-                	if(j->id_selectionee==6)
+                	if(j->id_selectionee==6 && tour==0)
                 	{
                     	if(j->coeur_pose==1)
                     	{
@@ -210,6 +211,7 @@ int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,
 	    for(i=0;i<=1;i++)
         {
             *n_tour+=1;
+            j[i].compteur_tour_replacer_canon+=1;
             j[i].tune+=POINT_CONSTRUCTION_PAR_TOUR*j[i].coef_gain_tune;
             j[i].id_missile_selectione=1;
             j->missile_selectione=missiles[1].missile;
@@ -258,6 +260,19 @@ void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,
                 	}
                 	jo[a].bombardier.xi=i;
                 	jo[a].bombardier.yi=j;
+            	}
+            	if(bloc[j][i].id==6)
+            	{
+                	if(bloc[j][i].x<XFENETRE/2)
+                	{
+                    	a=0;
+                	}
+                	if(bloc[j][i].x>XFENETRE/2)
+                	{
+                    	a=1;
+                	}
+                	jo[a].coeur_xi=i;
+                	jo[a].coeur_yi=j;
             	}
         	}
     	}
@@ -690,79 +705,82 @@ void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double 
 void tirs_de_cannon(CLAVIER,joueur* j,SOURIS)
 {
 	static int appuye=0;
-	al_draw_line((j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,(j->bombardier.xi+0.5)*TAILLE_CASE_X+LONGEUR_LIGNE_TIR*cos(j->angle_tir),(j->bombardier.yi+0.5)*TAILLE_CASE_Y+LONGEUR_LIGNE_TIR*sin(j->angle_tir),ROUGE,LARGEUR_LIGNE_TIR);
-	if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_UP))
-	{
-    	j->angle_tir-=0.01;
-	}
-	if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_DOWN))
-	{
-    	j->angle_tir+=0.01;
-	}
-	if(j->id_missile_selectione==10)
+	if(j->canon_place==1)
     {
-        j->angle_tir=atan(((j->bombardier.yi+0.5)*TAILLE_CASE_Y-mouse.y)/((j->bombardier.xi+0.5)*TAILLE_CASE_X-mouse.x));
-        if(mouse.x<(j->bombardier.xi+0.5)*TAILLE_CASE_X)
+        al_draw_line((j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,(j->bombardier.xi+0.5)*TAILLE_CASE_X+LONGEUR_LIGNE_TIR*cos(j->angle_tir),(j->bombardier.yi+0.5)*TAILLE_CASE_Y+LONGEUR_LIGNE_TIR*sin(j->angle_tir),ROUGE,LARGEUR_LIGNE_TIR);
+        if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_UP))
         {
-            j->angle_tir+=PI;
+            j->angle_tir-=0.01;
+        }
+        if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_DOWN))
+        {
+            j->angle_tir+=0.01;
+        }
+        if(j->id_missile_selectione==10)
+        {
+            j->angle_tir=atan(((j->bombardier.yi+0.5)*TAILLE_CASE_Y-mouse.y)/((j->bombardier.xi+0.5)*TAILLE_CASE_X-mouse.x));
+            if(mouse.x<(j->bombardier.xi+0.5)*TAILLE_CASE_X)
+            {
+                j->angle_tir+=PI;
+            }
+        }
+        if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0 && j->id_missile_selectione!=0 && (j->nbre_tirs<j->nbre_tirs_max || MOD_CHEAT==1 || (j->precision_debloques[7]==2 && j->nbre_tirs<NBRE_TIRS_COMPETENCE_7_PRECISION)))
+        {
+            appuye=1;
+            if(j->nbre_tirs==0 || MOD_CHEAT==1)
+            {
+                if(j->id_missile_selectione!=8 && j->id_missile_selectione!=9)
+                {
+                    tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
+                }
+                if(j->id_missile_selectione==8)
+                {
+                    tirer_missile(*j,cos(j->angle_tir)*PUISSANCE_CANON_STOP,sin(j->angle_tir)*PUISSANCE_CANON_STOP,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
+                }
+                if(j->id_missile_selectione==9)
+                {
+                    tirer_missile(*j,sqrt(2)*j->puissance_tir_cannon/1.5,sqrt(2)*j->puissance_tir_cannon/1.5,mouse.x-mouse.y,0,j->missile_selectione);
+                }
+            }
+            else
+            {
+                if(j->id_missile_selectione==1)
+                {
+                    tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
+                }
+                if(j->id_missile_selectione==9 && j->precision_debloques[7]==2 && j->points_destruction>PRIX_MISSILES_CIBLE)
+                {
+                    j->points_destruction-=PRIX_MISSILES_CIBLE;
+                    tirer_missile(*j,sqrt(2)*j->puissance_tir_cannon/1.5,sqrt(2)*j->puissance_tir_cannon/1.5,mouse.x-mouse.y,0,j->missile_selectione);
+                }
+            }
+            j->nbre_tirs+=1;
+        }
+        if(!al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE))
+        {
+            appuye=0;
+        }
+        if(j->precision_debloques[1]==2)
+        {
+            al_draw_line((j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y+YFENETRE/NBRE_CASES_Y,(j->bombardier.xi+0.5)*TAILLE_CASE_X+LONGEUR_LIGNE_TIR*j->puissance_tir_cannon/PUISSANCE_CANON_INITIALE,(j->bombardier.yi+0.5)*TAILLE_CASE_Y+YFENETRE/NBRE_CASES_Y,JAUNE,LARGEUR_LIGNE_TIR);
+            if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_LEFT))
+            {
+                j->puissance_tir_cannon-=5;
+                if(j->puissance_tir_cannon<0)
+                {
+                    j->puissance_tir_cannon+=5;
+                }
+            }
+            if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_RIGHT))
+            {
+                j->puissance_tir_cannon+=5;
+                if(j->puissance_tir_cannon>1.5*PUISSANCE_CANON_INITIALE)
+                {
+                    j->puissance_tir_cannon-=5;
+                }
+            }
         }
     }
-	if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0 && j->id_missile_selectione!=0 && (j->nbre_tirs<j->nbre_tirs_max || MOD_CHEAT==1 || (j->precision_debloques[7]==2 && j->nbre_tirs<NBRE_TIRS_COMPETENCE_7_PRECISION)))
-	{
-    	appuye=1;
-    	if(j->nbre_tirs==0 || MOD_CHEAT==1)
-        {
-            if(j->id_missile_selectione!=8 && j->id_missile_selectione!=9)
-            {
-                tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
-            }
-            if(j->id_missile_selectione==8)
-            {
-                tirer_missile(*j,cos(j->angle_tir)*PUISSANCE_CANON_STOP,sin(j->angle_tir)*PUISSANCE_CANON_STOP,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
-            }
-            if(j->id_missile_selectione==9)
-            {
-                tirer_missile(*j,sqrt(2)*j->puissance_tir_cannon/1.5,sqrt(2)*j->puissance_tir_cannon/1.5,mouse.x-mouse.y,0,j->missile_selectione);
-            }
-        }
-        else
-        {
-            if(j->id_missile_selectione==1)
-            {
-                tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
-            }
-            if(j->id_missile_selectione==9 && j->precision_debloques[7]==2 && j->points_destruction>PRIX_MISSILES_CIBLE)
-            {
-                j->points_destruction-=PRIX_MISSILES_CIBLE;
-                tirer_missile(*j,sqrt(2)*j->puissance_tir_cannon/1.5,sqrt(2)*j->puissance_tir_cannon/1.5,mouse.x-mouse.y,0,j->missile_selectione);
-            }
-        }
-    	j->nbre_tirs+=1;
-	}
-	if(!al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE))
-	{
-    	appuye=0;
-	}
-	if(j->precision_debloques[1]==2)
-	{
-    	al_draw_line((j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y+YFENETRE/NBRE_CASES_Y,(j->bombardier.xi+0.5)*TAILLE_CASE_X+LONGEUR_LIGNE_TIR*j->puissance_tir_cannon/PUISSANCE_CANON_INITIALE,(j->bombardier.yi+0.5)*TAILLE_CASE_Y+YFENETRE/NBRE_CASES_Y,JAUNE,LARGEUR_LIGNE_TIR);
-    	if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_LEFT))
-    	{
-        	j->puissance_tir_cannon-=5;
-        	if(j->puissance_tir_cannon<0)
-        	{
-            	j->puissance_tir_cannon+=5;
-        	}
-    	}
-    	if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_RIGHT))
-    	{
-        	j->puissance_tir_cannon+=5;
-        	if(j->puissance_tir_cannon>1.5*PUISSANCE_CANON_INITIALE)
-        	{
-            	j->puissance_tir_cannon-=5;
-        	}
-    	}
-	}
 }
 void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,
                          	ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,
@@ -879,5 +897,48 @@ void enlever_tempo_blocs_bois(carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,CLAVI
     if(!al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_ENTER) && appu==1)
     {
         appu=0;
+    }
+}
+void gerer_victoire(joueur j[],carre c[NBRE_CASES_Y][NBRE_CASES_X],int joueur_qui_joue,int tour,int* fond,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police)
+{
+    int i;
+    static int p1=0;
+    static int p0=0;
+    *fond=1;
+    if(tour>=1)
+    {
+        j[joueur_qui_joue].bombardier.pv=c[j[joueur_qui_joue].bombardier.yi][j[joueur_qui_joue].bombardier.xi].pv;
+        if(c[j[1].bombardier.yi][j[1].bombardier.xi].id==0 && p1==0)
+        {
+            p1=1;
+            j[1].canon_place=2;
+            j[1].compteur_tour_replacer_canon=0;
+        }
+        if(c[j[0].bombardier.yi][j[0].bombardier.xi].id==0 && p0==0)
+        {
+            p0=1;
+            j[0].canon_place=2;
+            j[0].compteur_tour_replacer_canon=0;
+        }
+        if(c[j[0].coeur_yi][j[0].coeur_xi].id==0)
+        {
+            printf("    VICTOIRE DU JOUEUR   2");
+            *fond=4;
+            al_draw_textf(police,couleur,XFENETRE/8,YFENETRE/4,0,"VICTOIRE DU JOUEUR DE DROITE");
+        }
+        if(c[j[1].coeur_yi][j[1].coeur_xi].id==0)
+        {
+            printf("    VICTOIRE DU JOUEUR   1");
+            al_draw_textf(police,couleur,XFENETRE/8,YFENETRE/4,0,"VICTOIRE DU JOUEUR DE GAUCHE");
+            *fond=4;
+        }
+        if(j[1].canon_place==1)
+        {
+            p1=0;
+        }
+        if(j[0].canon_place==1)
+        {
+            p0=0;
+        }
     }
 }

@@ -129,6 +129,7 @@ void jeu()
             interface_competences(&key,&interface_jeu,&fond_actuel);
             if(interface_jeu==0)
             {
+                gerer_victoire(player,blocs,joueur_qui_joue,tour,&fond_actuel,rouge,arial66);
                 joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue,player,&tour,les_stats_misssiles);
                 afficher_tune(arial36,rougefonce,player[joueur_qui_joue]);
                 afficher_scores(arial36,jaune,player[joueur_qui_joue],Xfenetre/2+(distance_fin_tour_inventaire+taille_bouton_fin_tour_x/2*taille_bouton_fin_tour+tailleX_bouton_invenaire*taille_bouton_invenaire_x)*COEF_PIXEL_X);
@@ -139,6 +140,7 @@ void jeu()
                 afficher_blocs_selec(selecCons,bloc,&player[joueur_qui_joue],taille_blocs_a_selectionner,carte[0],les_stats_blocs,mouse);
                 afficher_objet_anime(&bouton_fin_tour);
                 afficher_barre_xp(barre_xp,player[joueur_qui_joue],bleuClair,arial36);
+                afficher_conseil(player[joueur_qui_joue],rouge,arial36);
                 placer_item(mouse,souris_case,blocs,&player[joueur_qui_joue],les_stats_blocs,tour);
                 enlever_carre(blocs,souris_case,mouse,les_stats_blocs,&player[joueur_qui_joue],tour);
                 gerer_blocs(blocs,vitesse_inversee_gravite,les_stats_blocs,player);

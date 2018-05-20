@@ -21,4 +21,5 @@ int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,A
 void afficher_scores(ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,joueur j,double x);
 void afficher_barre_xp(ALLEGRO_BITMAP* barre[],joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
 void afficher_pts_competences(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
+void afficher_conseil(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
 #endif // AFFICHAGE_H_INCLUDED
