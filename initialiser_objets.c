@@ -19,6 +19,7 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
     {
         i[j].id=j;
         i[j].nbre_blocs_actuel=nbre_blocs_actuel;
+        i[j].enleve_tempo=0;
         if(j==1 || j==5 || (j>=6 && j<=8) || j==10)
             i[j].soumis_a_la_gravite=1;
         else
@@ -63,7 +64,7 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
         }
         if(j==7)
         {
-            i[j].pv=150;
+            i[j].pv=200;
         }
         if(j==8)
         {
@@ -99,6 +100,7 @@ void initialiser_blocs(fenetre f,carre c[NBRE_CASES_Y][NBRE_CASES_X],item it[])
             c[j][i].au_joueur=-1;
             c[j][i].pv=it[c[j][i].id].pv;
             c[j][i].pv_initiaux=it[c[j][i].id].pv;
+            c[j][i].enleve_tempo=0;
         }
     }
 }
@@ -331,8 +333,10 @@ void initialiser_items_missiles(item_missile it[])
     it[2].prix=4;
     it[3].prix=100;
     it[4].prix=20;
-    it[5].prix=30;
-    it[6].prix=35;
-    it[7].prix=15;
-    it[8].prix=20;
+    it[5].prix=10;
+    it[6].prix=30;
+    it[7].prix=5;
+    it[8].prix=15;
+    it[9].prix=PRIX_MISSILES_CIBLE;
+    it[10].prix=18;
 }

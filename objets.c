@@ -32,20 +32,24 @@ void switcher_deux_blocs(carre* bloc1,carre* bloc2)
 	int etat=bloc1->etat;
 	int pv=bloc1->pv;
 	int compteur_gravite=bloc1->compteur_gravite;
-
+	int enlever_tempo=bloc1->enleve_tempo;
+    int au_joueur=bloc1->au_joueur;
 
 	bloc1->id=bloc2->id;
 	bloc1->etat=bloc2->etat;
 	bloc1->pv=bloc2->pv;
 	bloc1->compteur_gravite=bloc2->compteur_gravite;
-
+    bloc1->enleve_tempo=bloc2->enleve_tempo;
+    bloc1->au_joueur=bloc2->au_joueur;
 
 	bloc2->id=id;
 	bloc2->etat=etat;
 	bloc2->pv=pv;
 	bloc2->compteur_gravite=compteur_gravite;
+	bloc2->enleve_tempo=enlever_tempo;
+	bloc2->au_joueur=au_joueur;
 }
-void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j,item i[])
+void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j,item i[],int tour)
 {
 	if(mouse.buttons&1)
 	{
@@ -99,9 +103,8 @@ void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CA
                     	blocs[souris.y][souris.x].au_joueur=j->n_joueur;
                     	j->tune-=blocs[souris.y][souris.x].pv/10;
                     	}
-
-
                 	}
+                    blocs[souris.y][souris.x].enleve_tempo=0;
             	}
         	}
     	}
@@ -411,6 +414,14 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[],carre blocs[NBRE_CASES_Y]
                     {
                         ajouter_missile_dans_inventaire(j,8);
                     }
+                    if(i==2)
+                    {
+                        ajouter_missile_dans_inventaire(j,9);
+                    }
+                    if(i==6)
+                    {
+                        ajouter_missile_dans_inventaire(j,10);
+                    }
                 	for(k=1;k<=NBRE_LIAISONS_COMPTENCES_MAX;k++)
                 	{
                     	if(o[i].utile2[k]!=0)
@@ -434,7 +445,7 @@ int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X],
 {
 	int xi=floor((o.x)/XFENETRE*NBRE_CASES_X);
 	int yi=floor((o.y)/YFENETRE*NBRE_CASES_Y);
-	if(c[yi][xi].id!=0)
+	if(c[yi][xi].id!=0 && c[yi][xi].enleve_tempo==0)
 	{
     	if(c[yi][xi].id==5 && c[yi][xi].au_joueur==joueur_qui_joue)
     	{
@@ -468,7 +479,7 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
         	if(f[i].explosion.animation[0]==0)
         	{
             	f[i].chrono+=1;
-            	if(f[i].id!=4 && f[i].id!=7 && (f[i].id!=8 || f[i].utile1==1))
+            	if(f[i].id!=4 && f[i].id!=7 && (f[i].id!=8 || f[i].utile1==1) && f[i].id!=9 && f[i].id!=10)
                 {
                     f[i].vy+=attraction;
                 }
@@ -676,7 +687,7 @@ void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double 
     	n=retablisseur(n+1,NBRE_PARTICULES_EXPLOSION_MAX,0);
 	}
 }
-void tirs_de_cannon(CLAVIER,joueur* j)
+void tirs_de_cannon(CLAVIER,joueur* j,SOURIS)
 {
 	static int appuye=0;
 	al_draw_line((j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,(j->bombardier.xi+0.5)*TAILLE_CASE_X+LONGEUR_LIGNE_TIR*cos(j->angle_tir),(j->bombardier.yi+0.5)*TAILLE_CASE_Y+LONGEUR_LIGNE_TIR*sin(j->angle_tir),ROUGE,LARGEUR_LIGNE_TIR);
@@ -688,12 +699,20 @@ void tirs_de_cannon(CLAVIER,joueur* j)
 	{
     	j->angle_tir+=0.01;
 	}
-	if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0 && j->id_missile_selectione!=0 && (j->nbre_tirs<j->nbre_tirs_max || MOD_CHEAT==1))
+	if(j->id_missile_selectione==10)
+    {
+        j->angle_tir=atan(((j->bombardier.yi+0.5)*TAILLE_CASE_Y-mouse.y)/((j->bombardier.xi+0.5)*TAILLE_CASE_X-mouse.x));
+        if(mouse.x<(j->bombardier.xi+0.5)*TAILLE_CASE_X)
+        {
+            j->angle_tir+=PI;
+        }
+    }
+	if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0 && j->id_missile_selectione!=0 && (j->nbre_tirs<j->nbre_tirs_max || MOD_CHEAT==1 || (j->precision_debloques[7]==2 && j->nbre_tirs<NBRE_TIRS_COMPETENCE_7_PRECISION)))
 	{
     	appuye=1;
     	if(j->nbre_tirs==0 || MOD_CHEAT==1)
         {
-            if(j->id_missile_selectione!=8)
+            if(j->id_missile_selectione!=8 && j->id_missile_selectione!=9)
             {
                 tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
             }
@@ -701,12 +720,21 @@ void tirs_de_cannon(CLAVIER,joueur* j)
             {
                 tirer_missile(*j,cos(j->angle_tir)*PUISSANCE_CANON_STOP,sin(j->angle_tir)*PUISSANCE_CANON_STOP,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
             }
+            if(j->id_missile_selectione==9)
+            {
+                tirer_missile(*j,sqrt(2)*j->puissance_tir_cannon/1.5,sqrt(2)*j->puissance_tir_cannon/1.5,mouse.x-mouse.y,0,j->missile_selectione);
+            }
         }
         else
         {
             if(j->id_missile_selectione==1)
             {
                 tirer_missile(*j,cos(j->angle_tir)*j->puissance_tir_cannon,sin(j->angle_tir)*j->puissance_tir_cannon,(j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,j->missile_selectione);
+            }
+            if(j->id_missile_selectione==9 && j->precision_debloques[7]==2 && j->points_destruction>PRIX_MISSILES_CIBLE)
+            {
+                j->points_destruction-=PRIX_MISSILES_CIBLE;
+                tirer_missile(*j,sqrt(2)*j->puissance_tir_cannon/1.5,sqrt(2)*j->puissance_tir_cannon/1.5,mouse.x-mouse.y,0,j->missile_selectione);
             }
         }
     	j->nbre_tirs+=1;
@@ -823,5 +851,33 @@ void ajouter_missile_dans_inventaire(joueur* j,int id_item)
             a=1;
             j->inventaire[i]=id_item;
         }
+    }
+}
+void enlever_tempo_blocs_bois(carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,CLAVIER)
+{
+    int x;
+    int y;
+    static int appu=0;
+    if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_ENTER) && appu==0)
+    {
+        appu=1;
+        for(x=0;x<=NBRE_CASES_X-1;x++)
+        {
+            for(y=0;y<=NBRE_CASES_Y-1;y++)
+            {
+                if(c[y][x].id==7 && c[y][x].au_joueur==j.n_joueur && c[y][x].enleve_tempo==0)
+                {
+                    c[y][x].enleve_tempo=1;
+                }
+                else
+                {
+                    c[y][x].enleve_tempo=0;
+                }
+            }
+        }
+    }
+    if(!al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_ENTER) && appu==1)
+    {
+        appu=0;
     }
 }

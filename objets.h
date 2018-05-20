@@ -14,6 +14,7 @@ typedef struct
 	int compteur_gravite;
 	int au_joueur;
 	double pv_initiaux;
+	int enleve_tempo;
 }carre;
 typedef struct
 {
@@ -139,6 +140,7 @@ typedef struct
 	double taille_image_selection;
 	int nbre_item_placable;
 	int soumis_a_la_gravite; //  0:NON	1:OUI   2:COLLANT
+	int enleve_tempo;
 }item;
 typedef struct
 {
@@ -146,7 +148,7 @@ typedef struct
 	double prix;
 	fusee_missile* missile;
 }item_missile;
-void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j,item i[]);
+void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j,item i[],int tour);
 int clic_objet(SOURIS,objet_anime o);
 int toucher_objet(SOURIS,objet_anime o);
 int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,joueur j[],int* n_tour,item_missile missiles[]);
@@ -163,11 +165,12 @@ void pop_fumee(objet_anime o[],fusee_missile f[]);
 void deplacer_objet_constament(objet_anime o[],int nbre_objets,double vitesse_x,double vitesse_y);
 void deplacer_objet_fixe_constament(objet_fixe o[],int nbre_objets);
 void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double vitesse);
-void tirs_de_cannon(CLAVIER,joueur* j);
+void tirs_de_cannon(CLAVIER,joueur* j,SOURIS);
 void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur* j,ALLEGRO_BITMAP* selection,item_missile missiles[],int n_tour,ALLEGRO_FONT* police,ALLEGRO_COLOR couleur);
 int passer_souris_sur_carre(SOURIS,double x1 ,double y1, double x2,double y2);
 void gere_xp(joueur j[]);
 void ajouter_missile_dans_inventaire(joueur* j,int id_item);
+void enlever_tempo_blocs_bois(carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,CLAVIER);
 #endif // OBJETS_H_INCLUDED
 
 

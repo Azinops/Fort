@@ -23,7 +23,7 @@ void afficher_blocs(fenetre f,carre c[NBRE_CASES_Y][NBRE_CASES_X],ALLEGRO_BITMAP
     {
         for(j=0;j<f.cases_y;j++)
         {
-            if(c[j][i].id!=0)
+            if(c[j][i].id!=0 && c[j][i].enleve_tempo==0)
             {
                 al_draw_scaled_rotated_bitmap(bitmap[c[j][i].id],0,0,c[j][i].x,c[j][i].y,(f.Xfenetre/f.cases_x)/taille_materiau,(f.Yfenetre/f.cases_y)/taille_materiau,0,0);
             }
@@ -340,4 +340,12 @@ void afficher_barre_xp(ALLEGRO_BITMAP* barre[],joueur j,ALLEGRO_COLOR couleur,AL
 void afficher_pts_competences(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police)
 {
     al_draw_textf(police,couleur,XFENETRE/3-20*COEF_PIXEL_X,0,0,"Points disponibles: %d",j.pts_competences);
+}
+void afficher_pointeur_souris(joueur j,SOURIS,ALLEGRO_BITMAP* pointeur)
+{
+    double jsp_pk_ca_bug=round(YFENETRE*100/950)/100;
+    if(j.id_missile_selectione==9 || j.id_missile_selectione==10)
+    {
+        al_draw_scaled_rotated_bitmap(pointeur,taille_cible_x_y/2,taille_cible_x_y/2,mouse.x,mouse.y,COEF_PIXEL_X,jsp_pk_ca_bug,0,0);
+    }
 }

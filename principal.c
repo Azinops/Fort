@@ -26,6 +26,7 @@ void jeu()
     INITIALISERIMAGE(debloque,"./images/effets/debloque.png")
     INITIALISERIMAGE(inventaire,"./images/inventaire/inventaire.png")
     INITIALISERIMAGE(case_inventaire,"./images/inventaire/case.png")
+    INITIALISERIMAGE(cible,"./images/effets/cible.png")
     INITIALISERIMAGE(selection_inventaire,"./images/inventaire/selection.png")
     INITIALISER_IMAGES_EN_MASSE(fusee,nbre_fusees_actuel,"./images/fusees/")
     INITIALISER_IMAGES_EN_MASSE(bloc,nbre_blocs_actuels,"./images/blocs/")
@@ -95,10 +96,16 @@ void jeu()
     initialiser_fusees(bombe_xp,NBRE_FUSEES,fusee[6],taille_bombe_xp,nbre_deflagration_actuel,deflagration,vitesse_anim_deflagration,taille_explosion_xp,PUISSANCE_BOMBE_XP,PORTEE_BOMBE_XP,les_stats_misssiles,coef_xp_bombe_xp,taille_x_y_explosion_xp);
 
     fusee_missile tirs_droits[NBRE_FUSEES+1];
-    initialiser_fusees(tirs_droits,NBRE_FUSEES,fusee[7],taille_fusees_droites,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIR_INITIALE*2,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
+    initialiser_fusees(tirs_droits,NBRE_FUSEES,fusee[7],taille_fusees_droites,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIRS_DROITS,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
 
     fusee_missile missile_stop[NBRE_FUSEES+1];
-    initialiser_fusees(missile_stop,NBRE_FUSEES,fusee[8],taille_fusees_stop,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIR_INITIALE*1.5,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
+    initialiser_fusees(missile_stop,NBRE_FUSEES,fusee[8],taille_fusees_stop,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_MISSILE_STOP,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
+
+    fusee_missile missile_cible[NBRE_FUSEES+1];
+    initialiser_fusees(missile_cible,NBRE_FUSEES,fusee[9],taille_fusees_cible,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_MISSILE_CIBLE,PORTEE_INITIALE*2,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
+
+    fusee_missile missile_sniper[NBRE_FUSEES+1];
+    initialiser_fusees(missile_sniper,NBRE_FUSEES,fusee[10],taille_fusees_sniper,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_MISSILE_SNIPER,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
 
     objet_anime fumee[NBRE_FUMEE];
     initialiser_fumee(fumee,nbre_fumees_actuel,image_fumee,vitese_anim_fumee,taille_initiale_fumee);
@@ -122,6 +129,7 @@ void jeu()
             interface_competences(&key,&interface_jeu,&fond_actuel);
             if(interface_jeu==0)
             {
+                joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue,player,&tour,les_stats_misssiles);
                 afficher_tune(arial36,rougefonce,player[joueur_qui_joue]);
                 afficher_scores(arial36,jaune,player[joueur_qui_joue],Xfenetre/2+(distance_fin_tour_inventaire+taille_bouton_fin_tour_x/2*taille_bouton_fin_tour+tailleX_bouton_invenaire*taille_bouton_invenaire_x)*COEF_PIXEL_X);
                 rentrer_souris_dans_une_case(&souris_case,carte[0],mouse);
@@ -131,11 +139,10 @@ void jeu()
                 afficher_blocs_selec(selecCons,bloc,&player[joueur_qui_joue],taille_blocs_a_selectionner,carte[0],les_stats_blocs,mouse);
                 afficher_objet_anime(&bouton_fin_tour);
                 afficher_barre_xp(barre_xp,player[joueur_qui_joue],bleuClair,arial36);
-                placer_item(mouse,souris_case,blocs,&player[joueur_qui_joue],les_stats_blocs);
+                placer_item(mouse,souris_case,blocs,&player[joueur_qui_joue],les_stats_blocs,tour);
                 enlever_carre(blocs,souris_case,mouse,les_stats_blocs,&player[joueur_qui_joue],tour);
-                joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue,player,&tour,les_stats_misssiles);
                 gerer_blocs(blocs,vitesse_inversee_gravite,les_stats_blocs,player);
-                tirs_de_cannon(&key,&player[joueur_qui_joue]);
+                tirs_de_cannon(&key,&player[joueur_qui_joue],mouse);
                 deplacer_objet_constament(fumee,NBRE_FUMEE,vitesse_deplacement_fumee_x,vitesse_deplacement_fumee_y);
                 afficher_objet_anime_en_masse(&fumee,NBRE_FUMEE);
                 gerer_fusees(player[joueur_qui_joue].missile_selectione,attraction,blocs,particule_explosion,joueur_qui_joue,player,&key);
@@ -148,6 +155,8 @@ void jeu()
                                         icones_fusees,&player[joueur_qui_joue],selection_inventaire,les_stats_misssiles,tour,
                                         arial22,noir);
                 gere_xp(player);
+                afficher_pointeur_souris(player[joueur_qui_joue],mouse,cible);
+                enlever_tempo_blocs_bois(blocs,player[joueur_qui_joue],&key);
             }
             if(interface_jeu==1)
             {
