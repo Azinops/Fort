@@ -61,7 +61,7 @@ void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CA
         	{
             	if(mouse.x*(1-j->n_joueur*2)<(1-j->n_joueur*2)*(XFENETRE/2))
             	{
-                	if((j->id_selectionee==5 && tour==0) || (j->canon_place==2 && j->compteur_tour_replacer_canon>=NRBE_TOURS_POUR_REPLACER_CANON))
+                	if((j->id_selectionee==5 && tour==0) || (j->canon_place==2 && j->compteur_tour_replacer_canon>=NRBE_TOURS_POUR_REPLACER_CANON && j->id_selectionee==5))
                 	{
                     	if(j->canon_place==1)
                     	{
