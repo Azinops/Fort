@@ -28,6 +28,8 @@ void jeu()
     INITIALISERIMAGE(case_inventaire,"./images/inventaire/case.png")
     INITIALISERIMAGE(cible,"./images/effets/cible.png")
     INITIALISERIMAGE(selection_inventaire,"./images/inventaire/selection.png")
+    INITIALISER_IMAGES_EN_MASSE(indictaions_competences,NBRE_COMPETENCES_EXPLO+NBRE_COMPETENCES_PRECISION+NBRE_COMPETENCES_SCIENCE,"./images/explications_competences/")
+    INITIALISER_IMAGES_EN_MASSE(indictaion_competences,4,"./images/explications_competences/")
     INITIALISER_IMAGES_EN_MASSE(fusee,nbre_fusees_actuel,"./images/fusees/")
     INITIALISER_IMAGES_EN_MASSE(bloc,nbre_blocs_actuels,"./images/blocs/")
     INITIALISER_IMAGES_EN_MASSE(fin_tour,nbre_fin_tour_actuel,"./images/fin_tour/")
@@ -179,6 +181,7 @@ void jeu()
                 selection_objets_jaune(selecCons,c_explo,NBRE_COMPETENCES_EXPLO,mouse);
                 selection_objets_jaune(selecCons,c_science,NBRE_COMPETENCES_SCIENCE,mouse);
                 selection_objets_jaune(selecCons,c_precision,NBRE_COMPETENCES_PRECISION,mouse);
+                afficher_explications_competences(c_explo,c_science,c_precision,indictaions_competences,mouse);
             }
         }
         al_flip_display();

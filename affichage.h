@@ -22,4 +22,5 @@ void afficher_scores(ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,joueur j,double 
 void afficher_barre_xp(ALLEGRO_BITMAP* barre[],joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
 void afficher_pts_competences(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
 void afficher_conseil(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
+void afficher_explications_competences(objet_fixe c1[],objet_fixe c2[],objet_fixe c3[],ALLEGRO_BITMAP* explications[],SOURIS);
 #endif // AFFICHAGE_H_INCLUDED

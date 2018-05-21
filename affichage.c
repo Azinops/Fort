@@ -362,3 +362,28 @@ void afficher_conseil(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police)
         al_draw_textf(police,couleur,XFENETRE/4,YFENETRE/4,0,"Joueur %d, vous pouvez replacer votre canon",1+j.n_joueur);
     }
 }
+void afficher_explications_competences(objet_fixe c1[],objet_fixe c2[],objet_fixe c3[],ALLEGRO_BITMAP* explications[],SOURIS)
+{
+    int i;
+    for(i=1;i<=NBRE_COMPETENCES_EXPLO;i++)
+    {
+        if(toucher_objet_fixe(mouse,c1[i]))
+        {
+            al_draw_scaled_rotated_bitmap(explications[i],0,0,mouse.x,mouse.y,COEF_PIXEL_X*taille_indication_competences,COEF_PIXEL_Y*taille_indication_competences,0,0);
+        }
+    }
+    for(i=1;i<=NBRE_COMPETENCES_SCIENCE;i++)
+    {
+        if(toucher_objet_fixe(mouse,c2[i]))
+        {
+            al_draw_scaled_rotated_bitmap(explications[8+i],0,0,mouse.x,mouse.y,COEF_PIXEL_X*taille_indication_competences,COEF_PIXEL_Y*taille_indication_competences,0,0);
+        }
+    }
+    for(i=1;i<=NBRE_COMPETENCES_PRECISION;i++)
+    {
+        if(toucher_objet_fixe(mouse,c3[i]))
+        {
+            al_draw_scaled_rotated_bitmap(explications[16+i],taille_indication_competences_x,0,mouse.x,mouse.y,COEF_PIXEL_X*taille_indication_competences,COEF_PIXEL_Y*taille_indication_competences,0,0);
+        }
+    }
+}

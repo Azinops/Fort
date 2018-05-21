@@ -27,4 +27,8 @@ double taille_cible_x_y=50;
 
 double taille_indication_bloc_x=200;
 double taille_indication_bloc_y=200;
+
+double taille_indication_competences_x=500;
+double taille_indication_competences_y=300;
+double taille_indication_competences=0.5;
 #endif // TAILLES_IMAGES_H_INCLUDED

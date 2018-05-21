@@ -366,11 +366,16 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[],carre blocs[NBRE_CASES_Y]
                 	j->pts_competences-=1;
                 	if(i==3)
                     {
-                        j->coef_xp=1.5;
+                        j->coef_xp=1.6;
+                    }
+                    if(i==1)
+                    {
+                        j->coef_xp=1.2;
+                        j->coef_gain_tune=1.2;
                     }
                     if(i==4)
                     {
-                        j->coef_xp=2;
+                        j->coef_xp=2.2;
                     }
                     if(i==5)
                     {
