@@ -164,10 +164,12 @@ void animer_objet(objet_anime* o,int image_depart,int image_fin_anim,int image_a
 	o->animation[2]=image_fin_anim;
 	o->animation[3]=image_a_mettre_apres_animation;
 }
-int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,joueur j[],int* n_tour,item_missile missiles[])
+int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,joueur j[],int* n_tour,item_missile missiles[],carre c[NBRE_CASES_Y][NBRE_CASES_X])
 {
 	int i;
 	int q;
+	int x;
+	int y;
 	q=quel_joueur_joue;
 	if(clic_objet(mouse,*bouton)==1 && bouton->animation[0]==0)
 	{
@@ -194,6 +196,20 @@ int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,
     	{
         	quel_joueur_joue=1;
     	}
+    	for(x=1;x<=NBRE_CASES_X;x++)
+        {
+            for(y=1;y<=NBRE_CASES_Y;y++)
+            {
+                if(c[y][x].au_joueur==quel_joueur_joue && c[y][x].id==7)
+                {
+                    c[y][x].enleve_tempo=1;
+                }
+                if(c[y][x].au_joueur!=quel_joueur_joue && c[y][x].id==7)
+                {
+                    c[y][x].enleve_tempo=0;
+                }
+            }
+        }
 	}
 	else
 	{
@@ -573,7 +589,7 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
                                 {
                                     c[y][x].pv/=1.5;
                                 }
-                                c[y][x].pv-=f[i].puissance_explosion/(pow(distance(f[i].fusee.x,f[i].fusee.y,x*XFENETRE/NBRE_CASES_X,y*YFENETRE/NBRE_CASES_Y)*COEF_REDUC_DEGAT_EXPLOSION,2));
+                                c[y][x].pv-=f[i].puissance_explosion/(pow(distance(f[i].fusee.x,f[i].fusee.y,(x+0.5)*XFENETRE/NBRE_CASES_X,(y+0.5)*YFENETRE/NBRE_CASES_Y)*COEF_REDUC_DEGAT_EXPLOSION,2));
                                 if(c[y][x].pv<=0 && c[y][x].id!=0)
                                 {
                                     j[joueur_qui_joue].points_destruction+=c[y][x].pv_initiaux*j[joueur_qui_joue].coef_points/100*f[i].coef_xp;
@@ -719,11 +735,11 @@ void tirs_de_cannon(CLAVIER,joueur* j,SOURIS)
         al_draw_line((j->bombardier.xi+0.5)*TAILLE_CASE_X,(j->bombardier.yi+0.5)*TAILLE_CASE_Y,(j->bombardier.xi+0.5)*TAILLE_CASE_X+LONGEUR_LIGNE_TIR*cos(j->angle_tir),(j->bombardier.yi+0.5)*TAILLE_CASE_Y+LONGEUR_LIGNE_TIR*sin(j->angle_tir),ROUGE,LARGEUR_LIGNE_TIR);
         if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_UP))
         {
-            j->angle_tir-=0.01;
+            j->angle_tir-=0.01*(1-2*j->n_joueur);
         }
         if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_DOWN))
         {
-            j->angle_tir+=0.01;
+            j->angle_tir+=0.01*(1-2*j->n_joueur);
         }
         if(j->id_missile_selectione==10)
         {

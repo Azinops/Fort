@@ -23,7 +23,7 @@ void afficher_blocs(fenetre f,carre c[NBRE_CASES_Y][NBRE_CASES_X],ALLEGRO_BITMAP
     {
         for(j=0;j<f.cases_y;j++)
         {
-            if(c[j][i].id!=0 && c[j][i].enleve_tempo==0)
+            if(c[j][i].id!=0)
             {
                 al_draw_scaled_rotated_bitmap(bitmap[c[j][i].id],0,0,c[j][i].x,c[j][i].y,(f.Xfenetre/f.cases_x)/taille_materiau,(f.Yfenetre/f.cases_y)/taille_materiau,0,0);
             }
