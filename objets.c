@@ -748,7 +748,7 @@ void tirs_de_cannon(CLAVIER,joueur* j,SOURIS)
                 }
                 if(j->id_missile_selectione==9)
                 {
-                    tirer_missile(*j,sqrt(2)*j->puissance_tir_cannon/1.5,sqrt(2)*j->puissance_tir_cannon/1.5,mouse.x-mouse.y,0,j->missile_selectione);
+                    tirer_missile(*j,(1-j->n_joueur*2)*sqrt(2)*j->puissance_tir_cannon/1.5,sqrt(2)*j->puissance_tir_cannon/1.5,mouse.x+(j->n_joueur*2-1)*mouse.y,0,j->missile_selectione);
                 }
             }
             else
@@ -760,7 +760,7 @@ void tirs_de_cannon(CLAVIER,joueur* j,SOURIS)
                 if(j->id_missile_selectione==9 && j->precision_debloques[7]==2 && j->points_destruction>PRIX_MISSILES_CIBLE)
                 {
                     j->points_destruction-=PRIX_MISSILES_CIBLE;
-                    tirer_missile(*j,sqrt(2)*j->puissance_tir_cannon/1.5,sqrt(2)*j->puissance_tir_cannon/1.5,mouse.x-mouse.y,0,j->missile_selectione);
+                    tirer_missile(*j,(1-j->n_joueur*2)*sqrt(2)*j->puissance_tir_cannon/1.5,sqrt(2)*j->puissance_tir_cannon/1.5,mouse.x+(j->n_joueur*2-1)*mouse.y,0,j->missile_selectione);
                 }
             }
             j->nbre_tirs+=1;
