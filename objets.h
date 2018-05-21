@@ -154,7 +154,7 @@ typedef struct
 void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j,item i[],int tour);
 int clic_objet(SOURIS,objet_anime o);
 int toucher_objet(SOURIS,objet_anime o);
-int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,joueur j[],int* n_tour,item_missile missiles[],carre c[NBRE_CASES_Y][NBRE_CASES_X]);
+int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,joueur j[],int* n_tour,item_missile missiles[],carre c[NBRE_CASES_Y][NBRE_CASES_X],CLAVIER);
 void animer_objet(objet_anime* o,int image_depart,int image_fin_anim,int image_a_mettre_apres_animation);
 void gerer_blocs(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],int vitesse_inv_gravite,item it[],joueur jo[]);
 void switcher_deux_blocs(carre* bloc1,carre* bloc2);

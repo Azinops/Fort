@@ -90,7 +90,7 @@ int taille_competences_xy=TAILLE_COMPETENCE;
 int anti_marge_competence_x=-600;
 
 //BOUTON FIN TOUR
-double vitesse_animation_bouton_fin_tour=0.5;
+double vitesse_animation_bouton_fin_tour=0.3;
 double taille_bouton_fin_tour=0.8;
 int taille_bouton_fin_tour_x=300;
 int taille_bouton_fin_tour_y=100;

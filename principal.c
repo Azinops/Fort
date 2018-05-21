@@ -119,7 +119,6 @@ void jeu()
 
     c_explo[8].angle=0;
 
-
     while(!fin)
     {
         OBTENIRMOUSEETKEY
@@ -128,12 +127,12 @@ void jeu()
         //TIMER = 1/50 sec
         if(event.type==ALLEGRO_EVENT_TIMER)
         {
-            afficher_fond(fond[fond_actuel],carte[0]);
+            afficher_fond(fond[fond_actuel],carte[0],joueur_qui_joue);
             interface_competences(&key,&interface_jeu,&fond_actuel);
             if(interface_jeu==0)
             {
                 gerer_victoire(player,blocs,joueur_qui_joue,tour,&fond_actuel,rouge,arial66);
-                joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue,player,&tour,les_stats_misssiles,blocs);
+                joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue,player,&tour,les_stats_misssiles,blocs,&key);
                 afficher_tune(arial36,rougefonce,player[joueur_qui_joue]);
                 afficher_scores(arial36,jaune,player[joueur_qui_joue],Xfenetre/2+(distance_fin_tour_inventaire+taille_bouton_fin_tour_x/2*taille_bouton_fin_tour+tailleX_bouton_invenaire*taille_bouton_invenaire_x)*COEF_PIXEL_X);
                 rentrer_souris_dans_une_case(&souris_case,carte[0],mouse);
