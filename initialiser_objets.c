@@ -141,7 +141,7 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].xp=0;
         j[i].coef_xp=1;
         j[i].coef_points=1;
-        j[i].tune=2000+MOD_CHEAT*100000;
+        j[i].tune=3200+MOD_CHEAT*100000;
         j[i].points_destruction_debut_tour=0+MOD_CHEAT*500;
         j[i].id_missile_selectione=0;
         j[i].nbre_tirs=0;

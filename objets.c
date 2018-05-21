@@ -284,9 +284,9 @@ void enlever_carre(carre bloc[NBRE_CASES_Y][NBRE_CASES_X],point_case p,SOURIS,it
 	{
     	if(i[bloc[p.y][p.x].id].placable==1 && i[bloc[p.y][p.x].id].id!=5 && i[bloc[p.y][p.x].id].id!=6 && n_tour==0)
     	{
+        	j->tune+=i[bloc[p.y][p.x].id].prix;
         	bloc[p.y][p.x].id=0;
         	bloc[p.y][p.x].etat=1;
-        	j->tune+=bloc[p.y][p.x].pv/10;
         	bloc[p.y][p.x].pv=0;
     	}
 	}
