@@ -24,4 +24,7 @@ double taille_barre_xp_x=300;
 double taille_barre_xp_y=50;
 
 double taille_cible_x_y=50;
+
+double taille_indication_bloc_x=200;
+double taille_indication_bloc_y=200;
 #endif // TAILLES_IMAGES_H_INCLUDED

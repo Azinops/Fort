@@ -43,7 +43,7 @@
                                                                     printf(":   loaded \n");\
                                                                 }\
                                                             }
-#define ESCAPE if(al_key_down(&key,ALLEGRO_KEY_ESCAPE))\
+#define ESCAPE if(al_key_down(&key,ALLEGRO_KEY_F4))\
                 fin=1;
 
 #define INITIALISER_BIBLIOTHEQUE double X0=0;\

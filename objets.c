@@ -96,13 +96,13 @@ void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CA
                 	}
                 	if(j->id_selectionee!=5 && j->id_selectionee!=6)
                 	{
-                    	if(j->tune>=i[j->id_selectionee].pv/10)
+                    	if(j->tune>=i[j->id_selectionee].prix)
                     	{
                        	blocs[souris.y][souris.x].id=j->id_selectionee;
                     	blocs[souris.y][souris.x].pv=i[blocs[souris.y][souris.x].id].pv;
                     	blocs[souris.y][souris.x].pv_initiaux=i[blocs[souris.y][souris.x].id].pv;
                     	blocs[souris.y][souris.x].au_joueur=j->n_joueur;
-                    	j->tune-=blocs[souris.y][souris.x].pv/10;
+                    	j->tune-=i[j->id_selectionee].prix;
                     	}
                 	}
                     blocs[souris.y][souris.x].enleve_tempo=0;
@@ -378,7 +378,7 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[],carre blocs[NBRE_CASES_Y]
                     }
                     if(i==2)
                     {
-                        j->coef_gain_tune=1.5;
+                        j->coef_gain_tune=2;
                     }
                     if(i==6)
                     {
@@ -535,6 +535,10 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
                 f[i].fusee.x+=f[i].vx/50*COEF_PIXEL_X;
                 f[i].fusee.y+=f[i].vy/50*COEF_PIXEL_Y;
                 f[i].fusee.angle=atan(f[i].vy/f[i].vx)+PI/2*(f[i].vx/abs(f[i].vx));
+                if(f[i].fusee.y<0)
+                {
+                    f[i].fusee.y=0;
+                }
         	}
         	if(collision_objet_fixe_carre(f[i].fusee,c,joueur_qui_joue)==1 && f[i].explosion_en_cours==0 && f[i].fusee.y>0 && (j[joueur_qui_joue].precision_debloques[8]!=2 || (j[joueur_qui_joue].precision_debloques[8]==2 && (j[joueur_qui_joue].n_joueur*2-1)*f[i].fusee.x<(j[joueur_qui_joue].n_joueur*2-1)*XFENETRE/2)))
         	{
@@ -786,7 +790,7 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
                          	ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,
                          	int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],
                         	joueur* j,ALLEGRO_BITMAP* selection,item_missile missiles[],int n_tour,
-                        	ALLEGRO_FONT* police,ALLEGRO_COLOR couleur)
+                        	ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,CLAVIER)
 {
 	static int b=0;
 	int c=0;
@@ -795,6 +799,10 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
 	selection_objet_jaune(selection_jaune,*o,mouse);
 	if(n_tour!=0-MOD_CHEAT && (j->nbre_tirs==0 || MOD_CHEAT==1))
 	{
+	    if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_ESCAPE))
+        {
+            b=0;
+        }
     	if(clic_objet_fixe(mouse,*o) && clic==0)
     	{
         	clic=1;

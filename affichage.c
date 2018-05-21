@@ -34,10 +34,11 @@ void afficher_selection(ALLEGRO_BITMAP* bitmap,point_case souris,fenetre f)
 {
     al_draw_scaled_rotated_bitmap(bitmap,0,0,souris.x*(f.Xfenetre/f.cases_x),souris.y*(f.Yfenetre/f.cases_y),(f.Xfenetre/f.cases_x)/taille_selec,(f.Yfenetre/f.cases_y)/taille_selec,0,0);
 }
-void afficher_blocs_selec(ALLEGRO_BITMAP* selec,ALLEGRO_BITMAP* blocs[],joueur* j,double taille,fenetre f,item it[],ALLEGRO_MOUSE_STATE mouse)
+void afficher_blocs_selec(ALLEGRO_BITMAP* selec,ALLEGRO_BITMAP* blocs[],joueur* j,double taille,fenetre f,item it[],ALLEGRO_MOUSE_STATE mouse,ALLEGRO_BITMAP* explications[])
 {
     int i;
     int n=1;
+    int c=0;
     for(i=1;i<=it[1].nbre_blocs_actuel;i++)
     {
         if(it[i].placable==1)
@@ -47,6 +48,7 @@ void afficher_blocs_selec(ALLEGRO_BITMAP* selec,ALLEGRO_BITMAP* blocs[],joueur* 
             if(mouse.x>f.Xfenetre-(taille_materiau*taille)*n && mouse.x<f.Xfenetre-(taille_materiau*taille)*(n-1) && mouse.y>0 && mouse.y<taille_materiau*taille)
             {
                 al_draw_scaled_rotated_bitmap(selec,0,0,f.Xfenetre-(taille_materiau*taille)*n,0,taille,taille,0,0);
+                c=i;
                 if(mouse.buttons&1)
                 {
                     j->id_selectionee=i;
@@ -54,6 +56,10 @@ void afficher_blocs_selec(ALLEGRO_BITMAP* selec,ALLEGRO_BITMAP* blocs[],joueur* 
                 }
             }
             n+=1;
+        }
+        if(c!=0)
+        {
+            al_draw_scaled_rotated_bitmap(explications[c],taille_indication_bloc_x,0,mouse.x,mouse.y,COEF_PIXEL_X,COEF_PIXEL_Y,0,0);
         }
     }
 }
@@ -121,7 +127,7 @@ void interface_competences(CLAVIER,int* interface_du_jeu,int* fond)
     }
     if(*interface_du_jeu==1)
     {
-        if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) && a==0)
+        if((al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) || al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_ESCAPE)) && a==0)
         {
             *fond=1;
             *interface_du_jeu=0;

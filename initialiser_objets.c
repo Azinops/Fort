@@ -40,7 +40,8 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
         }
         if(j==1)
         {
-            i[j].pv=100;
+            i[j].pv=200;
+            i[j].prix=20;
         }
         if(j==2)
         {
@@ -53,22 +54,27 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
         if(j==4)
         {
             i[j].pv=300;
+            i[j].prix=30;
         }
         if(j==5)
         {
             i[j].pv=PV_CANON;
+            i[j].prix=0;
         }
         if(j==6)
         {
             i[j].pv=1500;
+            i[j].prix=0;
         }
         if(j==7)
         {
             i[j].pv=200;
+            i[j].prix=40;
         }
         if(j==8)
         {
             i[j].pv=1500;
+            i[j].prix=150;
         }
         if(j==9)
         {
@@ -77,6 +83,7 @@ void initialiser_item(item i[],int nbre_blocs_actuel)
         if(j==10)
         {
             i[j].pv=15;
+            i[j].prix=10;
         }
     }
     i[1].nbre_item_placable=n-1;
@@ -134,7 +141,7 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].xp=0;
         j[i].coef_xp=1;
         j[i].coef_points=1;
-        j[i].tune=3000+MOD_CHEAT*100000;
+        j[i].tune=2000+MOD_CHEAT*100000;
         j[i].points_destruction_debut_tour=0+MOD_CHEAT*500;
         j[i].id_missile_selectione=0;
         j[i].nbre_tirs=0;

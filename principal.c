@@ -41,6 +41,7 @@ void jeu()
     INITIALISER_IMAGES_EN_MASSE(explosion_nucleaire,nbre_explosion_nucleaire_actuel,"./images/explosion_nucleaire/")
     INITIALISER_IMAGES_EN_MASSE(barre_xp,nbre_barre_xp_actuel,"./images/barre_xp/")
     INITIALISER_IMAGES_EN_MASSE(deflagration,nbre_deflagration_actuel,"./images/deflagration/")
+    INITIALISER_IMAGES_EN_MASSE(indication_blocs,nbre_blocs_actuels,"./images/explications_blocs/")
 
     fenetre carte[0];
     initialiser_map(&carte,Xfenetre,Yfenetre,cases_x,cases_y);
@@ -137,7 +138,7 @@ void jeu()
                 afficher_objet_fixe_en_masse(particule_explosion,NBRE_PARTICULES_EXPLOSION_MAX);
                 afficher_blocs(carte[0],blocs,bloc);
                 afficher_selection(selecCons,souris_case,carte[0]);
-                afficher_blocs_selec(selecCons,bloc,&player[joueur_qui_joue],taille_blocs_a_selectionner,carte[0],les_stats_blocs,mouse);
+                afficher_blocs_selec(selecCons,bloc,&player[joueur_qui_joue],taille_blocs_a_selectionner,carte[0],les_stats_blocs,mouse,indication_blocs);
                 afficher_objet_anime(&bouton_fin_tour);
                 afficher_barre_xp(barre_xp,player[joueur_qui_joue],bleuClair,arial36);
                 afficher_conseil(player[joueur_qui_joue],rouge,arial36);
@@ -155,7 +156,7 @@ void jeu()
                 gerer_bouton_inventaire(&bouton_inventaire,selecCons,mouse,inventaire,case_inventaire,
                                         nbre_cases_x_inventaire,nbre_cases_y_inventaire,taille_inventaire,Xfenetre/2,Yfenetre/2,
                                         icones_fusees,&player[joueur_qui_joue],selection_inventaire,les_stats_misssiles,tour,
-                                        arial22,noir);
+                                        arial22,noir,&key);
                 gere_xp(player);
                 afficher_pointeur_souris(player[joueur_qui_joue],mouse,cible);
                 enlever_tempo_blocs_bois(blocs,player[joueur_qui_joue],&key);

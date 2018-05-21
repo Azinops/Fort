@@ -2,31 +2,6 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="fonctions.c" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="647" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="tailles_images.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="70" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="fonctions.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3736" topLine="93" />
-		</Cursor>
-	</File>
-	<File name="dimensions.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1395" topLine="30" />
-		</Cursor>
-	</File>
-	<File name="variables.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1529" topLine="39" />
-		</Cursor>
-	</File>
 	<File name="main.c" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="95" topLine="0" />
@@ -34,7 +9,7 @@
 	</File>
 	<File name="initialiser_objets.c" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="8875" topLine="279" />
+			<Cursor1 position="1417" topLine="35" />
 		</Cursor>
 	</File>
 	<File name="map.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
@@ -42,34 +17,59 @@
 			<Cursor1 position="48" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="principal.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6960" topLine="77" />
-		</Cursor>
-	</File>
 	<File name="initialiser_objets.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1448" topLine="0" />
+			<Cursor1 position="298" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="variables.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="732" topLine="21" />
+		</Cursor>
+	</File>
+	<File name="objets.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12568" topLine="586" />
+		</Cursor>
+	</File>
+	<File name="affichage.c" open="1" top="1" tabpos="5" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2571" topLine="34" />
+		</Cursor>
+	</File>
+	<File name="fonctions.c" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="647" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="tailles_images.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="621" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="fonctions.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2667" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="principal.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="9825" topLine="118" />
+		</Cursor>
+	</File>
+	<File name="dimensions.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2214" topLine="66" />
 		</Cursor>
 	</File>
 	<File name="objets.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1653" topLine="53" />
-		</Cursor>
-	</File>
-	<File name="objets.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="14564" topLine="459" />
+			<Cursor1 position="5411" topLine="148" />
 		</Cursor>
 	</File>
 	<File name="affichage.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1880" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="affichage.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="17383" topLine="312" />
+			<Cursor1 position="504" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

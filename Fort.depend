@@ -143,10 +143,10 @@
 	<allegro5/allegro_image.h>
 	<math.h>
 
-1526676365 c:\users\meli\desktop\tout\programmation\calegro\fort\fonctions.h
+1526822678 c:\users\meli\desktop\tout\programmation\calegro\fort\fonctions.h
 	"dimensions.h"
 
-1526813229 source:c:\users\meli\desktop\tout\programmation\calegro\fort\initialiser_objets.c
+1526897515 source:c:\users\meli\desktop\tout\programmation\calegro\fort\initialiser_objets.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -165,7 +165,7 @@
 	"objets.h"
 	"dimensions.h"
 
-1526816756 c:\users\meli\desktop\tout\programmation\calegro\fort\objets.h
+1526895960 c:\users\meli\desktop\tout\programmation\calegro\fort\objets.h
 	"dimensions.h"
 	"fonctions.h"
 
@@ -175,7 +175,7 @@
 
 1519064906 c:\users\meli\desktop\tout\programmation\calegro\fort\principal.h
 
-1526816406 source:c:\users\meli\desktop\tout\programmation\calegro\fort\objets.c
+1526896213 source:c:\users\meli\desktop\tout\programmation\calegro\fort\objets.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -190,7 +190,7 @@
 	"objets.h"
 	"fonctions.h"
 
-1526816072 source:c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.c
+1526824968 source:c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.c
 	<time.h>
 	<stdlib.h>
 	<allegro5/allegro.h>
@@ -205,11 +205,11 @@
 	"objets.h"
 	"tailles_images.h"
 
-1526816024 c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.h
+1526824650 c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.h
 	"objets.h"
 	"dimensions.h"
 
-1526816873 source:c:\users\meli\desktop\tout\programmation\calegro\fort\principal.c
+1526824676 source:c:\users\meli\desktop\tout\programmation\calegro\fort\principal.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -573,7 +573,7 @@
 
 1522777704 c:\users\meli\desktop\tout\programmation\calegro\fort\map.h
 
-1526802584 c:\users\meli\desktop\tout\programmation\calegro\fort\tailles_images.h
+1526824720 c:\users\meli\desktop\tout\programmation\calegro\fort\tailles_images.h
 
 1522779770 k:\isn\c\fort\tailles_images.h
 
@@ -581,7 +581,7 @@
 
 1522937544 k:\isn\c\fort\dimensions.h
 
-1526815170 c:\users\meli\desktop\tout\programmation\calegro\fort\dimensions.h
+1526897572 c:\users\meli\desktop\tout\programmation\calegro\fort\dimensions.h
 
 1522937358 source:c:\users\meli\desktop\fort\affichage.c
 	<time.h>
