@@ -381,7 +381,7 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[],carre blocs[NBRE_CASES_Y]
                     {
                         ajouter_missile_dans_inventaire(j,6);
                     }
-                    if(i==2)
+                    if(i==7)
                     {
                         j->coef_gain_tune=2;
                     }
@@ -393,7 +393,7 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[],carre blocs[NBRE_CASES_Y]
                     {
                         ajouter_missile_dans_inventaire(j,4);
                     }
-                    if(i==7)
+                    if(i==2)
                     {
                         ajouter_missile_dans_inventaire(j,5);
                     }
