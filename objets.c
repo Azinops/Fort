@@ -556,52 +556,52 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
                 f[i].fusee.x+=f[i].vx/50*COEF_PIXEL_X;
                 f[i].fusee.y+=f[i].vy/50*COEF_PIXEL_Y;
                 f[i].fusee.angle=atan(f[i].vy/f[i].vx)+PI/2*(f[i].vx/abs(f[i].vx));
-                if(f[i].fusee.y<0)
-                {
-                    f[i].fusee.y=0;
-                }
+
         	}
-        	if(collision_objet_fixe_carre(f[i].fusee,c,joueur_qui_joue)==1 && f[i].explosion_en_cours==0 && f[i].fusee.y>0 && (j[joueur_qui_joue].precision_debloques[8]!=2 || (j[joueur_qui_joue].precision_debloques[8]==2 && (j[joueur_qui_joue].n_joueur*2-1)*f[i].fusee.x<(j[joueur_qui_joue].n_joueur*2-1)*XFENETRE/2)))
-        	{
-        	    if(f[i].id==5 && f[i].utile1==0)
+        	if(f[i].fusee.y>0)
+            {
+                if(collision_objet_fixe_carre(f[i].fusee,c,joueur_qui_joue)==1 && f[i].explosion_en_cours==0 && f[i].fusee.y>0 && (j[joueur_qui_joue].precision_debloques[8]!=2 || (j[joueur_qui_joue].precision_debloques[8]==2 && (j[joueur_qui_joue].n_joueur*2-1)*f[i].fusee.x<(j[joueur_qui_joue].n_joueur*2-1)*XFENETRE/2)))
                 {
-                    f[i].utile1=1;
-                }
-        	    if(f[i].id!=5 || (f[i].id==5 && f[i].utile1==2))
-                {
-                    f[i].explosion_en_cours=1;
-                    f[i].vx=0;
-                    f[i].vy=0;
-                    f[i].explosion.x=f[i].fusee.x;
-                    f[i].explosion.y=f[i].fusee.y;
-                    f[i].chrono=0;
-                    if(f[i].puissance_explosion<=PUISSANCE_TIR_n3*PUISSANCE_TIR_INITIALE)
+                    if(f[i].id==5 && f[i].utile1==0)
                     {
-                        pop_particules(p,f[i].explosion.x,f[i].explosion.y,NBRE_PARTICULE_POP*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE),VITESSE_PARTICULE*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE));
+                        f[i].utile1=1;
                     }
-                    for(x=1;x<=NBRE_CASES_X-1;x++)
+                    if(f[i].id!=5 || (f[i].id==5 && f[i].utile1==2))
                     {
-                        for(y=1;y<=NBRE_CASES_Y-1;y++)
+                        f[i].explosion_en_cours=1;
+                        f[i].vx=0;
+                        f[i].vy=0;
+                        f[i].explosion.x=f[i].fusee.x;
+                        f[i].explosion.y=f[i].fusee.y;
+                        f[i].chrono=0;
+                        if(f[i].puissance_explosion<=PUISSANCE_TIR_n3*PUISSANCE_TIR_INITIALE)
                         {
-                            if(distance(f[i].explosion.x,f[i].explosion.y,x*XFENETRE/NBRE_CASES_X,y*YFENETRE/NBRE_CASES_Y)<=f[i].portee_explosion)
+                            pop_particules(p,f[i].explosion.x,f[i].explosion.y,NBRE_PARTICULE_POP*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE),VITESSE_PARTICULE*sqrt(f[i].puissance_explosion)/sqrt(PUISSANCE_TIR_INITIALE));
+                        }
+                        for(x=1;x<=NBRE_CASES_X-1;x++)
+                        {
+                            for(y=1;y<=NBRE_CASES_Y-1;y++)
                             {
-                                if(j->explosion_debloques[3]==2)
+                                if(distance(f[i].explosion.x,f[i].explosion.y,x*XFENETRE/NBRE_CASES_X,y*YFENETRE/NBRE_CASES_Y)<=f[i].portee_explosion)
                                 {
-                                    c[y][x].pv/=1.5;
-                                }
-                                c[y][x].pv-=f[i].puissance_explosion/(pow(distance(f[i].fusee.x,f[i].fusee.y,(x+1/2)*XFENETRE/NBRE_CASES_X,(y+1/2)*YFENETRE/NBRE_CASES_Y)*COEF_REDUC_DEGAT_EXPLOSION,2));
-                                if(c[y][x].pv<=0 && c[y][x].id!=0)
-                                {
-                                    j[joueur_qui_joue].points_destruction+=c[y][x].pv_initiaux*j[joueur_qui_joue].coef_points/100*f[i].coef_xp;
-                                    j[joueur_qui_joue].xp+=c[y][x].pv_initiaux*j[joueur_qui_joue].coef_xp*f[i].coef_xp;
+                                    if(j->explosion_debloques[3]==2)
+                                    {
+                                        c[y][x].pv/=1.5;
+                                    }
+                                    c[y][x].pv-=f[i].puissance_explosion/(pow(distance(f[i].fusee.x,f[i].fusee.y,(x+1/2)*XFENETRE/NBRE_CASES_X,(y+1/2)*YFENETRE/NBRE_CASES_Y)*COEF_REDUC_DEGAT_EXPLOSION,2));
+                                    if(c[y][x].pv<=0 && c[y][x].id!=0)
+                                    {
+                                        j[joueur_qui_joue].points_destruction+=c[y][x].pv_initiaux*j[joueur_qui_joue].coef_points/100*f[i].coef_xp;
+                                        j[joueur_qui_joue].xp+=c[y][x].pv_initiaux*j[joueur_qui_joue].coef_xp*f[i].coef_xp;
+                                    }
                                 }
                             }
-                        }
 
+                        }
+                        animer_objet(&f[i].explosion,1,f[i].explosion.nbre_images_max,f[i].explosion.nbre_images_max);
                     }
-                    animer_objet(&f[i].explosion,1,f[i].explosion.nbre_images_max,f[i].explosion.nbre_images_max);
                 }
-        	}
+            }
         	if(f[i].fusee.y>YFENETRE || f[i].fusee.x>XFENETRE || f[i].fusee.x<0)
         	{
             	f[i].fusee.existence=0;
@@ -729,8 +729,9 @@ void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double 
     	n=retablisseur(n+1,NBRE_PARTICULES_EXPLOSION_MAX,0);
 	}
 }
-void tirs_de_cannon(CLAVIER,joueur* j,SOURIS)
+void tirs_de_cannon(CLAVIER,joueur* j,SOURIS,double attraction)
 {
+    int x;
 	static int appuye=0;
 	if(j->canon_place==1)
     {
@@ -749,6 +750,16 @@ void tirs_de_cannon(CLAVIER,joueur* j,SOURIS)
             if(mouse.x<(j->bombardier.xi+0.5)*TAILLE_CASE_X)
             {
                 j->angle_tir+=PI;
+            }
+        }
+        if(j->precision_debloques[5]==2 && j->id_missile_selectione!=4 && j->id_missile_selectione!=7 && j->id_missile_selectione!=8 && j->id_missile_selectione!=9 && j->id_missile_selectione!=10)
+        {
+            for(x=(j->bombardier.xi+0.5)*TAILLE_CASE_X;x<=XFENETRE+(j->bombardier.xi+0.5)*TAILLE_CASE_X;x+=10*COEF_PIXEL_X)
+            {
+                double VX0=cos(j->angle_tir)*j->puissance_tir_cannon;
+                double VY0=sin(j->angle_tir)*j->puissance_tir_cannon;
+                double xmx0=x-((j->bombardier.xi+0.5)*TAILLE_CASE_X);
+                al_draw_circle(x,(j->bombardier.yi+0.5)*TAILLE_CASE_Y+VY0*COEF_PIXEL_Y*xmx0/(VX0*COEF_PIXEL_X)+round((COEF_PIXEL_X)*(attraction*50*pow(xmx0,2))/(2*pow(VX0*COEF_PIXEL_X,2))*10000)/10000,1,BLANC,2);
             }
         }
         if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0 && j->id_missile_selectione!=0 && (j->nbre_tirs<j->nbre_tirs_max || MOD_CHEAT==1 || (j->precision_debloques[7]==2 && j->nbre_tirs<NBRE_TIRS_COMPETENCE_7_PRECISION)))
@@ -819,6 +830,8 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
 	int c=0;
 	static int clic;
 	int id;
+	int id_missile_selectione_depart=j->id_missile_selectione;
+	static int d=0;
 	selection_objet_jaune(selection_jaune,*o,mouse);
 	if(n_tour!=0-MOD_CHEAT && (j->nbre_tirs==0 || MOD_CHEAT==1))
 	{
@@ -846,8 +859,7 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
     	if(b==1)
     	{
         	id=j->id_missile_selectione;
-        	j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id,
-                                                                                  police,couleur,missiles);
+        	j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id,police,couleur,missiles);
         	if(round(j->points_destruction_debut_tour)>=missiles[id].prix)
             {
                 j->points_destruction=j->points_destruction_debut_tour-missiles[id].prix;
@@ -861,6 +873,15 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
                 j->id_missile_selectione=1;
             }
     	}
+    	if(d==1)
+        {
+            d=0;
+            b=0;
+        }
+        if(j->id_missile_selectione!=id_missile_selectione_depart)
+        {
+            d=1;
+        }
 	}
 }
 int passer_souris_sur_carre(SOURIS,double x1 ,double y1, double x2,double y2)
@@ -951,13 +972,13 @@ void gerer_victoire(joueur j[],carre c[NBRE_CASES_Y][NBRE_CASES_X],int joueur_qu
             j[0].canon_place=2;
             j[0].compteur_tour_replacer_canon=0;
         }
-        if(c[j[0].coeur_yi][j[0].coeur_xi].id==0)
+        if(c[j[0].coeur_yi][j[0].coeur_xi].id!=6)
         {
             printf("    VICTOIRE DU JOUEUR   2");
             *fond=4;
             al_draw_textf(police,couleur,XFENETRE/8,YFENETRE/4,0,"VICTOIRE DU JOUEUR DE DROITE");
         }
-        if(c[j[1].coeur_yi][j[1].coeur_xi].id==0)
+        if(c[j[1].coeur_yi][j[1].coeur_xi].id!=6)
         {
             printf("    VICTOIRE DU JOUEUR   1");
             al_draw_textf(police,couleur,XFENETRE/8,YFENETRE/4,0,"VICTOIRE DU JOUEUR DE GAUCHE");

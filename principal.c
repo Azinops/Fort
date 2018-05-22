@@ -128,7 +128,6 @@ void jeu()
         if(event.type==ALLEGRO_EVENT_TIMER)
         {
             afficher_fond(fond[fond_actuel],carte[0],joueur_qui_joue);
-            interface_competences(&key,&interface_jeu,&fond_actuel);
             if(interface_jeu==0)
             {
                 gerer_victoire(player,blocs,joueur_qui_joue,tour,&fond_actuel,rouge,arial66);
@@ -146,7 +145,7 @@ void jeu()
                 placer_item(mouse,souris_case,blocs,&player[joueur_qui_joue],les_stats_blocs,tour);
                 enlever_carre(blocs,souris_case,mouse,les_stats_blocs,&player[joueur_qui_joue],tour);
                 gerer_blocs(blocs,vitesse_inversee_gravite,les_stats_blocs,player);
-                tirs_de_cannon(&key,&player[joueur_qui_joue],mouse);
+                tirs_de_cannon(&key,&player[joueur_qui_joue],mouse,attraction);
                 deplacer_objet_constament(fumee,NBRE_FUMEE,vitesse_deplacement_fumee_x,vitesse_deplacement_fumee_y);
                 afficher_objet_anime_en_masse(&fumee,NBRE_FUMEE);
                 gerer_fusees(player[joueur_qui_joue].missile_selectione,attraction,blocs,particule_explosion,joueur_qui_joue,player,&key);
@@ -181,6 +180,7 @@ void jeu()
                 selection_objets_jaune(selecCons,c_precision,NBRE_COMPETENCES_PRECISION,mouse);
                 afficher_explications_competences(c_explo,c_science,c_precision,indictaions_competences,mouse);
             }
+            interface_competences(&key,&interface_jeu,&fond_actuel,mouse,selecCons);
         }
         al_flip_display();
     }

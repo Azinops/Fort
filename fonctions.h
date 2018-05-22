@@ -5,6 +5,7 @@
 #define NOIR al_map_rgb(0,0,0)
 #define CYAN al_map_rgb(0,255,255)
 #define ROUGE al_map_rgb(255,0,0)
+#define BLANC al_map_rgb(255,255,255)
 #define FINPARENTHESE }
 #include "dimensions.h"
 

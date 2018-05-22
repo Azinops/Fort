@@ -25,7 +25,7 @@ void afficher_blocs(fenetre f,carre c[NBRE_CASES_Y][NBRE_CASES_X],ALLEGRO_BITMAP
         {
             if(c[j][i].id!=0)
             {
-                al_draw_scaled_rotated_bitmap(bitmap[c[j][i].id],0,0,c[j][i].x,c[j][i].y,(f.Xfenetre/f.cases_x)/taille_materiau,(f.Yfenetre/f.cases_y)/taille_materiau,0,0);
+                al_draw_scaled_rotated_bitmap(bitmap[c[j][i].id],0,0,c[j][i].x,c[j][i].y,(f.Xfenetre/f.cases_x)/taille_materiau,(f.Yfenetre/f.cases_y)/taille_materiau,0,c[j][i].au_joueur);
             }
         }
     }
@@ -59,7 +59,7 @@ void afficher_blocs_selec(ALLEGRO_BITMAP* selec,ALLEGRO_BITMAP* blocs[],joueur* 
         }
         if(c!=0)
         {
-            al_draw_scaled_rotated_bitmap(explications[c],taille_indication_bloc_x,0,mouse.x,mouse.y,COEF_PIXEL_X,COEF_PIXEL_Y,0,0);
+            al_draw_scaled_rotated_bitmap(explications[c],taille_indication_bloc_x,0,mouse.x,mouse.y,1,1,0,0);
         }
     }
 }
@@ -109,7 +109,7 @@ void afficher_objet_anime_en_masse(objet_anime o[],int nbre_objets)
         }
     }
 }
-void interface_competences(CLAVIER,int* interface_du_jeu,int* fond)
+void interface_competences(CLAVIER,int* interface_du_jeu,int* fond,SOURIS,ALLEGRO_BITMAP* selection_jaune)
 {
     static int a=0;
     if(!al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) && a==1)
@@ -118,7 +118,11 @@ void interface_competences(CLAVIER,int* interface_du_jeu,int* fond)
         }
     if(*interface_du_jeu==0)
     {
-        if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) && a==0)
+        if(passer_souris_sur_carre(mouse,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,XFENETRE/5+taille_barre_xp_x,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y+taille_barre_xp_y))
+        {
+            al_draw_scaled_rotated_bitmap(selection_jaune,0,0,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,taille_barre_xp_x/taille_selec,taille_barre_xp_y/taille_selec,0,0);
+        }
+        if((al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) || (passer_souris_sur_carre(mouse,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,XFENETRE/5+taille_barre_xp_x,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y+taille_barre_xp_y) && mouse.buttons&1)) && a==0)
         {
             *fond=2;
             *interface_du_jeu=1;
@@ -350,6 +354,7 @@ void afficher_pts_competences(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* polic
 void afficher_pointeur_souris(joueur j,SOURIS,ALLEGRO_BITMAP* pointeur)
 {
     double jsp_pk_ca_bug=round(YFENETRE*100/950)/100;
+    double jsp_pk_ca_bugx=round(XFENETRE*100/1662.5)/100;
     if(j.id_missile_selectione==9 || j.id_missile_selectione==10)
     {
         al_draw_scaled_rotated_bitmap(pointeur,taille_cible_x_y/2,taille_cible_x_y/2,mouse.x,mouse.y,COEF_PIXEL_X,jsp_pk_ca_bug,0,0);
@@ -365,25 +370,26 @@ void afficher_conseil(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police)
 void afficher_explications_competences(objet_fixe c1[],objet_fixe c2[],objet_fixe c3[],ALLEGRO_BITMAP* explications[],SOURIS)
 {
     int i;
+    double jsp_pk_ca_bug=1;
     for(i=1;i<=NBRE_COMPETENCES_EXPLO;i++)
     {
         if(toucher_objet_fixe(mouse,c1[i]))
         {
-            al_draw_scaled_rotated_bitmap(explications[i],0,0,mouse.x,mouse.y,COEF_PIXEL_X*taille_indication_competences,COEF_PIXEL_Y*taille_indication_competences,0,0);
+            al_draw_scaled_rotated_bitmap(explications[i],0,0,mouse.x,mouse.y,taille_indication_competences,jsp_pk_ca_bug*taille_indication_competences,0,0);
         }
     }
     for(i=1;i<=NBRE_COMPETENCES_SCIENCE;i++)
     {
         if(toucher_objet_fixe(mouse,c2[i]))
         {
-            al_draw_scaled_rotated_bitmap(explications[8+i],0,0,mouse.x,mouse.y,COEF_PIXEL_X*taille_indication_competences,COEF_PIXEL_Y*taille_indication_competences,0,0);
+            al_draw_scaled_rotated_bitmap(explications[8+i],0,0,mouse.x,mouse.y,taille_indication_competences,jsp_pk_ca_bug*taille_indication_competences,0,0);
         }
     }
     for(i=1;i<=NBRE_COMPETENCES_PRECISION;i++)
     {
         if(toucher_objet_fixe(mouse,c3[i]))
         {
-            al_draw_scaled_rotated_bitmap(explications[16+i],taille_indication_competences_x,0,mouse.x,mouse.y,COEF_PIXEL_X*taille_indication_competences,COEF_PIXEL_Y*taille_indication_competences,0,0);
+            al_draw_scaled_rotated_bitmap(explications[16+i],taille_indication_competences_x,0,mouse.x,mouse.y,taille_indication_competences,jsp_pk_ca_bug*taille_indication_competences,0,0);
         }
     }
 }
