@@ -754,12 +754,25 @@ void tirs_de_cannon(CLAVIER,joueur* j,SOURIS,double attraction)
         }
         if(j->precision_debloques[5]==2 && j->id_missile_selectione!=4 && j->id_missile_selectione!=7 && j->id_missile_selectione!=8 && j->id_missile_selectione!=9 && j->id_missile_selectione!=10)
         {
-            for(x=(j->bombardier.xi+0.5)*TAILLE_CASE_X;x<=XFENETRE+(j->bombardier.xi+0.5)*TAILLE_CASE_X;x+=10*COEF_PIXEL_X)
+            if(j->n_joueur==0)
             {
-                double VX0=cos(j->angle_tir)*j->puissance_tir_cannon;
-                double VY0=sin(j->angle_tir)*j->puissance_tir_cannon;
-                double xmx0=x-((j->bombardier.xi+0.5)*TAILLE_CASE_X);
-                al_draw_circle(x,(j->bombardier.yi+0.5)*TAILLE_CASE_Y+VY0*COEF_PIXEL_Y*xmx0/(VX0*COEF_PIXEL_X)+round((COEF_PIXEL_X)*(attraction*50*pow(xmx0,2))/(2*pow(VX0*COEF_PIXEL_X,2))*10000)/10000,1,BLANC,2);
+                for(x=(j->bombardier.xi+0.5)*TAILLE_CASE_X;x<=XFENETRE+(j->bombardier.xi+0.5)*TAILLE_CASE_X;x+=10*COEF_PIXEL_X)
+                {
+                    double VX0=cos(j->angle_tir)*j->puissance_tir_cannon;
+                    double VY0=sin(j->angle_tir)*j->puissance_tir_cannon;
+                    double xmx0=x-((j->bombardier.xi+0.5)*TAILLE_CASE_X);
+                    al_draw_circle(x,(j->bombardier.yi+0.5)*TAILLE_CASE_Y+VY0*COEF_PIXEL_Y*xmx0/(VX0*COEF_PIXEL_X)+round((COEF_PIXEL_X)*(attraction*50*pow(xmx0,2))/(2*pow(VX0*COEF_PIXEL_X,2))*10000)/10000,1,BLANC,2);
+                }
+            }
+            else
+            {
+                for(x=(j->bombardier.xi+0.5)*TAILLE_CASE_X;x>=0;x-=10*COEF_PIXEL_X)
+                {
+                    double VX0=cos(j->angle_tir)*j->puissance_tir_cannon;
+                    double VY0=sin(j->angle_tir)*j->puissance_tir_cannon;
+                    double xmx0=x-((j->bombardier.xi+0.5)*TAILLE_CASE_X);
+                    al_draw_circle(x,(j->bombardier.yi+0.5)*TAILLE_CASE_Y+VY0*COEF_PIXEL_Y*xmx0/(VX0*COEF_PIXEL_X)+round((COEF_PIXEL_X)*(attraction*50*pow(xmx0,2))/(2*pow(VX0*COEF_PIXEL_X,2))*10000)/10000,1,BLANC,2);
+                }
             }
         }
         if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0 && j->id_missile_selectione!=0 && (j->nbre_tirs<j->nbre_tirs_max || MOD_CHEAT==1 || (j->precision_debloques[7]==2 && j->nbre_tirs<NBRE_TIRS_COMPETENCE_7_PRECISION)))

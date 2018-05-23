@@ -111,6 +111,7 @@ void afficher_objet_anime_en_masse(objet_anime o[],int nbre_objets)
 }
 void interface_competences(CLAVIER,int* interface_du_jeu,int* fond,SOURIS,ALLEGRO_BITMAP* selection_jaune)
 {
+    double jsp=round(100*COEF_PIXEL_Y)/100;
     static int a=0;
     if(!al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) && a==1)
         {
@@ -120,7 +121,7 @@ void interface_competences(CLAVIER,int* interface_du_jeu,int* fond,SOURIS,ALLEGR
     {
         if(passer_souris_sur_carre(mouse,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,XFENETRE/5+taille_barre_xp_x,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y+taille_barre_xp_y))
         {
-            al_draw_scaled_rotated_bitmap(selection_jaune,0,0,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,taille_barre_xp_x/taille_selec,taille_barre_xp_y/taille_selec,0,0);
+            al_draw_scaled_rotated_bitmap(selection_jaune,0,0,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,COEF_PIXEL_X*taille_barre_xp_x/taille_selec,jsp*taille_barre_xp_y/taille_selec,0,0);
         }
         if((al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) || (passer_souris_sur_carre(mouse,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,XFENETRE/5+taille_barre_xp_x,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y+taille_barre_xp_y) && mouse.buttons&1)) && a==0)
         {

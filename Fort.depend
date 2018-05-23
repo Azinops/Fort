@@ -143,7 +143,7 @@
 	<allegro5/allegro_image.h>
 	<math.h>
 
-1527011410 c:\users\meli\desktop\tout\programmation\calegro\fort\fonctions.h
+1527011412 c:\users\meli\desktop\tout\programmation\calegro\fort\fonctions.h
 	"dimensions.h"
 
 1526932898 source:c:\users\meli\desktop\tout\programmation\calegro\fort\initialiser_objets.c
@@ -165,7 +165,7 @@
 	"objets.h"
 	"dimensions.h"
 
-1527018569 c:\users\meli\desktop\tout\programmation\calegro\fort\objets.h
+1527018570 c:\users\meli\desktop\tout\programmation\calegro\fort\objets.h
 	"dimensions.h"
 	"fonctions.h"
 
@@ -175,7 +175,7 @@
 
 1519064906 c:\users\meli\desktop\tout\programmation\calegro\fort\principal.h
 
-1527020831 source:c:\users\meli\desktop\tout\programmation\calegro\fort\objets.c
+1527064806 source:c:\users\meli\desktop\tout\programmation\calegro\fort\objets.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -190,7 +190,7 @@
 	"objets.h"
 	"fonctions.h"
 
-1527011936 source:c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.c
+1527022262 source:c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.c
 	<time.h>
 	<stdlib.h>
 	<allegro5/allegro.h>
@@ -205,11 +205,11 @@
 	"objets.h"
 	"tailles_images.h"
 
-1527021368 c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.h
+1527021370 c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.h
 	"objets.h"
 	"dimensions.h"
 
-1527021378 source:c:\users\meli\desktop\tout\programmation\calegro\fort\principal.c
+1527021432 source:c:\users\meli\desktop\tout\programmation\calegro\fort\principal.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -228,7 +228,7 @@
 	"initialiser_objets.h"
 	<windows.h>
 
-1527018675 c:\users\meli\desktop\tout\programmation\calegro\fort\variables.h
+1527018676 c:\users\meli\desktop\tout\programmation\calegro\fort\variables.h
 	"dimensions.h"
 
 1521049449 c:\users\meli\desktop\tout\programmation\calegro\fort\const.h
@@ -581,7 +581,7 @@
 
 1522937544 k:\isn\c\fort\dimensions.h
 
-1527020006 c:\users\meli\desktop\tout\programmation\calegro\fort\dimensions.h
+1527064965 c:\users\meli\desktop\tout\programmation\calegro\fort\dimensions.h
 
 1522937358 source:c:\users\meli\desktop\fort\affichage.c
 	<time.h>
@@ -794,7 +794,7 @@
 1526937646 \\srv-2012\baucher$\isn\c\fort\variables.h
 	"dimensions.h"
 
-1526494228 source:m:\scolaire\edgar\programmation c\fort\affichage.c
+1527022262 source:m:\scolaire\edgar\programmation c\fort\affichage.c
 	<time.h>
 	<stdlib.h>
 	<allegro5/allegro.h>
@@ -809,19 +809,20 @@
 	"objets.h"
 	"tailles_images.h"
 
-1526493632 m:\scolaire\edgar\programmation c\fort\fonctions.h
+1527011412 m:\scolaire\edgar\programmation c\fort\fonctions.h
+	"dimensions.h"
 
-1526494044 m:\scolaire\edgar\programmation c\fort\affichage.h
+1527021370 m:\scolaire\edgar\programmation c\fort\affichage.h
 	"objets.h"
 	"dimensions.h"
 
-1526554916 m:\scolaire\edgar\programmation c\fort\objets.h
+1527018570 m:\scolaire\edgar\programmation c\fort\objets.h
 	"dimensions.h"
 	"fonctions.h"
 
-1526557562 m:\scolaire\edgar\programmation c\fort\dimensions.h
+1527064832 m:\scolaire\edgar\programmation c\fort\dimensions.h
 
-1526121014 m:\scolaire\edgar\programmation c\fort\tailles_images.h
+1526900276 m:\scolaire\edgar\programmation c\fort\tailles_images.h
 
 1520008866 source:m:\scolaire\edgar\programmation c\fort\fonctions.c
 	"fonctions.h"
@@ -836,7 +837,7 @@
 	<allegro5/allegro_image.h>
 	<math.h>
 
-1526555766 source:m:\scolaire\edgar\programmation c\fort\initialiser_objets.c
+1526932898 source:m:\scolaire\edgar\programmation c\fort\initialiser_objets.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -851,7 +852,7 @@
 	"fonctions.h"
 	"map.h"
 
-1526554570 m:\scolaire\edgar\programmation c\fort\initialiser_objets.h
+1526752668 m:\scolaire\edgar\programmation c\fort\initialiser_objets.h
 	"objets.h"
 	"dimensions.h"
 
@@ -863,7 +864,7 @@
 
 1519064906 m:\scolaire\edgar\programmation c\fort\principal.h
 
-1526556380 source:m:\scolaire\edgar\programmation c\fort\objets.c
+1527064806 source:m:\scolaire\edgar\programmation c\fort\objets.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -878,7 +879,7 @@
 	"objets.h"
 	"fonctions.h"
 
-1526554538 source:m:\scolaire\edgar\programmation c\fort\principal.c
+1527021432 source:m:\scolaire\edgar\programmation c\fort\principal.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -897,6 +898,6 @@
 	"initialiser_objets.h"
 	<windows.h>
 
-1526553132 m:\scolaire\edgar\programmation c\fort\variables.h
+1527018676 m:\scolaire\edgar\programmation c\fort\variables.h
 	"dimensions.h"
 
