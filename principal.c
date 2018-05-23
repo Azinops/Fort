@@ -44,7 +44,7 @@ void jeu()
     INITIALISER_IMAGES_EN_MASSE(barre_xp,nbre_barre_xp_actuel,"./images/barre_xp/")
     INITIALISER_IMAGES_EN_MASSE(deflagration,nbre_deflagration_actuel,"./images/deflagration/")
     INITIALISER_IMAGES_EN_MASSE(indication_blocs,nbre_blocs_actuels,"./images/explications_blocs/")
-    INITIALISER_IMAGES_EN_MASSE(explications_fusees,nbre_fusees_actuel,"./images/explications_fusees/")
+
     fenetre carte[0];
     initialiser_map(&carte,Xfenetre,Yfenetre,cases_x,cases_y);
 
@@ -156,7 +156,7 @@ void jeu()
                 gerer_bouton_inventaire(&bouton_inventaire,selecCons,mouse,inventaire,case_inventaire,
                                         nbre_cases_x_inventaire,nbre_cases_y_inventaire,taille_inventaire,Xfenetre/2,Yfenetre/2,
                                         icones_fusees,&player[joueur_qui_joue],selection_inventaire,les_stats_misssiles,tour,
-                                        arial22,noir,&key,explications_fusees);
+                                        arial22,noir,&key);
                 gere_xp(player);
                 afficher_pointeur_souris(player[joueur_qui_joue],mouse,cible);
             }
@@ -180,7 +180,7 @@ void jeu()
                 selection_objets_jaune(selecCons,c_precision,NBRE_COMPETENCES_PRECISION,mouse);
                 afficher_explications_competences(c_explo,c_science,c_precision,indictaions_competences,mouse);
             }
-            interface_competences(&key,&interface_jeu,&fond_actuel,mouse,selecCons,player[joueur_qui_joue],arial36);
+            interface_competences(&key,&interface_jeu,&fond_actuel,mouse,selecCons);
         }
         al_flip_display();
     }

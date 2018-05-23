@@ -586,7 +586,7 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
                                 {
                                     if(j->explosion_debloques[3]==2)
                                     {
-                                        c[y][x].pv/=1.3;
+                                        c[y][x].pv/=1.5;
                                     }
                                     c[y][x].pv-=f[i].puissance_explosion/(pow(distance(f[i].fusee.x,f[i].fusee.y,(x+1/2)*XFENETRE/NBRE_CASES_X,(y+1/2)*YFENETRE/NBRE_CASES_Y)*COEF_REDUC_DEGAT_EXPLOSION,2));
                                     if(c[y][x].pv<=0 && c[y][x].id!=0)
@@ -837,7 +837,7 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
                          	ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,
                          	int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],
                         	joueur* j,ALLEGRO_BITMAP* selection,item_missile missiles[],int n_tour,
-                        	ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,CLAVIER,ALLEGRO_BITMAP* explications[])
+                        	ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,CLAVIER)
 {
 	static int b=0;
 	int c=0;
@@ -872,7 +872,7 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
     	if(b==1)
     	{
         	id=j->id_missile_selectione;
-        	j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id,police,couleur,missiles,explications);
+        	j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id,police,couleur,missiles);
         	if(round(j->points_destruction_debut_tour)>=missiles[id].prix)
             {
                 j->points_destruction=j->points_destruction_debut_tour-missiles[id].prix;

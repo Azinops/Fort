@@ -109,7 +109,7 @@ void afficher_objet_anime_en_masse(objet_anime o[],int nbre_objets)
         }
     }
 }
-void interface_competences(CLAVIER,int* interface_du_jeu,int* fond,SOURIS,ALLEGRO_BITMAP* selection_jaune,joueur j,ALLEGRO_FONT* police)
+void interface_competences(CLAVIER,int* interface_du_jeu,int* fond,SOURIS,ALLEGRO_BITMAP* selection_jaune)
 {
     double jsp=round(100*COEF_PIXEL_Y)/100;
     static int a=0;
@@ -119,12 +119,11 @@ void interface_competences(CLAVIER,int* interface_du_jeu,int* fond,SOURIS,ALLEGR
         }
     if(*interface_du_jeu==0)
     {
-        if(passer_souris_sur_carre(mouse,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,XFENETRE/5+taille_barre_xp_x*COEF_PIXEL_X,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y+taille_barre_xp_y*COEF_PIXEL_Y))
+        if(passer_souris_sur_carre(mouse,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,XFENETRE/5+taille_barre_xp_x,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y+taille_barre_xp_y))
         {
             al_draw_scaled_rotated_bitmap(selection_jaune,0,0,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,COEF_PIXEL_X*taille_barre_xp_x/taille_selec,jsp*taille_barre_xp_y/taille_selec,0,0);
-            al_draw_textf(police,BLEU,XFENETRE/5+taille_barre_xp_x*COEF_PIXEL_X/2,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y+taille_barre_xp_y*COEF_PIXEL_Y,ALLEGRO_ALIGN_CENTRE,"XP: %.0f/%.0f",j.xp,j.xp_pour_lvlup);
         }
-        if((al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) || (passer_souris_sur_carre(mouse,XFENETRE/5,TAILLE_ECRITUR_SCORE,XFENETRE/5+taille_barre_xp_x*COEF_PIXEL_X,TAILLE_ECRITUR_SCORE+taille_barre_xp_y*COEF_PIXEL_Y) && mouse.buttons&1)) && a==0)
+        if((al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) || (passer_souris_sur_carre(mouse,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,XFENETRE/5+taille_barre_xp_x,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y+taille_barre_xp_y) && mouse.buttons&1)) && a==0)
         {
             *fond=2;
             *interface_du_jeu=1;
@@ -133,7 +132,7 @@ void interface_competences(CLAVIER,int* interface_du_jeu,int* fond,SOURIS,ALLEGR
     }
     if(*interface_du_jeu==1)
     {
-        if((al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) || al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_ESCAPE) || mouse.buttons&2) && a==0)
+        if((al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) || al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_ESCAPE)) && a==0)
         {
             *fond=1;
             *interface_du_jeu=0;
@@ -295,12 +294,11 @@ void afficher_fusees(fusee_missile f[])
         }
     }
 }
-int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur jo, ALLEGRO_BITMAP* selection,SOURIS,int item_selectione_initial,ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,item_missile missiles[],ALLEGRO_BITMAP* explications[])
+int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur jo, ALLEGRO_BITMAP* selection,SOURIS,int item_selectione_initial,ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,item_missile missiles[])
 {
     int i;
     int j;
     int a=0;
-    int id_touche;
     a=item_selectione_initial;
     al_draw_scaled_rotated_bitmap(inventaire,taille_inventaire_x/2,taille_inventaire_y/2,x,y,taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y),taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y),0,0);
     for(i=1;i<=nbre_cases_x;i++)
@@ -323,17 +321,12 @@ int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,A
                                        ,taille_case_y*0.8*taille/(nbre_cases_x+nbre_cases_y)+y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y))))
             {
                 al_draw_scaled_rotated_bitmap(selection,taille_case_x/2,taille_case_y/2,x-taille_inventaire_x/2*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)+i*taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y)-taille_inventaire_x/(nbre_cases_x)*taille*nbre_cases_x/(2*(nbre_cases_x+nbre_cases_y)),y-taille_inventaire_y/2*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)+j*taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y)-taille_inventaire_y/(nbre_cases_y)*taille*nbre_cases_y/(2*(nbre_cases_x+nbre_cases_y)),0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_x/taille_case_x,0.8*taille/(nbre_cases_x+nbre_cases_y)*taille_inventaire_y/taille_case_y,0,0);
-                id_touche=jo.inventaire[i+(j-1)*nbre_cases_x];
                 if(mouse.buttons&1 && jo.inventaire[i+(j-1)*nbre_cases_x]!=0)
                 {
                     a=jo.inventaire[i+(j-1)*nbre_cases_x];
                 }
             }
         }
-    }
-    if(id_touche!=0)
-    {
-        al_draw_scaled_rotated_bitmap(explications[id_touche],0,0,mouse.x,mouse.y,1,1,0,0);
     }
     return a;
 }

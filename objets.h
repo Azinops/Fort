@@ -169,7 +169,7 @@ void deplacer_objet_constament(objet_anime o[],int nbre_objets,double vitesse_x,
 void deplacer_objet_fixe_constament(objet_fixe o[],int nbre_objets);
 void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double vitesse);
 void tirs_de_cannon(CLAVIER,joueur* j,SOURIS,double attraction);
-void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur* j,ALLEGRO_BITMAP* selection,item_missile missiles[],int n_tour,ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,CLAVIER,ALLEGRO_BITMAP* explications[]);
+void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURIS,ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur* j,ALLEGRO_BITMAP* selection,item_missile missiles[],int n_tour,ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,CLAVIER);
 int passer_souris_sur_carre(SOURIS,double x1 ,double y1, double x2,double y2);
 void gere_xp(joueur j[]);
 void ajouter_missile_dans_inventaire(joueur* j,int id_item);
