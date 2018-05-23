@@ -2,6 +2,7 @@
 #define FONCTIONS_H_INCLUDED
 #define VIOLET al_map_rgb(130,80,200)
 #define VERTC al_map_rgb(165,230,20)
+#define VERT al_map_rgb(100,255,100)
 #define NOIR al_map_rgb(0,0,0)
 #define CYAN al_map_rgb(0,255,255)
 #define ROUGE al_map_rgb(255,0,0)
