@@ -23,4 +23,5 @@ void afficher_barre_xp(ALLEGRO_BITMAP* barre[],joueur j,ALLEGRO_COLOR couleur,AL
 void afficher_pts_competences(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
 void afficher_conseil(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
 void afficher_explications_competences(objet_fixe c1[],objet_fixe c2[],objet_fixe c3[],ALLEGRO_BITMAP* explications[],SOURIS);
+void afficher_pv_coeur_et_canon(carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,SOURIS,point_case souris,ALLEGRO_FONT* police,int n_tour);
 #endif // AFFICHAGE_H_INCLUDED

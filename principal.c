@@ -159,6 +159,7 @@ void jeu()
                                         arial22,noir,&key,explications_fusees);
                 gere_xp(player);
                 afficher_pointeur_souris(player[joueur_qui_joue],mouse,cible);
+                afficher_pv_coeur_et_canon(blocs,player[joueur_qui_joue],mouse,souris_case,arial36,tour);
             }
             if(interface_jeu==1)
             {

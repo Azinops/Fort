@@ -401,3 +401,10 @@ void afficher_explications_competences(objet_fixe c1[],objet_fixe c2[],objet_fix
         }
     }
 }
+void afficher_pv_coeur_et_canon(carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,SOURIS,point_case souris,ALLEGRO_FONT* police,int n_tour)
+{
+    if((c[souris.y][souris.x].id==5  || c[souris.y][souris.x].id==6) && n_tour!=0)
+    {
+        al_draw_textf(police,BLEU,mouse.x,mouse.y-TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,ALLEGRO_ALIGN_CENTER,"PV:%.0f",c[souris.y][souris.x].pv);
+    }
+}
