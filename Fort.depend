@@ -147,15 +147,15 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of d5278ba... Revert "Fort 1.3.3"
 1522937544 D
 
 1527097527 c:\users\meli\desktop\tout\programmation\calegro\fort\fonctions.h
 	"dimensions.h"
 
 1527064965 ent of bcc2a44... Fort 1.3.3
-=======
-1527011412 c:\users\meli\desktop\tout\programmation\calegro\fort\fonctions.h
->>>>>>> parent of bcc2a44... Fort 1.3.3
 	"dimensions.h"
 =======
 1527011412 c:\users\meli\desktop\tout\programmation\calegro\fort\fonctions.h
@@ -192,6 +192,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 1527097527 c:\users\meli\desktop\tout\programmation\calegro\fort\objets.h
 =======
 1527018570 c:\users\meli\desktop\tout\programmation\calegro\fort\objets.h
@@ -205,6 +206,9 @@
 =======
 1527018570 c:\users\meli\desktop\tout\programmation\calegro\fort\objets.h
 >>>>>>> parent of bcc2a44... Fort 1.3.3
+=======
+1527097527 c:\users\meli\desktop\tout\programmation\calegro\fort\objets.h
+>>>>>>> parent of d5278ba... Revert "Fort 1.3.3"
 	"dimensions.h"
 	"fonctions.h"
 
@@ -214,6 +218,7 @@
 
 1519064906 c:\users\meli\desktop\tout\programmation\calegro\fort\principal.h
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -231,6 +236,9 @@
 =======
 1527064806 source:c:\users\meli\desktop\tout\programmation\calegro\fort\objets.c
 >>>>>>> parent of bcc2a44... Fort 1.3.3
+=======
+1527097527 source:c:\users\meli\desktop\tout\programmation\calegro\fort\objets.c
+>>>>>>> parent of d5278ba... Revert "Fort 1.3.3"
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -249,6 +257,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 1527097527 source:c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.c
 =======
 1527022262 source:c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.c
@@ -262,6 +271,9 @@
 =======
 1527022262 source:c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.c
 >>>>>>> parent of bcc2a44... Fort 1.3.3
+=======
+1527097527 source:c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.c
+>>>>>>> parent of d5278ba... Revert "Fort 1.3.3"
 	<time.h>
 	<stdlib.h>
 	<allegro5/allegro.h>
@@ -280,11 +292,15 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of d5278ba... Revert "Fort 1.3.3"
 1527097527 c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.h
 	"objets.h"
 	"dimensions.h"
 
 1527097527 source:c:\users\meli\desktop\tout\programmation\calegro\fort\principal.c
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of bcc2a44... Fort 1.3.3
@@ -307,6 +323,8 @@
 >>>>>>> parent of bcc2a44... Fort 1.3.3
 =======
 >>>>>>> parent of bcc2a44... Fort 1.3.3
+=======
+>>>>>>> parent of d5278ba... Revert "Fort 1.3.3"
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -329,6 +347,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 1527097527 c:\users\meli\desktop\tout\programmation\calegro\fort\variables.h
 =======
 1527018676 c:\users\meli\desktop\tout\programmation\calegro\fort\variables.h
@@ -342,6 +361,9 @@
 =======
 1527018676 c:\users\meli\desktop\tout\programmation\calegro\fort\variables.h
 >>>>>>> parent of bcc2a44... Fort 1.3.3
+=======
+1527097527 c:\users\meli\desktop\tout\programmation\calegro\fort\variables.h
+>>>>>>> parent of d5278ba... Revert "Fort 1.3.3"
 	"dimensions.h"
 
 1521049449 c:\users\meli\desktop\tout\programmation\calegro\fort\const.h
@@ -698,6 +720,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 1527097527 c:\users\meli\desktop\tout\programmation\calegro\fort\dimensions.h
 =======
 1527064965 c:\users\meli\desktop\tout\programmation\calegro\fort\dimensions.h
@@ -711,6 +734,9 @@
 =======
 1527064965 c:\users\meli\desktop\tout\programmation\calegro\fort\dimensions.h
 >>>>>>> parent of bcc2a44... Fort 1.3.3
+=======
+1527097527 c:\users\meli\desktop\tout\programmation\calegro\fort\dimensions.h
+>>>>>>> parent of d5278ba... Revert "Fort 1.3.3"
 
 1522937358 source:c:\users\meli\desktop\fort\affichage.c
 	<time.h>

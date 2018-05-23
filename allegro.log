@@ -2,6 +2,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of d5278ba... Revert "Fort 1.3.3"
 system   D d:\Libraries\build\allegro\src\allegro-git\allegro-git\src\win\wsystem.c:633  _al_win_safe_load_library        [   0.00082] PathFindOnPath found: C:\Windows\system32\d3d9.dll
 system   D d:\Libraries\build\allegro\src\allegro-git\allegro-git\src\win\wsystem.c:544  load_library_at_path             [   0.00089] Calling LoadLibrary C:\Windows\system32\d3d9.dll
 system   I d:\Libraries\build\allegro\src\allegro-git\allegro-git\src\win\wsystem.c:547  load_library_at_path             [   0.08547] Loaded C:\Windows\system32\d3d9.dll
@@ -889,6 +892,7 @@ d3d      I d:\Libraries\build\allegro\src\allegro-git\allegro-git\src\win\d3d_di
 dtor     D d:\Libraries\build\allegro\src\allegro-git\allegro-git\src\dtor.c:184  _al_register_destructor          [   1.35327] added dtor for object 05542F78, func 6396DCCE
 d3d      D d:\Libraries\build\allegro\src\allegro-git\allegro-git\src\win\d3d_bmp.cpp:467  _al_d3d_sync_bitmap              [   1.35576] _al_d3d_sync_bitmap (system) ref count == 1
 d3d      D d:\Libraries\build\allegro\src\allegro-git\allegro-git\src\win\d3d_bmp.cpp:473  _al_d3d_sync_bitmap              [   1.35579] _al_d3d_sync_bitmap (video) ref count == 1
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of bcc2a44... Fort 1.3.3
@@ -2913,3 +2917,5 @@ d3d      D d:\Libraries\build\allegro\src\allegro-git\allegro-git\src\win\d3d_bm
 >>>>>>> parent of bcc2a44... Fort 1.3.3
 =======
 >>>>>>> parent of bcc2a44... Fort 1.3.3
+=======
+>>>>>>> parent of d5278ba... Revert "Fort 1.3.3"
