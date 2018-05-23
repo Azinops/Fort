@@ -584,7 +584,7 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
                             {
                                 if(distance(f[i].explosion.x,f[i].explosion.y,x*XFENETRE/NBRE_CASES_X,y*YFENETRE/NBRE_CASES_Y)<=f[i].portee_explosion)
                                 {
-                                    if(j->explosion_debloques[3]==2)
+                                    if(j->explosion_debloques[3]==2 && c[y][x].id!=6)
                                     {
                                         c[y][x].pv/=1.3;
                                     }
