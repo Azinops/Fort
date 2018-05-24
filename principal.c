@@ -45,6 +45,7 @@ void jeu()
     INITIALISER_IMAGES_EN_MASSE(deflagration,nbre_deflagration_actuel,"./images/deflagration/")
     INITIALISER_IMAGES_EN_MASSE(indication_blocs,nbre_blocs_actuels,"./images/explications_blocs/")
     INITIALISER_IMAGES_EN_MASSE(explications_fusees,nbre_fusees_actuel,"./images/explications_fusees/")
+
     fenetre carte[0];
     initialiser_map(&carte,Xfenetre,Yfenetre,cases_x,cases_y);
 

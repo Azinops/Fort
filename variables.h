@@ -42,6 +42,7 @@ int nbre_particules_explosion_actuel=1;
 int nbre_explosion_nucleaire_actuel=37;
 int nbre_barre_xp_actuel=2;
 int nbre_deflagration_actuel=17;
+int nbre_explosion_aerienne_actuel=14;
 
 //FUSEES
 double taille_fusees_normales=0.2;
