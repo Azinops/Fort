@@ -485,6 +485,7 @@ int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X],
 	{
     	if(c[yi][xi].id==5 && c[yi][xi].au_joueur==joueur_qui_joue)
     	{
+    	    return 0;
     	}
     	else
     	{
