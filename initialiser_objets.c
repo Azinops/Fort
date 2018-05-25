@@ -118,7 +118,7 @@ void initialiser_map(fenetre f[],double Xfen,double Yfen,int cases_max_x,int cas
     f[0].Xfenetre=Xfen;
     f[0].Yfenetre=Yfen;
 }
-void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explosion_init,fusee_missile* missile_initiaux)
+void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explosion_init,fusee_missile* missile_initiaux,objet_fixe* avion)
 {
     int i;
     int k;
@@ -148,12 +148,15 @@ void initialiser_joueur(joueur j[],int jmax,canon canon_j[],double taille_explos
         j[i].nbre_tirs_max=1;
         j[i].coef_gain_tune=1;
         j[i].xp_pour_lvlup=1800;
-        j[i].pts_competences=1+MOD_CHEAT*100;
+        j[i].pts_competences=1+MOD_CHEAT*100 + MOD_CHEAT_JUSTE_POUR_COMPETENCE*100;
         j[i].niveau=1;
         j[i].coef_xp_lvl_sup=1.6;
         j[i].coeur_xi=0;
         j[i].coeur_yi=0;
         j[i].coeur_pose=0;
+        j[i].avion=avion;
+        j[i].avion->flag=1-i;
+        j[i].largueur_lance=0;
         for(k=1;k<=NBRE_CASES_INVENTAIRE*2;k++)
         {
             j[i].inventaire[k]=0;
@@ -216,6 +219,7 @@ void initialiser_objet_fixe(objet_fixe* o,ALLEGRO_BITMAP* image,double tailleX,d
     o->bitmap=image;
     o->angle=0;
     o->existence=existence;
+    o->flag=0;
 }
 void initialiser_objet_fixe_en_masse(objet_fixe o[],ALLEGRO_BITMAP* image,double tailleX,double tailleY,double x,double y,int taille_x,int taille_y,int nbre_objets)
 {
@@ -233,6 +237,7 @@ void initialiser_objet_fixe_en_masse(objet_fixe o[],ALLEGRO_BITMAP* image,double
         o[i].existence=0;
         o[i].vitesse_x=0;
         o[i].vitesse_y=0;
+        o[i].flag=0;
     }
 }
 void mettre_id(objet_fixe o[],int id)

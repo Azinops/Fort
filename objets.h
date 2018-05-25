@@ -48,6 +48,7 @@ typedef struct
 	int existence;
 	double vitesse_x;
 	double vitesse_y;
+	int flag;
 }objet_fixe;
 typedef struct
 {
@@ -124,6 +125,8 @@ typedef struct
     int coeur_yi;
     int coeur_pose;
     int compteur_tour_replacer_canon;
+    objet_fixe* avion;
+    int largueur_lance;
 }joueur;
 void placer_bloc(ALLEGRO_MOUSE_STATE mouse,carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,fenetre f);
 typedef struct
@@ -166,6 +169,7 @@ int collision_objet_fixe_carre(objet_fixe o,carre c[NBRE_CASES_Y][NBRE_CASES_X],
 void tirer_missile(joueur j,double vx,double vy,double x,double y,fusee_missile f[]);
 void pop_fumee(objet_anime o[],fusee_missile f[]);
 void deplacer_objet_constament(objet_anime o[],int nbre_objets,double vitesse_x,double vitesse_y);
+void deplacer_seul_objet_fixe_constament(objet_anime o,double vitesse_x,double vitesse_y);
 void deplacer_objet_fixe_constament(objet_fixe o[],int nbre_objets);
 void pop_particules(objet_fixe o[],double x,double y,int nbre_particules,double vitesse);
 void tirs_de_cannon(CLAVIER,joueur* j,SOURIS,double attraction);
@@ -175,6 +179,7 @@ void gere_xp(joueur j[]);
 void ajouter_missile_dans_inventaire(joueur* j,int id_item);
 void enlever_tempo_blocs_bois(carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,CLAVIER);
 void gerer_victoire(joueur j[],carre c[NBRE_CASES_Y][NBRE_CASES_X],int joueur_qui_joue,int tour,int* fond,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
+void gerer_largueur(joueur j);
 #endif // OBJETS_H_INCLUDED
 
 

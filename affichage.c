@@ -143,7 +143,7 @@ void interface_competences(CLAVIER,int* interface_du_jeu,int* fond,SOURIS,ALLEGR
 }
 void afficher_objet_fixe(objet_fixe o)
 {
-    if(o.existence==1){al_draw_scaled_rotated_bitmap(o.bitmap,o.taille_x/2,o.taille_y/2,o.x,o.y,o.tailleX*COEF_PIXEL_X,o.tailleY*COEF_PIXEL_Y,o.angle,0);}
+    if(o.existence==1){al_draw_scaled_rotated_bitmap(o.bitmap,o.taille_x/2,o.taille_y/2,o.x,o.y,o.tailleX*COEF_PIXEL_X,o.tailleY*COEF_PIXEL_Y,o.angle,o.flag);}
 }
 void afficher_objet_fixe_en_masse(objet_fixe o[],int nbre_objets)
 {
@@ -152,7 +152,7 @@ void afficher_objet_fixe_en_masse(objet_fixe o[],int nbre_objets)
     {
         if(o[i].existence==1)
         {
-            al_draw_scaled_rotated_bitmap(o[i].bitmap,o[i].taille_x/2*COEF_PIXEL_X,o[i].taille_y/2*COEF_PIXEL_Y,o[i].x,o[i].y,o[i].tailleX*COEF_PIXEL_X,o[i].tailleY*COEF_PIXEL_Y,o[i].angle,0);
+            al_draw_scaled_rotated_bitmap(o[i].bitmap,o[i].taille_x/2*COEF_PIXEL_X,o[i].taille_y/2*COEF_PIXEL_Y,o[i].x,o[i].y,o[i].tailleX*COEF_PIXEL_X,o[i].tailleY*COEF_PIXEL_Y,o[i].angle,o[i].flag);
         }
     }
 }
@@ -363,7 +363,7 @@ void afficher_pointeur_souris(joueur j,SOURIS,ALLEGRO_BITMAP* pointeur)
 {
     double jsp_pk_ca_bug=round(YFENETRE*100/950)/100;
     double jsp_pk_ca_bugx=round(XFENETRE*100/1662.5)/100;
-    if(j.id_missile_selectione==9 || j.id_missile_selectione==10)
+    if(j.id_missile_selectione==10)
     {
         al_draw_scaled_rotated_bitmap(pointeur,taille_cible_x_y/2,taille_cible_x_y/2,mouse.x,mouse.y,COEF_PIXEL_X,jsp_pk_ca_bug,0,0);
     }

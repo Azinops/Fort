@@ -28,8 +28,10 @@ void jeu()
     INITIALISERIMAGE(case_inventaire,"./images/inventaire/case.png")
     INITIALISERIMAGE(cible,"./images/effets/cible.png")
     INITIALISERIMAGE(selection_inventaire,"./images/inventaire/selection.png")
+    INITIALISERIMAGE(largueur,"./images/trucs/avion_largueur.png")
     INITIALISER_IMAGES_EN_MASSE(indictaions_competences,NBRE_COMPETENCES_EXPLO+NBRE_COMPETENCES_PRECISION+NBRE_COMPETENCES_SCIENCE,"./images/explications_competences/")
     INITIALISER_IMAGES_EN_MASSE(indictaion_competences,4,"./images/explications_competences/")
+    INITIALISER_IMAGES_EN_MASSE(indictaion_competencess,2,"./images/explications_competences/")
     INITIALISER_IMAGES_EN_MASSE(fusee,nbre_fusees_actuel,"./images/fusees/")
     INITIALISER_IMAGES_EN_MASSE(bloc,nbre_blocs_actuels,"./images/blocs/")
     INITIALISER_IMAGES_EN_MASSE(fin_tour,nbre_fin_tour_actuel,"./images/fin_tour/")
@@ -57,6 +59,9 @@ void jeu()
 
     joueur player[2];
     canon bombardiers[2];
+
+    objet_fixe avion_largueur;
+    initialiser_objet_fixe(&avion_largueur,largueur,COEF_PIXEL_X*taille_avion_largueur,COEF_PIXEL_Y*taille_avion_largueur,0,0,taille_largueur_x,taille_largueur_x,0);
 
     objet_anime bouton_fin_tour;
     initialiser_objet_anime(&bouton_fin_tour,nbre_fin_tour_actuel,fin_tour,vitesse_animation_bouton_fin_tour,taille_bouton_fin_tour,Xfenetre/2,taille_bouton_fin_tour_y*taille_bouton_fin_tour/2*COEF_PIXEL_Y,taille_bouton_fin_tour_x,taille_bouton_fin_tour_y,1);
@@ -113,7 +118,7 @@ void jeu()
 
     objet_anime fumee[NBRE_FUMEE];
     initialiser_fumee(fumee,nbre_fumees_actuel,image_fumee,vitese_anim_fumee,taille_initiale_fumee);
-    initialiser_joueur(&player,1,bombardiers,taille_explosion_depart,&missile_normaux);
+    initialiser_joueur(&player,1,bombardiers,taille_explosion_depart,&missile_normaux,&avion_largueur);
 
     objet_fixe bouton_inventaire;
     initialiser_objet_fixe(&bouton_inventaire,image_bouton_inventaire,tailleX_bouton_invenaire,tailleY_bouton_invenaire,Xfenetre/2+(distance_fin_tour_inventaire+taille_bouton_fin_tour_x/2*taille_bouton_fin_tour+tailleX_bouton_invenaire*taille_bouton_invenaire_x/2)*COEF_PIXEL_X,(tailleY_bouton_invenaire*taille_bouton_invenaire_y/2)*COEF_PIXEL_Y,taille_bouton_invenaire_y,taille_bouton_invenaire_y,1);
@@ -125,7 +130,7 @@ void jeu()
         OBTENIRMOUSEETKEY
         ESCAPE
         EVENT
-        //TIMER = 1/50 sec
+        //TIMER = 1/FPS sec
         if(event.type==ALLEGRO_EVENT_TIMER)
         {
             afficher_fond(fond[fond_actuel],carte[0],joueur_qui_joue);
@@ -161,6 +166,8 @@ void jeu()
                 gere_xp(player);
                 afficher_pointeur_souris(player[joueur_qui_joue],mouse,cible);
                 afficher_pv_coeur_et_canon(blocs,player[joueur_qui_joue],mouse,souris_case,arial36,tour);
+                afficher_objet_fixe(avion_largueur);
+                gerer_largueur(player[joueur_qui_joue]);
             }
             if(interface_jeu==1)
             {

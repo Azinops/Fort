@@ -85,7 +85,7 @@
     queue=al_create_event_queue();\
     if(!queue)\
         erreur("al_create_event_queue()");\
-    timer=al_create_timer((1.0/50));\
+    timer=al_create_timer((1.0/FPS));\
     if(!timer)\
         erreur("al_create_timer()");\
     ALLEGRO_KEYBOARD_STATE key;\
