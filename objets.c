@@ -177,7 +177,6 @@ int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,
     	{
         	j[i].points_destruction_debut_tour=j[i].points_destruction;
         	j[i].nbre_tirs=0;
-        	j[i].largueur_lance=0;
         	if(*n_tour!=0-MOD_CHEAT)
         	{
             	j[i].id_missile_selectione=1;
@@ -793,7 +792,7 @@ void tirs_de_cannon(CLAVIER,joueur* j,SOURIS,double attraction)
         if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && appuye==0 && j->id_missile_selectione!=0 && (j->nbre_tirs<j->nbre_tirs_max || MOD_CHEAT==1 || (j->precision_debloques[7]==2 && j->nbre_tirs<NBRE_TIRS_COMPETENCE_7_PRECISION)))
         {
             appuye=1;
-            if(j->nbre_tirs==0)
+            if(j->nbre_tirs==0 || MOD_CHEAT==1)
             {
                 if(j->id_missile_selectione!=8 && j->id_missile_selectione!=9)
                 {
@@ -1033,15 +1032,16 @@ void gerer_victoire(joueur j[],carre c[NBRE_CASES_Y][NBRE_CASES_X],int joueur_qu
         }
     }
 }
-void gerer_largueur(joueur j)
+void gerer_largueur(joueur* j)
 {
-    j.avion->flag=1-j.n_joueur;
-    if(j.avion->existence==1)
+    j->avion->flag=1-j->n_joueur;
+    if(j->avion->existence==1)
     {
-        j.avion->x+=(1-2*j.n_joueur)*j.puissance_tir_cannon*sqrt(2)/(3*FPS);
-        if(j.avion->x<0 || j.avion->x>XFENETRE)
+        j->avion->x+=(1-2*j->n_joueur)*j->puissance_tir_cannon*sqrt(2)/(3*FPS);
+        if(j->avion->x<0 || j->avion->x>XFENETRE)
         {
-            j.avion->existence=0;
+            j->avion->existence=0;
+            j->largueur_lance=0;
         }
     }
 }

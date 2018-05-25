@@ -167,7 +167,7 @@ void jeu()
                 afficher_pointeur_souris(player[joueur_qui_joue],mouse,cible);
                 afficher_pv_coeur_et_canon(blocs,player[joueur_qui_joue],mouse,souris_case,arial36,tour);
                 afficher_objet_fixe(avion_largueur);
-                gerer_largueur(player[joueur_qui_joue]);
+                gerer_largueur(&player[joueur_qui_joue]);
             }
             if(interface_jeu==1)
             {
