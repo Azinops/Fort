@@ -190,7 +190,7 @@
 	"objets.h"
 	"fonctions.h"
 
-1527261804 source:c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.c
+1527530896 source:c:\users\meli\desktop\tout\programmation\calegro\fort\affichage.c
 	<time.h>
 	<stdlib.h>
 	<allegro5/allegro.h>
@@ -209,7 +209,7 @@
 	"objets.h"
 	"dimensions.h"
 
-1527265192 source:c:\users\meli\desktop\tout\programmation\calegro\fort\principal.c
+1527530718 source:c:\users\meli\desktop\tout\programmation\calegro\fort\principal.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -581,7 +581,7 @@
 
 1522937544 k:\isn\c\fort\dimensions.h
 
-1527265622 c:\users\meli\desktop\tout\programmation\calegro\fort\dimensions.h
+1527531649 c:\users\meli\desktop\tout\programmation\calegro\fort\dimensions.h
 
 1522937358 source:c:\users\meli\desktop\fort\affichage.c
 	<time.h>

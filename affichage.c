@@ -124,7 +124,7 @@ void interface_competences(CLAVIER,int* interface_du_jeu,int* fond,SOURIS,ALLEGR
             al_draw_scaled_rotated_bitmap(selection_jaune,0,0,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,COEF_PIXEL_X*taille_barre_xp_x/taille_selec,jsp*taille_barre_xp_y/taille_selec,0,0);
             al_draw_textf(police,BLEU,XFENETRE/5+taille_barre_xp_x*COEF_PIXEL_X/2,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y+taille_barre_xp_y*COEF_PIXEL_Y,ALLEGRO_ALIGN_CENTRE,"XP: %.0f/%.0f",j.xp,j.xp_pour_lvlup);
         }
-        if((al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) || (passer_souris_sur_carre(mouse,XFENETRE/5,TAILLE_ECRITUR_SCORE,XFENETRE/5+taille_barre_xp_x*COEF_PIXEL_X,TAILLE_ECRITUR_SCORE+taille_barre_xp_y*COEF_PIXEL_Y) && mouse.buttons&1)) && a==0)
+        if((al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_TAB) || (passer_souris_sur_carre(mouse,XFENETRE/5,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,XFENETRE/5+taille_barre_xp_x*COEF_PIXEL_X,TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y+taille_barre_xp_y*COEF_PIXEL_Y) && mouse.buttons&1)) && a==0)
         {
             *fond=2;
             *interface_du_jeu=1;

@@ -61,7 +61,7 @@ void jeu()
     canon bombardiers[2];
 
     objet_fixe avion_largueur;
-    initialiser_objet_fixe(&avion_largueur,largueur,COEF_PIXEL_X*taille_avion_largueur,COEF_PIXEL_Y*taille_avion_largueur,0,0,taille_largueur_x,taille_largueur_x,0);
+    initialiser_objet_fixe(&avion_largueur,largueur,taille_avion_largueur,taille_avion_largueur,0,0,taille_largueur_x,taille_largueur_x,0);
 
     objet_anime bouton_fin_tour;
     initialiser_objet_anime(&bouton_fin_tour,nbre_fin_tour_actuel,fin_tour,vitesse_animation_bouton_fin_tour,taille_bouton_fin_tour,Xfenetre/2,taille_bouton_fin_tour_y*taille_bouton_fin_tour/2*COEF_PIXEL_Y,taille_bouton_fin_tour_x,taille_bouton_fin_tour_y,1);
@@ -96,7 +96,7 @@ void jeu()
     initialiser_fusees(bombe_nucleaire,NBRE_FUSEES,fusee[3],taille_bombe_nucleaires,nbre_explosion_nucleaire_actuel,explosion_nucleaire,vitesse_anim_explo*0.5,taille_explosion_nucleaire,PUISSANCE_TIR_NUCLEAIRE,PORTEE_TIR_NSUP,les_stats_misssiles,coef_xp_missile_nucleaire,TAILLE_EXPLOSION_X_Y);
 
     fusee_missile missile_teleguide[NBRE_FUSEES+1];
-    initialiser_fusees(missile_teleguide,NBRE_FUSEES,fusee[4],taille_missile_teleguide,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_MISSILE_TELEGUIDE,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_teleguide,TAILLE_EXPLOSION_X_Y);
+    initialiser_fusees(missile_teleguide,NBRE_FUSEES,fusee[4],taille_missile_teleguide,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_MISSILE_TELEGUIDE,PORTEE_INITIALE*2,les_stats_misssiles,coef_xp_missile_teleguide,TAILLE_EXPLOSION_X_Y);
 
     fusee_missile taupinier[NBRE_FUSEES+1];
     initialiser_fusees(taupinier,NBRE_FUSEES,fusee[5],taille_taupinier,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIR_TAUPINIER,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
@@ -105,14 +105,12 @@ void jeu()
     initialiser_fusees(bombe_xp,NBRE_FUSEES,fusee[6],taille_bombe_xp,nbre_deflagration_actuel,deflagration,vitesse_anim_deflagration,taille_explosion_xp,PUISSANCE_BOMBE_XP,PORTEE_BOMBE_XP,les_stats_misssiles,coef_xp_bombe_xp,taille_x_y_explosion_xp);
 
     fusee_missile tirs_droits[NBRE_FUSEES+1];
-    initialiser_fusees(tirs_droits,NBRE_FUSEES,fusee[7],taille_fusees_droites,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIRS_DROITS,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
+    initialiser_fusees(tirs_droits,NBRE_FUSEES,fusee[7],taille_fusees_droites,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_TIRS_DROITS,PORTEE_INITIALE*1.5,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
 
     fusee_missile missile_stop[NBRE_FUSEES+1];
-    initialiser_fusees(missile_stop,NBRE_FUSEES,fusee[8],taille_fusees_stop,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_MISSILE_STOP,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
-
+    initialiser_fusees(missile_stop,NBRE_FUSEES,fusee[8],taille_fusees_stop,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_MISSILE_STOP,PORTEE_INITIALE*2,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
     fusee_missile missile_cible[NBRE_FUSEES+1];
     initialiser_fusees(missile_cible,NBRE_FUSEES,fusee[9],taille_fusees_cible,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_MISSILE_CIBLE,PORTEE_INITIALE*2,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
-
     fusee_missile missile_sniper[NBRE_FUSEES+1];
     initialiser_fusees(missile_sniper,NBRE_FUSEES,fusee[10],taille_fusees_sniper,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_MISSILE_SNIPER,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
 
