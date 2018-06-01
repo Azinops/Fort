@@ -47,7 +47,8 @@ void jeu()
     INITIALISER_IMAGES_EN_MASSE(deflagration,nbre_deflagration_actuel,"./images/deflagration/")
     INITIALISER_IMAGES_EN_MASSE(indication_blocs,nbre_blocs_actuels,"./images/explications_blocs/")
     INITIALISER_IMAGES_EN_MASSE(explications_fusees,nbre_fusees_actuel,"./images/explications_fusees/")
-
+    INITIALISERIMAGE(image_bouton_menu,"./images/effets/bouton_jouer.png")
+    INITIALISERIMAGE(image_bouton_quite,"./images/effets/bouton_quitter.png")
     fenetre carte[0];
     initialiser_map(&carte,Xfenetre,Yfenetre,cases_x,cases_y);
 
@@ -121,7 +122,34 @@ void jeu()
     objet_fixe bouton_inventaire;
     initialiser_objet_fixe(&bouton_inventaire,image_bouton_inventaire,tailleX_bouton_invenaire,tailleY_bouton_invenaire,Xfenetre/2+(distance_fin_tour_inventaire+taille_bouton_fin_tour_x/2*taille_bouton_fin_tour+tailleX_bouton_invenaire*taille_bouton_invenaire_x/2)*COEF_PIXEL_X,(tailleY_bouton_invenaire*taille_bouton_invenaire_y/2)*COEF_PIXEL_Y,taille_bouton_invenaire_y,taille_bouton_invenaire_y,1);
 
-    c_explo[8].angle=0;
+    objet_fixe bouton_menu;
+    initialiser_objet_fixe(&bouton_menu,image_bouton_menu,3*COEF_PIXEL_X,3*COEF_PIXEL_Y,Xfenetre/3,Yfenetre/2+COEF_PIXEL_Y*20,taille_bouton_quitter_et_jouer_x,taille_bouton_quitter_et_jouer_y,1);
+    fond_actuel=5;
+    objet_fixe bouton_quite;
+    initialiser_objet_fixe(&bouton_quite,image_bouton_quite,3*COEF_PIXEL_X,3*COEF_PIXEL_Y,2*Xfenetre/3,Yfenetre/2+COEF_PIXEL_Y*20,taille_bouton_quitter_et_jouer_x,taille_bouton_quitter_et_jouer_y,1);
+
+    while(bouton_menu.existence==1)  //MENU
+    {
+        OBTENIRMOUSEETKEY
+        ESCAPE
+        EVENT
+        afficher_fond(fond[fond_actuel],carte[0],joueur_qui_joue);
+        afficher_objet_fixe(bouton_menu);
+        afficher_objet_fixe(bouton_quite);
+        if(clic_objet_fixe(mouse,bouton_menu))
+        {
+            bouton_menu.existence=0;
+        }
+        if(clic_objet_fixe(mouse,bouton_quite))
+        {
+            bouton_menu.existence=0;
+            fin=1;
+        }
+        selection_objet_jaune(selecCons,bouton_menu,mouse);
+        selection_objet_jaune(selecCons,bouton_quite,mouse);
+        al_flip_display();
+    }
+
 
     while(!fin)
     {
@@ -132,7 +160,7 @@ void jeu()
         if(event.type==ALLEGRO_EVENT_TIMER)
         {
             afficher_fond(fond[fond_actuel],carte[0],joueur_qui_joue);
-            if(interface_jeu==0)
+            if(interface_jeu==0) //JEU NORMAL
             {
                 gerer_victoire(player,blocs,joueur_qui_joue,tour,&fond_actuel,rouge,arial66);
                 joueur_qui_joue=interaction_bouton_fin_tour(&bouton_fin_tour,mouse,joueur_qui_joue,player,&tour,les_stats_misssiles,blocs,&key);
@@ -167,7 +195,7 @@ void jeu()
                 afficher_objet_fixe(avion_largueur);
                 gerer_largueur(&player[joueur_qui_joue]);
             }
-            if(interface_jeu==1)
+            if(interface_jeu==1) //INTERFACE COMPETENCE
             {
                 afficher_pts_competences(player[joueur_qui_joue],jaune,arial66);
                 connexions(c_explo,nbre_c_explo_actuels,player[joueur_qui_joue]);

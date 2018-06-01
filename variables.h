@@ -28,7 +28,7 @@ int relache=1;
 int tour=0;
 
 //IMAGES ACTUELLES
-int nbre_fonds_actuels=4;
+int nbre_fonds_actuels=5;
 int nbre_blocs_actuels=NBRE_BLOCS_ACTUEL;
 int nbre_fin_tour_actuel=18;
 int nbre_c_explo_actuels=NBRE_COMPETENCES_EXPLO;
@@ -93,21 +93,25 @@ double taille_competences_c=1;
 int taille_competences_xy=TAILLE_COMPETENCE;
 int anti_marge_competence_x=-600;
 
-//BOUTON FIN TOUR
+//BOUTONS
 double vitesse_animation_bouton_fin_tour=0.3;
 double taille_bouton_fin_tour=0.8;
 int taille_bouton_fin_tour_x=300;
 int taille_bouton_fin_tour_y=100;
 
-//BOUTON INVENTAIRE
 double tailleX_bouton_invenaire=1.5;
 double tailleY_bouton_invenaire=1.5;
 double taille_bouton_invenaire_x=50;
 double taille_bouton_invenaire_y=50;
 double distance_fin_tour_inventaire=50;
 
+double taille_bouton_quitter_et_jouer_x=100;
+double taille_bouton_quitter_et_jouer_y=50;
+
 //INVENTAIRE
 double taille_inventaire=10;
 int nbre_cases_x_inventaire=4;
 int nbre_cases_y_inventaire=6;
 #endif // VARIABLES_H_INCLUDED
+
+
