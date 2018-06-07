@@ -98,11 +98,11 @@ void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CA
                 	{
                     	if(j->tune>=i[j->id_selectionee].prix)
                     	{
-                       	blocs[souris.y][souris.x].id=j->id_selectionee;
-                    	blocs[souris.y][souris.x].pv=i[blocs[souris.y][souris.x].id].pv;
-                    	blocs[souris.y][souris.x].pv_initiaux=i[blocs[souris.y][souris.x].id].pv;
-                    	blocs[souris.y][souris.x].au_joueur=j->n_joueur;
-                    	j->tune-=i[j->id_selectionee].prix;
+                            blocs[souris.y][souris.x].id=j->id_selectionee;
+                            blocs[souris.y][souris.x].pv=i[blocs[souris.y][souris.x].id].pv;
+                            blocs[souris.y][souris.x].pv_initiaux=i[blocs[souris.y][souris.x].id].pv;
+                            blocs[souris.y][souris.x].au_joueur=j->n_joueur;
+                            j->tune-=i[j->id_selectionee].prix;
                     	}
                 	}
                     blocs[souris.y][souris.x].enleve_tempo=0;
@@ -177,7 +177,7 @@ int interaction_bouton_fin_tour(objet_anime* bouton,SOURIS,int quel_joueur_joue,
     	{
         	j[i].points_destruction_debut_tour=j[i].points_destruction;
         	j[i].nbre_tirs=0;
-        	if(*n_tour!=0-MOD_CHEAT)
+        	if(*n_tour!=0-MOD_CHEAT())
         	{
             	j[i].id_missile_selectione=1;
                 j->missile_selectione=missiles[1].missile;
@@ -871,7 +871,7 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
 	int id_missile_selectione_depart=j->id_missile_selectione;
 	static int d=0;
 	selection_objet_jaune(selection_jaune,*o,mouse);
-	if(n_tour!=0-MOD_CHEAT && (j->nbre_tirs==0 || MOD_CHEAT==1))
+	if(n_tour!=0-MOD_CHEAT() && (j->nbre_tirs==0 || MOD_CHEAT()==1))
 	{
 	    if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_ESCAPE))
         {
@@ -890,14 +890,10 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
             	b=1;
         	}
     	}
-    	if(!clic_objet_fixe(mouse,*o))
-    	{
-        	clic=0;
-    	}
     	if(b==1)
     	{
         	id=j->id_missile_selectione;
-        	j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id,police,couleur,missiles,explications);
+        	j->id_missile_selectione=afficher_inventaire_et_renvoyer_id_item_si_clic(inventaire,case_inv,nbre_cases_x,nbre_cases_y,taille,x,y,icones,*j,selection,mouse,id,police,couleur,missiles,explications,&b,clic);
         	if(round(j->points_destruction_debut_tour)>=missiles[id].prix)
             {
                 j->points_destruction=j->points_destruction_debut_tour-missiles[id].prix;
@@ -920,6 +916,10 @@ void gerer_bouton_inventaire(objet_fixe* o,ALLEGRO_BITMAP* selection_jaune,SOURI
         {
             d=1;
         }
+    	if(!clic_objet_fixe(mouse,*o))
+    	{
+        	clic=0;
+    	}
 	}
 }
 int passer_souris_sur_carre(SOURIS,double x1 ,double y1, double x2,double y2)

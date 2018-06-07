@@ -17,7 +17,7 @@ void afficher_fusees(fusee_missile f[]);
 void afficher_objet_anime_en_masse(objet_anime o[],int nbre_objets);
 void afficher_objet_fixe_en_masse(objet_fixe o[],int nbre_objets);
 void selection_objet_jaune(ALLEGRO_BITMAP* selection_jaune,objet_fixe o,SOURIS);
-int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur jo,ALLEGRO_BITMAP* selection,SOURIS,int item_selectione_initial,ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,item_missile missiles[],ALLEGRO_BITMAP* explications[]);
+int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur jo,ALLEGRO_BITMAP* selection,SOURIS,int item_selectione_initial,ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,item_missile missiles[],ALLEGRO_BITMAP* explications[],int* b,int clic);
 void afficher_scores(ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,joueur j,double x);
 void afficher_barre_xp(ALLEGRO_BITMAP* barre[],joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
 void afficher_pts_competences(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);

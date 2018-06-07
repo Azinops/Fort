@@ -63,7 +63,11 @@
         erreur("al_init()");\
     if(!al_install_keyboard())\
         erreur("al_install_keyboard()");\
-    display=al_create_display(Xfenetre,Yfenetre);\
+    al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);\
+    ALLEGRO_DISPLAY_MODE rec;\
+    al_get_display_mode(al_get_num_display_modes() - 1, &rec);\
+    al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);\
+    display = al_create_display(rec.width, rec.height);\
     if(!display)\
         erreur("creation display");\
     if(!al_install_mouse())\
@@ -126,4 +130,6 @@ void erreur(const char*txt);
 int retablisseur(int valeur,int valeur_max,int valeur_min);
 double distance(double x1,double y1, double x2, double y2);
 int random(int a, int b);
+int MOD_CHEAT();
+double taille_fenetre_x();
 #endif // FONCTIONS_H_INCLUDED

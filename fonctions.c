@@ -43,3 +43,17 @@ int random(int a, int b)
         return rand()%(b-a+1) + a;
     }
 }
+int MOD_CHEAT()
+{
+    int mod_cheat=0;
+    fscanf(fopen("dim.txt", "r"),"MOD CHEAT:%d",&mod_cheat);
+    return mod_cheat;
+}
+double taille_fenetre_x()
+{
+    double taille=0;
+    int rien1=0;
+    int rien2=0;
+    fscanf(fopen("dim.txt", "r"),"MOD CHEAT:%d taille de la fenetre en x:%Lf taille de la fenetre en y:%d",&rien1,&taille,&rien2);
+    return taille;
+}

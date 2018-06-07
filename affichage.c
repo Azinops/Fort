@@ -295,11 +295,12 @@ void afficher_fusees(fusee_missile f[])
         }
     }
 }
-int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur jo, ALLEGRO_BITMAP* selection,SOURIS,int item_selectione_initial,ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,item_missile missiles[],ALLEGRO_BITMAP* explications[])
+int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,ALLEGRO_BITMAP* case_inv,int nbre_cases_x,int nbre_cases_y,double taille,double x,double y,ALLEGRO_BITMAP* icones[],joueur jo, ALLEGRO_BITMAP* selection,SOURIS,int item_selectione_initial,ALLEGRO_FONT* police,ALLEGRO_COLOR couleur,item_missile missiles[],ALLEGRO_BITMAP* explications[],int* b,int clic)
 {
     int i;
     int j;
     int a=0;
+    int d=0;
     int id_touche;
     a=item_selectione_initial;
     al_draw_scaled_rotated_bitmap(inventaire,taille_inventaire_x/2,taille_inventaire_y/2,x,y,taille*nbre_cases_x/(nbre_cases_x+nbre_cases_y),taille*nbre_cases_y/(nbre_cases_x+nbre_cases_y),0,0);
@@ -327,9 +328,14 @@ int afficher_inventaire_et_renvoyer_id_item_si_clic(ALLEGRO_BITMAP* inventaire,A
                 if(mouse.buttons&1 && jo.inventaire[i+(j-1)*nbre_cases_x]!=0)
                 {
                     a=jo.inventaire[i+(j-1)*nbre_cases_x];
+                    d=1;
                 }
             }
         }
+    }
+    if(mouse.buttons&1 && d==0 && clic==0)
+    {
+        *b=0;
     }
     if(id_touche!=0)
     {
