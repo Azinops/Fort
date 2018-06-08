@@ -389,21 +389,21 @@ void afficher_explications_competences(objet_fixe c1[],objet_fixe c2[],objet_fix
     {
         if(toucher_objet_fixe(mouse,c1[i]))
         {
-            al_draw_scaled_rotated_bitmap(explications[i],0,0,mouse.x,mouse.y,taille_indication_competences,jsp_pk_ca_bug*taille_indication_competences,0,0);
+            al_draw_scaled_rotated_bitmap(explications[i],0,0,mouse.x,mouse.y,taille_indication_competences*COEF_PIXEL_X,COEF_PIXEL_X*taille_indication_competences,0,0);
         }
     }
     for(i=1;i<=NBRE_COMPETENCES_SCIENCE;i++)
     {
         if(toucher_objet_fixe(mouse,c2[i]))
         {
-            al_draw_scaled_rotated_bitmap(explications[8+i],0,0,mouse.x,mouse.y,taille_indication_competences,jsp_pk_ca_bug*taille_indication_competences,0,0);
+            al_draw_scaled_rotated_bitmap(explications[8+i],0,0,mouse.x,mouse.y,taille_indication_competences*COEF_PIXEL_X,taille_indication_competences*COEF_PIXEL_X,0,0);
         }
     }
     for(i=1;i<=NBRE_COMPETENCES_PRECISION;i++)
     {
         if(toucher_objet_fixe(mouse,c3[i]))
         {
-            al_draw_scaled_rotated_bitmap(explications[16+i],taille_indication_competences_x,0,mouse.x,mouse.y,taille_indication_competences,jsp_pk_ca_bug*taille_indication_competences,0,0);
+            al_draw_scaled_rotated_bitmap(explications[16+i],taille_indication_competences_x,0,mouse.x,mouse.y,taille_indication_competences*COEF_PIXEL_X,taille_indication_competences*COEF_PIXEL_X,0,0);
         }
     }
 }
@@ -413,4 +413,33 @@ void afficher_pv_coeur_et_canon(carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,SOU
     {
         al_draw_textf(police,VERT,mouse.x,mouse.y-TAILLE_ECRITUR_SCORE*COEF_PIXEL_Y,ALLEGRO_ALIGN_CENTER,"PV:%.0f",c[souris.y][souris.x].pv);
     }
+}
+int entrer_dans_le_jeu(ALLEGRO_BITMAP* fonts[],int debut,double vitesse_animation_debut,int nbre_fonts_actuels,CLAVIER)
+{
+    static double compteur=5;
+    int afficher;
+    double cx;
+    double cy;
+    if(debut==0)
+    {
+        if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_P))
+        {
+            debut=1;
+            compteur=5;
+        }
+    }
+    if(debut==1)
+    {
+        compteur+=vitesse_animation_debut;
+        afficher=round(compteur);
+        if(compteur>nbre_fonts_actuels)
+        {
+            debut=0;
+            compteur=19;
+        }
+        cx=COEF_PIXEL_X*XFENETRE/taille_fond_x;
+        cy=round(1000*COEF_PIXEL_Y)*YFENETRE/(1000*taille_fond_y);
+        al_draw_scaled_rotated_bitmap(fonts[afficher],0,0,0,0,cx,cy,0,0);
+    }
+    return debut;
 }

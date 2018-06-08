@@ -110,10 +110,15 @@ void jeu()
 
     fusee_missile missile_stop[NBRE_FUSEES+1];
     initialiser_fusees(missile_stop,NBRE_FUSEES,fusee[8],taille_fusees_stop,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_MISSILE_STOP,PORTEE_INITIALE*2,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
+
     fusee_missile missile_cible[NBRE_FUSEES+1];
     initialiser_fusees(missile_cible,NBRE_FUSEES,fusee[9],taille_fusees_cible,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_MISSILE_CIBLE,PORTEE_INITIALE*2,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
+
     fusee_missile missile_sniper[NBRE_FUSEES+1];
     initialiser_fusees(missile_sniper,NBRE_FUSEES,fusee[10],taille_fusees_sniper,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_MISSILE_SNIPER,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
+
+    fusee_missile contourneur[NBRE_FUSEES+1];
+    initialiser_fusees(contourneur,NBRE_FUSEES,fusee[11],taille_contourneur,nbre_explosion_actuel,images_explosion,vitesse_anim_explo,taille_explosion_depart,PUISSANCE_CONTOURNEUR,PORTEE_INITIALE,les_stats_misssiles,coef_xp_missile_initial,TAILLE_EXPLOSION_X_Y);
 
     objet_anime fumee[NBRE_FUMEE];
     initialiser_fumee(fumee,nbre_fumees_actuel,image_fumee,vitese_anim_fumee,taille_initiale_fumee);
@@ -127,6 +132,12 @@ void jeu()
     fond_actuel=5;
     objet_fixe bouton_quite;
     initialiser_objet_fixe(&bouton_quite,image_bouton_quite,3*COEF_PIXEL_X,3*COEF_PIXEL_Y,2*Xfenetre/3,Yfenetre/2+COEF_PIXEL_Y*20,taille_bouton_quitter_et_jouer_x,taille_bouton_quitter_et_jouer_y,1);
+
+    while(at_charge<=(2/FPS))//CHARGEMENT: ATTENDRE UN PEU POUR PAS QUE CA BUG
+    {
+        EVENT
+        at_charge+=1;
+    }
 
     while(bouton_menu.existence==1)  //MENU
     {
@@ -194,6 +205,7 @@ void jeu()
                 afficher_pv_coeur_et_canon(blocs,player[joueur_qui_joue],mouse,souris_case,arial36,tour);
                 afficher_objet_fixe(avion_largueur);
                 gerer_largueur(&player[joueur_qui_joue]);
+                debut=entrer_dans_le_jeu(fond,debut,0.4,nbre_fonds_actuels,&key);
             }
             if(interface_jeu==1) //INTERFACE COMPETENCE
             {

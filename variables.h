@@ -26,9 +26,10 @@ int interface_jeu=0; //   0:ZONE COMBAT   1:COMPETENCES
 int temps=0;
 int relache=1;
 int tour=0;
+double at_charge=0;
 
 //IMAGES ACTUELLES
-int nbre_fonds_actuels=5;
+int nbre_fonds_actuels=19;
 int nbre_blocs_actuels=NBRE_BLOCS_ACTUEL;
 int nbre_fin_tour_actuel=18;
 int nbre_c_explo_actuels=NBRE_COMPETENCES_EXPLO;
@@ -58,6 +59,7 @@ double taille_fusees_sniper=0.23;
 double taille_largueur_x=500;
 double taille_largueur_y=300;
 double taille_avion_largueur=0.3;
+double taille_contourneur=0.25;
 
 double coef_xp_missile_initial=1;
 double coef_xp_missile_nucleaire=0.05;
@@ -87,6 +89,7 @@ double taille_x_y_explosion_xp=500;
 //FONDS
 int taille_fond_chargement_x=1200;
 int taille_fond_chargement_y=800;
+int debut=1;
 
 //COMPETTENCES
 double taille_competences_c=1;

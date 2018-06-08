@@ -352,4 +352,5 @@ void initialiser_items_missiles(item_missile it[])
     it[8].prix=15;
     it[9].prix=PRIX_MISSILES_CIBLE;
     it[10].prix=18;
+    it[11].prix=PRIX_CONTOURNEUR;
 }

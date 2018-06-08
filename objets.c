@@ -458,6 +458,10 @@ void gerer_competences(SOURIS,joueur* j,objet_fixe o[],carre blocs[NBRE_CASES_Y]
                     {
                         ajouter_missile_dans_inventaire(j,10);
                     }
+                    if(i==8)
+                    {
+                        ajouter_missile_dans_inventaire(j,11);
+                    }
                 	for(k=1;k<=NBRE_LIAISONS_COMPTENCES_MAX;k++)
                 	{
                     	if(o[i].utile2[k]!=0)
@@ -561,7 +565,7 @@ void gerer_fusees(fusee_missile f[],double attraction,carre c[NBRE_CASES_Y][NBRE
         	}
         	if(f[i].fusee.y>0)
             {
-                if(collision_objet_fixe_carre(f[i].fusee,c,joueur_qui_joue)==1 && f[i].explosion_en_cours==0 && f[i].fusee.y>0 && (j[joueur_qui_joue].precision_debloques[8]!=2 || (j[joueur_qui_joue].precision_debloques[8]==2 && (j[joueur_qui_joue].n_joueur*2-1)*f[i].fusee.x<(j[joueur_qui_joue].n_joueur*2-1)*XFENETRE/2)))
+                if(f[i].explosion_en_cours==0 && (collision_objet_fixe_carre(f[i].fusee,c,joueur_qui_joue)==1 && f[i].fusee.y>0 && f[i].id!=11 || (f[i].id==11 && al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_SPACE) && f[i].chrono>=10)))
                 {
                     if(f[i].id==5 && f[i].utile1==0)
                     {

@@ -24,4 +24,5 @@ void afficher_pts_competences(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* polic
 void afficher_conseil(joueur j,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
 void afficher_explications_competences(objet_fixe c1[],objet_fixe c2[],objet_fixe c3[],ALLEGRO_BITMAP* explications[],SOURIS);
 void afficher_pv_coeur_et_canon(carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,SOURIS,point_case souris,ALLEGRO_FONT* police,int n_tour);
+int entrer_dans_le_jeu(ALLEGRO_BITMAP* fonts[],int debut,double vitesse_animation_debut,int nbre_fonts_actuels,CLAVIER);
 #endif // AFFICHAGE_H_INCLUDED

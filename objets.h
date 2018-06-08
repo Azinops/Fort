@@ -180,6 +180,7 @@ void ajouter_missile_dans_inventaire(joueur* j,int id_item);
 void enlever_tempo_blocs_bois(carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,CLAVIER);
 void gerer_victoire(joueur j[],carre c[NBRE_CASES_Y][NBRE_CASES_X],int joueur_qui_joue,int tour,int* fond,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
 void gerer_largueur(joueur* j);
+int yolo(CLAVIER,int debut);
 #endif // OBJETS_H_INCLUDED
 
 
