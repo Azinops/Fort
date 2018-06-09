@@ -14,6 +14,7 @@ int cases_y=NBRE_CASES_Y;
 int fin=0;
 int i=1;
 int j=1;
+int c=0;
 char chemin[256];
 
 //AFFICHAGE
@@ -115,6 +116,7 @@ double taille_bouton_quitter_et_jouer_y=50;
 double taille_inventaire=10;
 int nbre_cases_x_inventaire=4;
 int nbre_cases_y_inventaire=6;
+
 #endif // VARIABLES_H_INCLUDED
 
 

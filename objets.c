@@ -49,6 +49,49 @@ void switcher_deux_blocs(carre* bloc1,carre* bloc2)
 	bloc2->enleve_tempo=enlever_tempo;
 	bloc2->au_joueur=au_joueur;
 }
+void placer_bloc_sel(int id_bloc,joueur* j,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],int n_case_x, int n_case_y,item i[])
+{
+    int a;
+    if(id_bloc!=0 && id_bloc!=blocs[n_case_y][n_case_x].id)
+    {
+        a=round(id_bloc);
+        if(j->tune>=i[a].prix)
+        {
+            j->tune-=i[a].prix;
+            blocs[n_case_y][n_case_x].id=id_bloc;
+            blocs[n_case_y][n_case_x].pv=i[blocs[n_case_y][n_case_x].id].pv;
+            blocs[n_case_y][n_case_x].pv_initiaux=i[blocs[n_case_y][n_case_x].id].pv;
+            blocs[n_case_y][n_case_x].au_joueur=j->n_joueur;
+            if(id_bloc==5)
+            {
+                if(j->canon_place==0)
+                {
+                    j->canon_place=1;
+                    j->bombardier.xi=n_case_x;
+                    j->bombardier.yi=n_case_y;
+                }
+                else
+                {
+                    switcher_deux_blocs(&blocs[j->bombardier.yi][j->bombardier.xi],&blocs[n_case_y][n_case_x]);
+                }
+            }
+            if(id_bloc==6)
+            {
+                if(j->coeur_pose==0)
+                {
+                    j->coeur_xi=n_case_x;
+                    j->coeur_yi=n_case_y;
+                    j->coeur_pose=1;
+                }
+                else
+                {
+                    switcher_deux_blocs(&blocs[j->coeur_yi][j->coeur_xi],&blocs[n_case_y][n_case_x]);
+                }
+            }
+            blocs[n_case_y][n_case_x].enleve_tempo=0;
+        }
+    }
+}
 void placer_item(ALLEGRO_MOUSE_STATE mouse,point_case souris,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],joueur* j,item i[],int tour)
 {
 	if(mouse.buttons&1)

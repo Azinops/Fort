@@ -181,6 +181,7 @@ void enlever_tempo_blocs_bois(carre c[NBRE_CASES_Y][NBRE_CASES_X],joueur j,CLAVI
 void gerer_victoire(joueur j[],carre c[NBRE_CASES_Y][NBRE_CASES_X],int joueur_qui_joue,int tour,int* fond,ALLEGRO_COLOR couleur,ALLEGRO_FONT* police);
 void gerer_largueur(joueur* j);
 int yolo(CLAVIER,int debut);
+void placer_bloc_sel(int id_bloc,joueur* j,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],int n_case_x, int n_case_y,item i[]);
 #endif // OBJETS_H_INCLUDED
 
 

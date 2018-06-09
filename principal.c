@@ -204,6 +204,8 @@ void jeu()
                 afficher_pointeur_souris(player[joueur_qui_joue],mouse,cible);
                 afficher_pv_coeur_et_canon(blocs,player[joueur_qui_joue],mouse,souris_case,arial36,tour);
                 afficher_objet_fixe(avion_largueur);
+                base_auto_j1(&key,&player[0],blocs,les_stats_blocs,tour,joueur_qui_joue);
+                base_auto_j2(&key,&player[1],blocs,les_stats_blocs,tour,joueur_qui_joue);
                 gerer_largueur(&player[joueur_qui_joue]);
                 debut=entrer_dans_le_jeu(fond,debut,0.4,nbre_fonds_actuels,&key);
             }

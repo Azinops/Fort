@@ -354,3 +354,38 @@ void initialiser_items_missiles(item_missile it[])
     it[10].prix=18;
     it[11].prix=PRIX_CONTOURNEUR;
 }
+void base_auto_j1(CLAVIER,joueur* j,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],item it[],int n_tour,int joueur_qui_joue)
+{
+    int x;
+    int y;
+    static int c=0;
+    if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_T) && c==0 && n_tour==0 && joueur_qui_joue==0)
+    {
+        c=1;
+        for(x=1;x<=NBRE_CASES_X-1;x++)
+        {
+            for(y=1;y<=NBRE_CASES_Y-1;y++)
+            {
+                placer_bloc_sel(BASE_RAPIDE_J1[y][x],j,blocs,x,y,it);
+            }
+        }
+    }
+}
+
+void base_auto_j2(CLAVIER,joueur* j,carre blocs[NBRE_CASES_Y][NBRE_CASES_X],item it[],int n_tour,int joueur_qui_joue)
+{
+    int x;
+    int y;
+    static int ca=0;
+    if(al_key_down(ALLEGRO_KEYBOARD_STATE,ALLEGRO_KEY_T) && ca==0 && n_tour==0 && joueur_qui_joue==1)
+    {
+        ca=1;
+        for(x=1;x<=NBRE_CASES_X-1;x++)
+        {
+            for(y=1;y<=NBRE_CASES_Y-1;y++)
+            {
+                placer_bloc_sel(BASE_RAPIDE_J2[y][x],j,blocs,x,y,it);
+            }
+        }
+    }
+}
