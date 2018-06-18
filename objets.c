@@ -57,7 +57,8 @@ void placer_bloc_sel(int id_bloc,joueur* j,carre blocs[NBRE_CASES_Y][NBRE_CASES_
         a=round(id_bloc);
         if(j->tune>=i[a].prix)
         {
-            j->tune-=i[a].prix;
+
+             j->tune-=i[a].prix;
             blocs[n_case_y][n_case_x].id=id_bloc;
             blocs[n_case_y][n_case_x].pv=i[blocs[n_case_y][n_case_x].id].pv;
             blocs[n_case_y][n_case_x].pv_initiaux=i[blocs[n_case_y][n_case_x].id].pv;
