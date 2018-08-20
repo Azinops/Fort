@@ -17,6 +17,11 @@
 #include <windows.h>
 void jeu()
 {
+    int taille_blocs_a_selectionner=3*COEF_PIXEL_X;
+    double Xfenetre=XFENETRE  ;
+    double Yfenetre=YFENETRE;
+    int cases_x=NBRE_CASES_X;
+    int cases_y=NBRE_CASES_Y;
     INITIALISER_BIBLIOTHEQUE
     INITIALISER_IMAGES_EN_MASSE(fond,nbre_fonds_actuels,"./images/fonts/")
     AFFICHER_CHARGEMENT

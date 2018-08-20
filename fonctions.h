@@ -132,4 +132,5 @@ double distance(double x1,double y1, double x2, double y2);
 int random(int a, int b);
 int MOD_CHEAT();
 double taille_fenetre_x();
+double taille_fenetre_y();
 #endif // FONCTIONS_H_INCLUDED

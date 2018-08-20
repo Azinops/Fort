@@ -67,6 +67,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="principal.h" />
+		<Unit filename="ressources.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
 		<Unit filename="tailles_images.h" />
 		<Unit filename="variables.h" />
 		<Extensions>

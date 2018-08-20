@@ -1,8 +1,8 @@
 #ifndef DIMENSIONS_H_INCLUDED
 #define DIMENSIONS_H_INCLUDED
 //POUR PC LYCEE: 1260*720  1366x768
-#define XFENETRE 1920
-#define YFENETRE 1080
+#define XFENETRE taille_fenetre_x()
+#define YFENETRE taille_fenetre_y()
 
 #define FPS 50
 

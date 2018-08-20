@@ -13,7 +13,7 @@
 #include "tailles_images.h"
 void afficher_fond(ALLEGRO_BITMAP* bitmap,fenetre f,int j)
 {
-    al_draw_scaled_rotated_bitmap(bitmap,0,0,0,0,f.Xfenetre/taille_fond_x,f.Yfenetre/taille_fond_y,0,j);
+    al_draw_scaled_rotated_bitmap(bitmap,0,0,0,0,XFENETRE/taille_fond_x,YFENETRE/taille_fond_y,0,j);
 }
 void afficher_blocs(fenetre f,carre c[NBRE_CASES_Y][NBRE_CASES_X],ALLEGRO_BITMAP* bitmap[])
 {
@@ -437,8 +437,8 @@ int entrer_dans_le_jeu(ALLEGRO_BITMAP* fonts[],int debut,double vitesse_animatio
             debut=0;
             compteur=19;
         }
-        cx=COEF_PIXEL_X*XFENETRE/taille_fond_x;
-        cy=round(1000*COEF_PIXEL_Y)*YFENETRE/(1000*taille_fond_y);
+        cx=XFENETRE/taille_fond_x;
+        cy=YFENETRE/taille_fond_y;
         al_draw_scaled_rotated_bitmap(fonts[afficher],0,0,0,0,cx,cy,0,0);
     }
     return debut;

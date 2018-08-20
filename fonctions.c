@@ -51,9 +51,27 @@ int MOD_CHEAT()
 }
 double taille_fenetre_x()
 {
-    double taille=0;
-    int rien1=0;
-    int rien2=0;
-    fscanf(fopen("dim.txt", "r"),"MOD CHEAT:%d taille de la fenetre en x:%Lf taille de la fenetre en y:%d",&rien1,&taille,&rien2);
-    return taille;
+    static int i=0;
+    static int taille=0;
+    static double tf=0;
+    if(i==0)
+    {
+        fscanf(fopen("x_fenetre.txt", "r"),"%d",&taille);
+        tf=taille+0.00;
+        i++;
+    }
+    return tf;
+}
+double taille_fenetre_y()
+{
+    static int y=0;
+    static int tailley=0;
+    static double tf=0;
+    if(y==0)
+    {
+        fscanf(fopen("y_fenetre.txt", "r"),"%d",&tailley);
+        tf=tailley+0.00;
+        y++;
+    }
+    return tf;
 }

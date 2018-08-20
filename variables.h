@@ -6,10 +6,7 @@
         al_wait_for_event(queue,&event);
 #include "dimensions.h"
 //FENETRE
-double Xfenetre=XFENETRE    ;
-double Yfenetre=YFENETRE;
-int cases_x=NBRE_CASES_X;
-int cases_y=NBRE_CASES_Y;
+
 //PIF
 int fin=0;
 int i=1;
@@ -19,7 +16,7 @@ char chemin[256];
 
 //AFFICHAGE
 int fond_actuel=1;
-int taille_blocs_a_selectionner=3*COEF_PIXEL_X;
+
 
 //TOUT
 double vitesse_inversee_gravite=4;
